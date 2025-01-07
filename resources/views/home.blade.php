@@ -55,10 +55,10 @@
         <p class="text-3.5xl w-170 font-extralight mx-20 sm:mx-0 sm:w-59 sm:text-center sm:text-xxs">Lorem ipsum dolor
             sit amet, consectetur adipiscing elit. Sed
             do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
-        <button
+        <a href="/login"><button
             class="h-30 sm:h-6 w-140 sm:w-33 font-light text-3.5xl sm:text-xxs border border-white rounded-full bg-primary-2">JOIN
             WITH US
-            RIGHT NOW!</button>
+            RIGHT NOW!</button></a>
     </section>
 
     {{-- ABOUT --}}

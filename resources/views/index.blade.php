@@ -51,9 +51,11 @@
                 tepat menggunakan SIMAK
             </p>
         </div>
+        <a href="/home">
         <button
             class="w-124 sm:w-66 h-20 sm:h-11 border border-black rounded-full text-3.5xl sm:text-2xl mt-12 sm:mt-7 font-extralight">LEARN
             MORE</button>
+            </a>
     </section>
 
     <div class="w-full flex justify-center mt-36 mb-4">

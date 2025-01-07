@@ -1,6 +1,6 @@
 <x-layout.userPage contentClass="flex flex-col justify-between items-center gap-7">
     <div class="w-full flex sm:flex-wrap-reverse justify-between items-center">
-        <div class="w-full h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
+        <div class="w-189 h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
             <div class="w-57 h-57 bg-primary-3 rounded-full border-2 border-black"></div>
             <div class="flex-grow sm:w-full h-full flex flex-col justify-center items-center gap-6">
                 <h1 class="text-2xl">YOUR PROFILE</h1>
@@ -20,7 +20,9 @@
                 </div>
             </div>
         </div>
-        <img class="w-49 h-49 mx-36 sm:mx-auto sm:my-24" src="{{ asset('assets/img/logo/logoBgWhite.png') }}" alt="">
+        <div class="flex-grow flex items-center justify-center ">
+            <img class="w-49 h-49 sm:mx-auto sm:my-24" src="{{ asset('assets/img/logo/logoBgWhite.png') }}" alt="">
+        </div>
     </div>
 
     <div class="w-full h-76 border border-black rounded-xl flex flex-col justify-between items-center gap-10 py-6"

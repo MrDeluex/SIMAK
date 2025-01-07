@@ -1,8 +1,8 @@
 <x-layout.userPage bodyClass="max-w-screen">
     <h1 class="w-full text-2xl font-light ml-2 sm:ml-0 mb-3 sm:text-center">DASHBOARD</h1>
     <p class="sm:block hidden w-full font-light text-xs text-center bg-secondary-2 text-white py-1 rounded mb-6">SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
-    <div class="w-full flex flex-wrap gap-y-5 justify-between items-center mb-5">
-        <div class="w-100 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
+    <div class="w-full flex sm:flex-wrap gap-y-5 justify-between items-center mb-5">
+        <div class="w-96 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
             <div class="w-55 h-full flex flex-col justify-center items-center gap-3 -translate-y-3">
                 <div class="w-full flex flex-col items-center justify-center">
                     <div
@@ -20,7 +20,7 @@
                     fill="white" stroke="black" stroke-width="2" />
             </svg>
         </div>
-        <div class="w-100 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
+        <div class="w-96 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
             <div class="w-55 h-full flex flex-col justify-center items-center gap-3 -translate-y-3">
                 <div class="w-full flex flex-col items-center justify-center">
                     <div
@@ -38,7 +38,7 @@
                     fill="white" stroke="black" stroke-width="2" />
             </svg>
         </div>
-        <div class="w-100 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
+        <div class="w-96 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
             <div class="w-55 h-full flex flex-col justify-center items-center gap-3 -translate-y-3">
                 <div class="w-full flex flex-col items-center justify-center">
                     <div
