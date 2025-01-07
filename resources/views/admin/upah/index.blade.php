@@ -120,7 +120,7 @@
 
                 <div class="p-6 flex flex-col justify-start items-center">
                     <div class="w-42 h-42 bg-cover bg-center my-6"
-                        style="background-image: url('{{ asset('assets/img/logo/logoBgWhite.png') }}')"></div>
+                        style="background-image: url('{{ asset('assets/img/logo/logoBgWhite.png'); }}')"></div>
 
                     <div id="modalContent" class="w-full flex flex-col gap-3 mb-6">
                         

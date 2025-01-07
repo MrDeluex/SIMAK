@@ -5,7 +5,7 @@
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
             
             <div class="w-full h-auto flex justify-center">
-                <div class="w-42 h-42 rounded-full bg-cover bg-center" style="background-image: url('{{ asset('assets/img/profile/ExProfile.jpg') }}')"></div>
+                <div class="w-42 h-42 rounded-full bg-cover bg-center" style="background-image: url('{{ asset('assets/img/profile/ExProfile.jpg'); }}')"></div>
             </div>
 
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
