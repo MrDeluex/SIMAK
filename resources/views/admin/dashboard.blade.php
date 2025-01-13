@@ -1,4 +1,11 @@
-<x-layout.userPage bodyClass="max-w-screen">
+<script>
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/login'; // Arahkan pengguna ke halaman login jika tidak ada token
+    }
+</script>
+
+<x-layout.adminPage bodyClass="max-w-screen">
     <h1 class="w-full text-2xl font-light ml-2 sm:ml-0 mb-3 sm:text-center">DASHBOARD</h1>
     <p class="sm:block hidden w-full font-light text-xs text-center bg-secondary-2 text-white py-1 rounded mb-6">SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
     <div class="w-full flex sm:flex-wrap gap-y-5 justify-between items-center mb-5">
@@ -9,7 +16,7 @@
                         class="w-35 h-10 rounded-lg bg-white border border-black flex justify-center items-center font-light text-2xl -translate-x-7 translate-y-1">
                         DATA</div>
                     <div class="w-42 h-8 rounded-lg border border-black flex justify-center items-center font-extralight"
-                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">PEGAWAI HARIAN</div>
+                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">KARYAWAN</div>
                 </div>
                 <div class="w-full h-0.5 bg-black"></div>
                 <div class="text-5xl font-light">10000</div>
@@ -68,18 +75,18 @@
                     <div class="w-full flex flex-col gap-3">
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">NAMA :</Label>
-                            <input type="text" name="nama" class="flex-grow border-b border-black">
+                            <input type="text" name="nama" class="flex-grow border-b border-black" disabled>
                         </div>
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">EMAIL :</Label>
-                            <input type="text" name="nama" class="flex-grow border-b border-black">
+                            <input type="text" name="nama" class="flex-grow border-b border-black" disabled>
                         </div>
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">ROLE :</Label>
-                            <input type="text" name="nama" class="flex-grow border-b border-black">
+                            <input type="text" name="nama" class="flex-grow border-b border-black" disabled>
                         </div>
                     </div>
-                    
+
                     <a href=""><button class="w-53 h-8 rounded-full text-center font-light bg-secondary-2 text-white">Edit Your Password</button></a>
                 </div>
             </div>
@@ -92,4 +99,40 @@
         </div>
     </div>
 
-</x-layout.userPage>
+    <script>
+        async function fetchUserCount() {
+            try {
+                // Pastikan untuk mengganti <your-access-token> dengan token Anda
+                const token = 'your-access-token'; // Ganti dengan token Anda yang valid
+
+                const response = await fetch('/api/users', {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Tambahkan header otorisasi jika diperlukan
+                    },
+                });
+
+                // Periksa apakah respons berhasil
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user data');
+                }
+
+                // Parsing data JSON dari respons
+                const users = await response.json();
+                const userCount = users.length;
+
+                // Update elemen HTML dengan jumlah pengguna
+                document.querySelector('.text-5xl').textContent = userCount;
+            } catch (error) {
+                console.error('Error fetching user count:', error);
+
+                // Tampilkan pesan error pada elemen HTML (opsional)
+                document.querySelector('.text-5xl').textContent = 'Error!';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchUserCount();
+        });
+    </script>
+
+
+</x-layout.adminPage>

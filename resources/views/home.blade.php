@@ -2,7 +2,7 @@
     <div class="sticky top-0 z-50">
         <nav id="navbar"
             class="text-white font-white flex justify-center sm:justify-between items-center pt-4 px-8 sm:px-4 text-2xl font-reguler relative top-0 left-0 w-full transition-transform duration-300"
-            style="background: rgb(217,217,217); background: linear-gradient(180deg, rgba(217,217,217,1) 0%, rgba(217,217,217,0.8) 55%, rgba(255,255,255,0) 100%);">
+            style="background: rgb(217,217,217); background: linear-gradient(180deg, rgba(217,217,217,1) 0%, rgba(217,217,217,0.8) 70%, rgba(255,255,255,0) 100%);">
             <!-- Logo -->
             <a href="/">
                 <img class="w-19 sm:w-6 hidden sm:block" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}" alt="Logo">
@@ -23,11 +23,11 @@
                 </div>
                 <!-- Logo -->
                 <a href="/">
-                    <img class="w-19 sm:w-6" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}" alt="Logo">
+                    <img class="w-19 sm:w-6" src="{{ asset('assets/img/logo/logoTransparant.png?v=1') }}" alt="Logo">
                 </a>
                 <div class="w-108 sm:w-32 flex justify-around items-center">
-                    <a class="#advantages" href="">Advantages</a>
-                    <a class="#contact" href="">Contact</a>
+                    <a class="" href="#advantages">Advantages</a>
+                    <a class="" href="#contact">Contact</a>
                 </div>
             </div>
 

@@ -29,7 +29,7 @@
         <div class="bg-secondary-2 w-full h-103 py-5"
             style="box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);">
             <div class="w-full flex flex-col justify-start items-center gap-2">
-                <a href="/" class="w-full">
+                <a href="/admin/" class="w-full">
                     <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +43,7 @@
                         <p>DASHBOARD</p>
                     </div>
                 </a>
-                <a href="/" class="w-full">
+                <a href="/admin/dataKaryawan" class="w-full">
                     <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@
                         <p>DATA KARYAWAN</p>
                     </div>
                 </a>
-                <a href="/" class="w-full">
+                <a href="/admin/upah" class="w-full">
                     <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +71,7 @@
                         <p>UPAH KARYAWAN</p>
                     </div>
                 </a>
-                <a href="/" class="w-full">
+                <a href="/admin/dataKaryawan" class="w-full">
                     <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -156,6 +156,7 @@
             lastScrollY = window.scrollY;
         });
     </script>
+    
 </body>
 
 </html>

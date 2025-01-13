@@ -1,4 +1,4 @@
-<x-layout.userPage>
+<x-layout.adminPage>
 
     <style>
         table {
@@ -300,4 +300,4 @@
 
     </html>
 
-    </x-userPage>
+    </x-adminPage>

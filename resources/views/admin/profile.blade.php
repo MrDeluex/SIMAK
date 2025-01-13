@@ -1,4 +1,4 @@
-<x-layout.userPage contentClass="flex flex-col justify-between items-center gap-7">
+<x-layout.adminPage contentClass="flex flex-col justify-between items-center gap-7">
     <div class="w-full flex sm:flex-wrap-reverse justify-between items-center">
         <div class="w-189 h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
             <div class="w-57 h-57 bg-primary-3 rounded-full border-2 border-black"></div>
@@ -51,4 +51,4 @@
             </a>
         </div>
     </div>
-</x-layout.userPage>
+</x-layout.adminPage>

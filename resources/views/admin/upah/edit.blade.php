@@ -1,4 +1,4 @@
-<x-layout.userPage contentClass="flex flex-col justify-start items-center">
+<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
     <h1 class="text-2xl font-reguler mb-10">EDIT UPAH KARYAWAN</h1>
     <form action="" class="w-full">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
@@ -58,4 +58,4 @@
             </div>
         </div>
     </form>
-</x-layout.userPage>
+</x-layout.adminPage>

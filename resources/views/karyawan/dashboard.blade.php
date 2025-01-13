@@ -1,6 +1,6 @@
 <x-layout.userPage bodyClass="max-w-screen">
     <h1 class="w-full text-2xl font-light ml-2 sm:ml-0 mb-5 text-center">DASHBOARD</h1>
-    <p class="hiddden sm:block text-white text-center sm:text-xs bg-secondary-2 border border-black rounded-lg px-8 py-1 sm:px-0 sm:w-full sm:mb-8" >SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
+    <p class="hidden sm:block text-white text-center sm:text-xs bg-secondary-2 border border-black rounded-lg px-8 py-1 sm:px-0 sm:w-full sm:mb-8" >SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
     <div class="w-full h-71 sm:h-auto border-2 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center mb-10 sm:py-8 sm:gap-8" style="box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.25);">
         <div class="w-86 h-full flex justify-center items-center">
             <div class="w-57 h-57 bg-primary-3 rounded-full border-2 border-black"></div>
