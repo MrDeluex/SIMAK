@@ -8,8 +8,6 @@
 
     @vite('resources/css/app.css')
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}">
     <title>SIMAK</title>
 
@@ -23,7 +21,8 @@
         <img class="aspect-1/1 w-38 rounded-full" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}"
             alt="Logo">
         <h1 class="text-3.5xl sm:text-2xl text-white sm:w-46 text-center">LOGIN TO YOUR ACCOUNT</h1>
-        <form id="login-form" class="sm:w-screen flex justify-center px-3">
+        <form id="login-form" action="{{ route('login') }}" method="post" class="sm:w-screen flex justify-center px-3">
+            @csrf
             <div class="w-194 sm:w-full filter bg-white flex flex-col justify-center items-center gap-8 py-8 sm:px-8 px-36"
                 style="box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);">
                 <div class="w-full h-15 border-2 sm:border border-black rounded-xl flex items-center px-4 gap-6">
@@ -34,7 +33,7 @@
                             fill="black" />
                     </svg>
                     <div class="relative w-full">
-                        <input type="text" placeholder="Email" id="email" name="email"
+                        <input type="email" placeholder="Email" id="email" name="email"
                             class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
                         <label for="email"
                             class="form-label absolute text-gray-400 transform -translate-y-10 -translate-x-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:-translate-x-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"

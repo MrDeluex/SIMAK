@@ -1,10 +1,3 @@
-<script>
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = '/login'; // Arahkan pengguna ke halaman login jika tidak ada token
-    }
-</script>
-
 <x-layout.adminPage bodyClass="max-w-screen">
     <h1 class="w-full text-2xl font-light ml-2 sm:ml-0 mb-3 sm:text-center">DASHBOARD</h1>
     <p class="sm:block hidden w-full font-light text-xs text-center bg-secondary-2 text-white py-1 rounded mb-6">SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
@@ -67,7 +60,10 @@
 
     <div class="flex flex-wrap justify-between items-center gap-5">
         <div class="flex-grow sm:w-screen h-86 sm:h-auto flex flex-col justify-between pt-2 sm:pt-0">
-            <p class="sm:hidden">SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
+            <p class="sm:hidden">
+                SELAMAT DATANG {{ session('user')['nama_lengkap'] }}, ANDA LOGIN SEBAGAI {{ session('user')['role'] }}
+            </p>
+
             <div class="w-full h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
                 <div class="w-57 h-57 bg-primary-3 rounded-full border-2 border-black"></div>
                 <div class="flex-grow sm:w-full h-full flex flex-col justify-center items-center gap-6">
@@ -98,41 +94,5 @@
                 eiusmod tempor incididunt ut</p>
         </div>
     </div>
-
-    <script>
-        async function fetchUserCount() {
-            try {
-                // Pastikan untuk mengganti <your-access-token> dengan token Anda
-                const token = 'your-access-token'; // Ganti dengan token Anda yang valid
-
-                const response = await fetch('/api/users', {
-                    headers: {
-                        Authorization: `Bearer ${token}`, // Tambahkan header otorisasi jika diperlukan
-                    },
-                });
-
-                // Periksa apakah respons berhasil
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user data');
-                }
-
-                // Parsing data JSON dari respons
-                const users = await response.json();
-                const userCount = users.length;
-
-                // Update elemen HTML dengan jumlah pengguna
-                document.querySelector('.text-5xl').textContent = userCount;
-            } catch (error) {
-                console.error('Error fetching user count:', error);
-
-                // Tampilkan pesan error pada elemen HTML (opsional)
-                document.querySelector('.text-5xl').textContent = 'Error!';
-            }
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchUserCount();
-        });
-    </script>
-
 
 </x-layout.adminPage>

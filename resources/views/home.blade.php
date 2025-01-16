@@ -132,7 +132,7 @@
         </div>
 
         <!-- Div 3 -->
-        <div class=" sm:order-3 pt-5  w-154 flex flex-col text-center gap-5 sm:w-full">
+        <div class=" sm:order-3 pt-5 flex flex-col text-center gap-5 sm:w-full">
             <div class="flex flex-col items-center gap-2">
                 <div class="flex items-center">
                     <svg class="w-10 sm:w-6" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
