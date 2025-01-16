@@ -17,10 +17,13 @@ Route::get('/percobaan', function () {
 Route::get('/data', [DataTables::class, 'index']);
 Route::get('/data/{id}', [DataTables::class, 'show']);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/profile', function () { return view('admin.profile'); });
+Route::middleware(['admin'])->group(function () {
+    
     Route::get('/admin', function () { return view('admin.dashboard'); });
+
 });
+
+Route::get('/admin/profile', function () { return view('admin.profile'); });
 
 Route::get('/', function () { return view('index'); });
 Route::get('/home', function () { return view('home'); });

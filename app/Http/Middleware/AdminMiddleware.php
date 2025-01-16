@@ -9,13 +9,17 @@ use App\Enums\UserRole;
 class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
-    {
-        if ($request->user()->role !== UserRole::Admin) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Unauthorized, Admin access required.'
-            ], 403);
-        }
-        return $next($request);
+{
+
+    // Ambil data pengguna dari sesi
+    $user = session('user');
+
+
+    // Cek apakah data user ada dan role sesuai
+    if (!$user || $user['role'] !== 'Admin') {
+        return redirect('/login')->withErrors(['message' => 'Unauthorized, please log in as Admin.']);
     }
+
+    return $next($request);
+}
 }
