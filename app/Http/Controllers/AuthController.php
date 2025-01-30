@@ -10,7 +10,22 @@ class AuthController extends Controller
     // Tampilkan form login
     public function showLoginForm()
     {
-        return view('auth.login');
+        $user = session('user');
+        
+        if($user == null) {
+            return view('auth.login');
+        } 
+
+        // Periksa dan arahkan berdasarkan role pengguna
+        elseif ($user['role'] === 'Admin') {
+            return redirect('/admin');
+        } elseif ($user['role'] === 'Karyawan') {
+            return redirect('/karyawan');
+        } elseif ($user['role'] === 'Staff') {
+            return redirect('/staff');
+        } else {
+            return redirect('/login')->with('error', 'Role tidak dikenali. Silakan login kembali.');
+        }
     }
 
     // Proses login API
@@ -48,6 +63,8 @@ class AuthController extends Controller
                 return redirect('/admin')->with('success', 'Login berhasil sebagai Admin!');
             } elseif ($role === 'Karyawan') {
                 return redirect('/karyawan')->with('success', 'Login berhasil sebagai Karyawan!');
+            } elseif ($role === 'Staff') {
+                return redirect('/staff')->with('success', 'Login berhasil sebagai Staff!');
             }
         }
 
