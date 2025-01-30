@@ -31,6 +31,11 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/users', function () { return view('admin.users.index'); });
     Route::get('/admin/users/create', function () { return view('admin.users.create'); });
     Route::get('/admin/users/edit', function () { return view('admin.users.edit'); });
+    
+    Route::get('/admin/karyawan', function () { return view('admin.karyawan.index'); });
+    Route::get('/admin/users/create', function () { return view('admin.users.create'); });
+    Route::get('/admin/users/edit', function () { return view('admin.users.edit'); });
+
 });
 
 Route::middleware(['karyawan'])->group(function () {
