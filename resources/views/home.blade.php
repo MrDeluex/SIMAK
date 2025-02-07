@@ -1,39 +1,5 @@
 <x-layout.landingPage customClass="relative">
-    <div class="sticky top-0 z-50">
-        <nav id="navbar"
-            class="text-white font-white flex justify-center sm:justify-between items-center pt-4 px-8 sm:px-4 text-2xl font-reguler relative top-0 left-0 w-full transition-transform duration-300"
-            style="background: rgb(217,217,217); background: linear-gradient(180deg, rgba(217,217,217,1) 0%, rgba(217,217,217,0.8) 70%, rgba(255,255,255,0) 100%);">
-            <!-- Logo -->
-            <a href="/">
-                <img class="w-19 sm:w-6 hidden sm:block" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}" alt="Logo">
-            </a>
 
-            <!-- Hamburger Icon (Mobile) -->
-            <button id="menu-toggle" class="sm:block hidden focus:outline-none">
-                <svg class="w-8 h-8" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.33334 6.5H21.6667M4.33334 10.8333H21.6667M4.33334 15.1667H21.6667M4.33334 19.5H21.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
-            <!-- Desktop Navigation -->
-            <div id="menu" class="flex sm:hidden space-x-16">
-                <div class="w-108 sm:w-32 flex justify-around items-center">
-                    <a class="" href="/">Home</a>
-                    <a class="" href="#about">About</a>
-                </div>
-                <!-- Logo -->
-                <a href="/">
-                    <img class="w-19 sm:w-6" src="{{ asset('assets/img/logo/logoTransparant.png?v=1') }}" alt="Logo">
-                </a>
-                <div class="w-108 sm:w-32 flex justify-around items-center">
-                    <a class="" href="#advantages">Advantages</a>
-                    <a class="" href="#contact">Contact</a>
-                </div>
-            </div>
-
-        </nav>
-        
-    </div>
     <div id="mobile-menu"
         class="hidden sm:hidden flex-col justify-start items-center z-1000 w-1/2 h-screen bg-blue-900 text-white fixed top-0 right-0 text-base">
         <button id="menu-close" class="self-start mt-8 ml-4 focus:outline-none">
@@ -50,63 +16,91 @@
 
     {{-- HEADER --}}
     <section
-        class="text-white pl-32 sm:pl-0 mt-18 sm:mt-8 mb-14 sm:mb-12 flex flex-col justify-center gap-8 sm:gap-2 sm:items-center">
-        <h1 class="text-8xl font-extralight sm:text-2xl">SIMAK</h1>
-        <p class="text-3.5xl w-170 font-extralight mx-20 sm:mx-0 sm:w-59 sm:text-center sm:text-xxs">Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
-        <a href="/login"><button
-            class="h-30 sm:h-6 w-140 sm:w-33 font-light text-3.5xl sm:text-xxs border border-white rounded-full bg-primary-2">JOIN
-            WITH US
-            RIGHT NOW!</button></a>
+        style="background-image: url('{{ asset('assets/img/mainBg.png' )}}');"
+        class="bg-cover">
+        <div class="top-0 z-50">
+            <nav id="navbar"
+                class="text-white font-white flex justify-center sm:justify-between items-center pt-4 px-8 sm:px-4 text-2xl font-reguler relative top-0 left-0 w-full transition-transform duration-300">
+                <!-- Logo -->
+                <a href="/">
+                    <img class="w-19 sm:w-6 hidden sm:block" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}" alt="Logo">
+                </a>
+
+                <!-- Hamburger Icon (Mobile) -->
+                <button id="menu-toggle" class="sm:block hidden focus:outline-none">
+                    <svg class="w-8 h-8" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.33334 6.5H21.6667M4.33334 10.8333H21.6667M4.33334 15.1667H21.6667M4.33334 19.5H21.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <!-- Desktop Navigation -->
+                <div id="menu" class="flex sm:hidden space-x-16">
+                    <div class="w-108 sm:w-32 flex justify-around items-center">
+                        <a class="" href="/">Home</a>
+                        <a class="" href="#about">About</a>
+                    </div>
+                    <!-- Logo -->
+                    <a href="/">
+                        <img class="w-19 sm:w-6" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}" alt="Logo">
+                    </a>
+                    <div class="w-108 sm:w-32 flex justify-around items-center">
+                        <a class="" href="#advantages">Advantages</a>
+                        <a class="" href="#contact">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="text-white pl-32 sm:pl-0 pt-18 sm:pt-8 pb-14 sm:pb-12 flex flex-col justify-center gap-8 sm:gap-2 sm:items-center ">
+            <h1 class="text-8xl font-extralight sm:text-2xl">SIMAK</h1>
+            <p class="text-3.5xl w-124 font-extralight mb-10 ml-20 sm:mx-0 sm:w-59 sm:text-center sm:text-xxs">Kelola Gaji Karyawan Dengan Lebih Mudah Cepat Dan Tepat Menggunakan Simak</p>
+            <a href="/login"><button
+                    class="h-30 sm:h-6 w-140 sm:w-33 font-light text-3.5xl sm:text-xxs border border-white rounded-full">
+                    JOIN WITH US RIGHT NOW!</button></a>
+        </div>
     </section>
 
     {{-- ABOUT --}}
-    <section id="about" class="w-full bg-white flex justify-center items-center gap-50 sm:gap-9 py-28 sm:py-10">
+    <section id="about" class="w-full bg-white flex justify-center items-center gap-50 sm:gap-9 py-28 sm:py-10 border-b-4 border-primary-1">
         <div class="">
-            <div class="w-112 h-112 sm:w-37 sm:h-37 rounded-full bg-primary-1"></div>
+            <div class="w-112 h-112 sm:w-37 sm:h-37 rounded-full bg-cover" style="background-image: url('{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}');"></div>
         </div>
         <div class="flex flex-col gap-6 sm:gap-2">
-            <h2 class="text-2xl sm:text-xxs sm:leading-tight">LOREM</h2>
-            <h1 class="text-4xl ml-12 sm:ml-3 font-medium sm:text-xxs sm:leading-tight">LOREM IPSUM DOLOR</h1>
-            <p class="w-124 sm:w-45 text-2xl sm:text-xxs sm:leading-normal font-extralight  ">Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse</p>
+            <h2 class="text-2xl sm:text-xxs sm:leading-tight">ABOUT US</h2>
+            <h1 class="text-4xl ml-12 sm:ml-3 font-medium sm:text-xxs sm:leading-tight">SISTEM MANAJEMEN KARYAWAN</h1>
+            <p class="w-124 sm:w-45 text-2xl sm:text-xxs sm:leading-normal font-extralight  ">Selamat datang di SIMAK, solusi inovatif untuk manajemen karyawan yang lebih efisien dan terstruktur. Kami memahami bahwa mengelola tenaga kerja bukanlah hal yang mudah, terutama dalam pencatatan upah, absensi, dan administrasi lainnya. Oleh karena itu, SIMAK hadir untuk membantu perusahaan dalam mengoptimalkan pengelolaan sumber daya manusia dengan sistem yang praktis dan modern.</p>
         </div>
     </section>
 
     {{-- ADVENTAGES --}}
-    <section id="advantages" class="flex flex-col py-8">
-        <h1 class="text-center text-6.5xl sm:text-2xl tracking-widest sm:tracking-normal">ADVANTAGES</h1>
+    <section id="advantages" class="flex flex-col py-8 pb-10 bg-cover" style="background-image: url('{{ asset('assets/img/secBg.png' )}}');">
+        <h1 class="text-white text-center text-6.5xl sm:text-2xl tracking-widest sm:tracking-normal">ADVANTAGES</h1>
         <div class="flex justify-center items-end flex-wrap my-6 gap-12">
             <div
-                class="aspect-32/19 sm:h-38 h-60 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-30 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-79 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
                 <div
-                    class="aspect-1/1 sm:h-38 h-60 rounded-full absolute top-min30 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-79 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
-                    LOREM</h1>
+                    EFISIEN</h1>
             </div>
             <div
-                class="aspect-32/19 sm:h-38 h-60 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-30 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-79 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
                 <div
-                    class="aspect-1/1 sm:h-38 h-60 rounded-full absolute top-min30 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-79 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
-                    LOREM</h1>
+                    TERINTEGRASI</h1>
             </div>
             <div
-                class="aspect-32/19 sm:h-38 h-60 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-30 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-79 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
                 <div
-                    class="aspect-1/1 sm:h-38 h-60 rounded-full absolute top-min30 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-79 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
-                    LOREM</h1>
+                    TRANSPARAN</h1>
             </div>
         </div>
     </section>
@@ -118,7 +112,7 @@
         <h2 class="text-2xl sm:text-base w-212 sm:w-95 font-light">Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Sed do eiusmod
             tempor incididunt ut</h2>
-            <a href="/login"><button class="text-4xl sm:text-base w-86 sm:w-56 h-18 sm:h-9 border-black border rounded-full">SIGN IN</button></a>
+        <a href="/login"><button class="text-4xl sm:text-base w-86 sm:w-56 h-18 sm:h-9 border-black border rounded-full">SIGN IN</button></a>
     </section>
 
     <section id="contact"

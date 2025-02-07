@@ -39,7 +39,7 @@ export default {
             },
 
             aspectRatio: {
-                '32/19': '32 / 19',
+                '108/79': '108 / 79',
                 '1/1': '1 / 1',
               },
 
@@ -50,6 +50,7 @@ export default {
             },
 
             spacing: {
+                'min40': '-10rem', 
                 'min30': '-7.5rem', 
                 'min39': '-9.75rem', 
                 'min19': '-4.75rem', 

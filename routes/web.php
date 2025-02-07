@@ -33,8 +33,19 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/users/edit', function () { return view('admin.users.edit'); });
     
     Route::get('/admin/karyawan', function () { return view('admin.karyawan.index'); });
-    Route::get('/admin/users/create', function () { return view('admin.users.create'); });
-    Route::get('/admin/users/edit', function () { return view('admin.users.edit'); });
+    Route::get('/admin/karyawan/create', function () { return view('admin.karyawan.create'); });
+    Route::get('/admin/karyawan/edit', function () { return view('admin.karyawan.edit'); });
+    
+    Route::get('/admin/barang', function () { return view('admin.barang.index'); });
+    Route::get('/admin/barang/create', function () { return view('admin.barang.create'); });
+    Route::get('/admin/barang/edit', function () { return view('admin.barang.edit'); });
+
+    
+    Route::get('/admin/kategori', function () { return view('admin.kategori.index'); });
+    Route::get('/admin/kategori/create', function () { return view('admin.kategori.create'); });
+    Route::get('/admin/kategori/edit', function () { return view('admin.kategori.edit'); });
+
+
 
 });
 

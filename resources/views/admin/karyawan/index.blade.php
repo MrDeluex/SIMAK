@@ -141,6 +141,7 @@
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
                         }
                     });
+                    
                     if (!response.ok) throw new Error("Failed to fetch data");
 
                     const data = await response.json();

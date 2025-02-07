@@ -20,7 +20,7 @@
 }
 </style>
 
-<body class="{{ $bg ?? 'bg-primary-1' }} {{ $customClass }} max-w-screen min-h-screen font-sans overflow-x-hidden ">
+<body class="{{ $customClass }} max-w-screen min-h-screen font-sans overflow-x-hidden bg-cover bg-fixed">
     {{ $slot }}
 </body>
 

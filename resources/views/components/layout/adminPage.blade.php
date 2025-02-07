@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="api-token" content="{{ session('api_token') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}">
     <title>{{ $title ?? 'SIMAK Admin' }}</title>
@@ -85,7 +88,7 @@
                         <p>UPAH KARYAWAN</p>
                     </div>
                 </a>
-                <a href="/admin/dataKaryawan" class="w-full">
+                <a href="/admin/barang" class="w-full">
                     <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

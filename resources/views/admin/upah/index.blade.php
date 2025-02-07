@@ -71,8 +71,8 @@
             </div>
 
             {{-- <div class="mb-4">
-                <label for="category" class="mr-2">Filter by Category:</label>
-                <select id="category" onchange="fetchData()" class="border border-gray-300 p-2 rounded">
+                <label for="minggu_ke" class="mr-2">Minggu Ke:</label>
+                <select id="minggu_ke" onchange="fetchData()" class="border border-gray-300 p-2 rounded">
                     <option value="">All</option>
                 </select>
             </div> --}}
@@ -81,8 +81,9 @@
                     <thead class="bg-secondary-2 text-white">
                         <tr>
                             <th style="width: 5%;" class="text-center">ID</th>
-                            <th style="width: 35%;">Name</th>
-                            <th style="width: 35%;">Category</th>
+                            <th style="width: 35%;">Nama Karyawan</th>
+                            <th style="width: 10%;">Minggu Ke</th>
+                            <th style="width: 25%;" class="text-center">Total Upah</th>
                             <th style="width: 25%;" class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -123,7 +124,7 @@
                         style="background-image: url('{{ asset('assets/img/logo/logoBgWhite.png'); }}')"></div>
 
                     <div id="modalContent" class="w-full flex flex-col gap-3 mb-6">
-                        
+
                     </div>
                 </div>
             </div>
@@ -134,16 +135,16 @@
             async function fetchData() {
                 const entries = parseInt(document.getElementById("entries").value);
                 const search = document.getElementById("search").value.toLowerCase();
-                const categoryElement = document.getElementById("category");
-                const category = categoryElement ? categoryElement.value : ""; // Default ke kosong jika elemen tidak ada
+                const minggu_keElement = document.getElementById("minggu_ke");
+                const minggu_ke = minggu_keElement ? minggu_keElement.value : ""; // Default ke kosong jika elemen tidak ada
 
-                const response = await fetch('/data');
+                const response = await fetch('http://localhost:8080/api/admin/upah');
                 const data = await response.json();
 
                 // Filter berdasarkan kategori dan pencarian
                 const filteredData = data.filter(item =>
                     item.name.toLowerCase().includes(search) &&
-                    (category === '' || item.category === category)
+                    (minggu_ke === '' || item.minggu_ke === minggu_ke)
                 );
 
                 const totalEntries = filteredData.length;
@@ -161,19 +162,19 @@
                 renderPagination(totalPages);
                 renderEntriesInfo(start, end, totalEntries); // Tambahkan informasi jumlah data
 
-                if (categoryElement) {
-                    renderCategories(data, category);
+                if (minggu_keElement) {
+                    renderCategories(data, minggu_ke);
                 }
             }
 
-                    async function viewDetail(id) {
-                        // Ambil data detail berdasarkan ID
-                        const response = await fetch(`/data/${id}`);
-                        const detailData = await response.json();
+            async function viewDetail(id) {
+                // Ambil data detail berdasarkan ID
+                const response = await fetch(`/data/${id}`);
+                const detailData = await response.json();
 
-                        // Isi konten modal dengan data detail
-                        const modalContent = document.getElementById("modalContent");
-                        modalContent.innerHTML = `
+                // Isi konten modal dengan data detail
+                const modalContent = document.getElementById("modalContent");
+                modalContent.innerHTML = `
         <div class="w-full flex justify-start items-center gap-3">
                             <p class="w-auto">Id Karyawan : </p>
                             <span class="flex-grow border-b border-black">${detailData.id}</span>
@@ -183,8 +184,8 @@
                             <span class="flex-grow border-b border-black">${detailData.name}</span>
                         </div>
                         <div class="w-full flex justify-start items-center gap-3">
-                            <p class="w-auto">Category : </p>
-                            <span class="flex-grow border-b border-black">${detailData.category}</span>
+                            <p class="w-auto">minggu_ke : </p>
+                            <span class="flex-grow border-b border-black">${detailData.minggu_ke}</span>
                         </div>
                         <div class="w-full flex justify-start items-center gap-3">
                             <p class="w-auto">Detail : </p>
@@ -192,9 +193,9 @@
                         </div>
     `;
 
-                        // Tampilkan modal
-                        document.getElementById("detailModal").style.display = "flex";
-                    }
+                // Tampilkan modal
+                document.getElementById("detailModal").style.display = "flex";
+            }
 
             function closeModal() {
                 // Sembunyikan modal
@@ -208,8 +209,9 @@
                     const row =
                         `<tr>
                     <td class="text-center">${item.id}</td>
-                    <td>${item.name}</td>
-                    <td>${item.category}</td>
+                    <td>${item.karyawan_id}</td>
+                    <td>${item.minggu_ke}</td>
+                    <td>${item.total_upah}</td>
                     <td class="flex justify-center gap-2 items-center">
                         <button onclick="viewDetail(${item.id})" 
                             class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600">Detail</button>
@@ -280,17 +282,17 @@
             }
 
 
-            function renderCategories(data, selectedCategory) {
-                const categorySelect = document.getElementById("category");
-                const categories = Array.from(new Set(data.map(item => item.category)));
+            function renderCategories(data, selectedminggu_ke) {
+                const minggu_keSelect = document.getElementById("minggu_ke");
+                const categories = Array.from(new Set(data.map(item => item.minggu_ke)));
 
-                categorySelect.innerHTML = '<option value="">All</option>'; // Tambahkan opsi awal
+                minggu_keSelect.innerHTML = '<option value="">All</option>'; // Tambahkan opsi awal
                 categories.forEach(cat => {
                     const option = document.createElement("option");
                     option.value = cat;
                     option.textContent = cat;
-                    option.selected = cat === selectedCategory; // Tetapkan opsi yang dipilih
-                    categorySelect.appendChild(option);
+                    option.selected = cat === selectedminggu_ke; // Tetapkan opsi yang dipilih
+                    minggu_keSelect.appendChild(option);
                 });
             }
 
