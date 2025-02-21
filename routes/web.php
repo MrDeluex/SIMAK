@@ -45,10 +45,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/kategori/create', function () { return view('admin.kategori.create'); });
     Route::get('/admin/kategori/edit', function () { return view('admin.kategori.edit'); });
     
-    Route::get('/admin/barang_harian', function () { return view('admin.barang_harian.index'); });
-    Route::get('/admin/barang_harian/create', function () { return view('admin.barang_harian.create'); });
-    Route::get('/admin/barang_harian/edit', function () { return view('admin.barang_harian.edit'); });
-
+    Route::get('/admin/harian', function () { return view('admin.barang_harian.index'); });
+    Route::get('/admin/harian/create', function () { return view('admin.barang_harian.create'); });
+    Route::get('/admin/harian/edit', function () { return view('admin.barang_harian.edit'); });
+    
+    Route::get('/admin/kategori', function () { return view('admin.kategori.index'); });
+    Route::get('/admin/kategori/create', function () { return view('admin.kategori.create'); });
+    Route::get('/admin/kategori/edit', function () { return view('admin.kategori.edit'); });
 
 });
 

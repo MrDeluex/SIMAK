@@ -45,10 +45,10 @@
     </style>
 
     <body>
-        <h1 class="text-2xl font-light mb-4 mt-10">DATA USERS</h1>
+        <h1 class="text-2xl font-light mb-4 mt-10">DATA KATEGORI BARANG</h1>
 
-        <a href="/admin/dataKaryawan/create">
-            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT USER</button>
+        <a href="/admin/kategori/create">
+            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">TAMBAH KATEGORI</button>
         </a>
 
         <div id="app" class="py-8"
@@ -258,24 +258,20 @@
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
                         }
                     });
-                    
+
                     if (!response.ok) throw new Error("Failed to fetch details");
 
                     const detailData = await response.json();
                     const modalContent = document.getElementById("modalContent");
                     modalContent.innerHTML = `
-                <div class="w-full flex justify-start items-center gap-3">
-                    <p class="w-auto">Id Karyawan :</p>
-                    <span class="flex-grow border-b border-black">${detailData.id}</span>
-                </div>
-                <div class="w-full flex justify-start items-center gap-3">
-                    <p class="w-auto">Nama Lengkap :</p>
-                    <span class="flex-grow border-b border-black">${detailData.nama}</span>
-                </div>
-                <div class="w-full flex justify-start items-center gap-3">
-                    <p class="w-auto">Deskripsi :</p>
-                    <span class="flex-grow border-b border-black">${detailData.deskripsi || "No description available."}</span>
-                </div>`;
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Nama Barang :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.nama}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Deskripsi :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.deskripsi}</span>
+            </div>`;
 
                     document.getElementById("detailModal").style.display = "flex";
                 } catch (error) {
@@ -299,7 +295,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/admin/kategori/${id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -312,12 +308,13 @@
                     }
 
                     let user = await response.json();
+                    console.log(user);
 
                     // Simpan data user ke sessionStorage agar bisa digunakan di halaman edit
-                    sessionStorage.setItem("editUser", JSON.stringify(user));
+                    sessionStorage.setItem("editKategori", JSON.stringify(user));
 
                     // Redirect ke halaman edit
-                    window.location.href = `/admin/users/edit`;
+                    window.location.href = `/admin/kategori/edit`;
                 } catch (error) {
                     alert(error.message);
                 }
@@ -329,7 +326,7 @@
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/admin/kategori/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
@@ -338,10 +335,10 @@
                     });
 
                     if (!response.ok) {
-                        throw new Error("Gagal menghapus user.");
+                        throw new Error("Gagal menghapus Kategori.");
                     }
 
-                    alert("User berhasil dihapus!");
+                    alert("Kategori berhasil dihapus!");
                     window.location.reload(); // Refresh halaman setelah menghapus
                 } catch (error) {
                     alert("Terjadi kesalahan: " + error.message);

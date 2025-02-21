@@ -66,6 +66,7 @@
                     <select id="entries" onchange="fetchData()" class="border border-gray-300 px-2 rounded">
                         <option value="5">5</option>
                         <option value="10">10</option>
+                        <option value="100">100</option>
                     </select>
                     <span class="ml-2">entries</span>
                 </div>
@@ -240,7 +241,7 @@
                    
                 `<tr>
             <td class="text-center">${item.id}</td>
-            <td>${console.log(item)}</td>
+            <td>${item.staff_produksi.nama}</td>
             <td class="text-center">${item.minggu_ke}</td>
             <td class="sm:hidden text-center">${formatRupiah(item.total_upah)}</td>
             <td class="flex justify-center gap-2 items-center">

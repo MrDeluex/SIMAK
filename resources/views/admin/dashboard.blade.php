@@ -1,15 +1,15 @@
 <x-layout.adminPage bodyClass="max-w-screen">
     <h1 class="w-full text-2xl font-light ml-2 sm:ml-0 mb-3 sm:text-center">DASHBOARD</h1>
     <p class="sm:block hidden w-full font-light text-xs text-center bg-secondary-2 text-white py-1 rounded mb-6">SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
-    <div class="w-full flex sm:flex-wrap gap-y-5 justify-between items-center mb-5">
+    <div class="w-full flex sm:flex-wrap gap-y-5 justify-between items-center mb-5 gap-3">
         <div class="w-96 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
             <div class="w-55 h-full flex flex-col justify-center items-center gap-3 -translate-y-3">
                 <div class="w-full flex flex-col items-center justify-center">
                     <div
                         class="w-35 h-10 rounded-lg bg-white border border-black flex justify-center items-center font-light text-2xl -translate-x-7 translate-y-1">
-                        DATA</div>
+                        JUMLAH</div>
                     <div class="w-42 h-8 rounded-lg border border-black flex justify-center items-center font-extralight"
-                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">KARYAWAN</div>
+                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">Staff Produksi</div>
                 </div>
                 <div class="w-full h-0.5 bg-black"></div>
                 <div class="text-5xl font-light">10000</div>
@@ -25,9 +25,9 @@
                 <div class="w-full flex flex-col items-center justify-center">
                     <div
                         class="w-35 h-10 rounded-lg bg-white border border-black flex justify-center items-center font-light text-2xl -translate-x-7 translate-y-1">
-                        DATA</div>
+                        JUMLAH</div>
                     <div class="w-42 h-8 rounded-lg border border-black flex justify-center items-center font-extralight"
-                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">PEGAWAI HARIAN</div>
+                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">Staff Administrasi</div>
                 </div>
                 <div class="w-full h-0.5 bg-black"></div>
                 <div class="text-5xl font-light">1000</div>
@@ -43,9 +43,9 @@
                 <div class="w-full flex flex-col items-center justify-center">
                     <div
                         class="w-35 h-10 rounded-lg bg-white border border-black flex justify-center items-center font-light text-2xl -translate-x-7 translate-y-1">
-                        DATA</div>
+                        JUMLAH</div>
                     <div class="w-42 h-8 rounded-lg border border-black flex justify-center items-center font-extralight"
-                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">PEGAWAI HARIAN</div>
+                        style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">Stock Barang</div>
                 </div>
                 <div class="w-full h-0.5 bg-black"></div>
                 <div class="text-5xl font-light">100</div>

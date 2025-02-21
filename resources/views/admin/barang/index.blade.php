@@ -93,9 +93,9 @@
                     <thead class="bg-secondary-2 text-white">
                         <tr>
                             <th style="width: 5%;" class="text-center">ID</th>
-                            <th style="width: 35%;">Nama Karyawan</th>
-                            <th style="width: 10%;" class="text-center">Minggu Ke</th>
-                            <th style="width: 25%;" class="text-center sm:hidden">Total Upah</th>
+                            <th style="width: 35%;">Nama Barang</th>
+                            <th style="width: 10%;" class="text-center">Kategori</th>
+                            <th style="width: 25%;" class="text-center sm:hidden">Stock</th>
                             <th style="width: 25%;" class="text-center">Action</th>
                         </tr>
                     </thead>
