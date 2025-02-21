@@ -48,7 +48,7 @@
         <h1 class="text-2xl font-light mb-4 mt-10">DATA KARYAWAN</h1>
 
         <a href="/admin/karyawan/create">
-            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT KARYAWAN</button>
+            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">TAMBAH KARYAWAN</button>
         </a>
 
         <div id="app" class="py-8"
@@ -74,10 +74,11 @@
                 <table id="dataTable" class="min-w-full">
                     <thead class="bg-secondary-2 text-white">
                         <tr>
-                            <th style="width: 10%;" class="text-center">ID</th>
-                            <th style="width: 30%;">Nama</th>
-                            <th style="width: 30%;">Pekerjaan</th>
-                            <th style="width: 30%;" class="text-center">Action</th>
+                            <th style="width: 5%;" class="text-center">ID</th>
+                            <th style="width: 25%;">Nama</th>
+                            <th style="width: 25%;">Email</th>
+                            <th style="width: 25%;">Pekerjaan</th>
+                            <th style="width: 20%;" class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,9 +123,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <script>
             let currentPage = 1;
 
@@ -135,13 +133,12 @@
                     const pekerjaanElement = document.getElementById("pekerjaan");
                     const pekerjaan = pekerjaanElement ? pekerjaanElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/admin/karyawan', {
+                    const response = await fetch('http://localhost:8080/api/admin/staff-produksi', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
                         }
                     });
-                    
                     if (!response.ok) throw new Error("Failed to fetch data");
 
                     const data = await response.json();
@@ -171,7 +168,13 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`/data/${id}`);
+                    const response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + '{{ session("api_token") }}'
+                        }
+                    });
+
                     if (!response.ok) throw new Error("Failed to fetch details");
 
                     const detailData = await response.json();
@@ -183,7 +186,7 @@
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Nama Lengkap :</p>
-                <span class="flex-grow border-b border-black">${detailData.name}</span>
+                <span class="flex-grow border-b border-black">${detailData.nama_lengkap}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">pekerjaan :</p>
@@ -200,6 +203,7 @@
                 }
             }
 
+
             function closeModal() {
                 document.getElementById("detailModal").style.display = "none";
             }
@@ -208,9 +212,10 @@
                 const tbody = document.querySelector("#dataTable tbody");
                 tbody.innerHTML = data.map(item => `
         <tr>
-            <td class="text-center">${item.users_id}</td>
+            <td class="text-center">${item.id}</td>
             <td>${item.nama}</td>
-            <td>${item.pekerjaan}</td>
+            <td class="sm:hidden">${item.email}</td>
+            <td class="sm:hidden">${item.pekerjaan}</td>
             <td class="flex justify-center gap-2 items-center">
                 <button onclick="viewDetail(${item.id})" class="px-2 py-4">
                     <svg width="18" height="13" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -293,7 +298,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -323,7 +328,7 @@
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",

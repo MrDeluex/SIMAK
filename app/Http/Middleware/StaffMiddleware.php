@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Enums\UserRole;
 
-class StaffMiddleware
+class StaffAdministrasiMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
@@ -19,14 +19,14 @@ class StaffMiddleware
         }
         
         
-        if ($user['role'] === 'Staff' || $user['role'] === 'Admin') {
+        if ($user['role'] === 'StaffAdministrasi' || $user['role'] === 'Admin') {
             return $next($request);
         }
         
 
-        // Cek apakah pengguna mencoba mengakses halaman /Staff
-        if ($request->is('/staff') && $user['role'] !== 'Staff') {
-            return redirect()->back()->withErrors(['message' => 'Unauthorized, only Staffs can access this page.']);
+        // Cek apakah pengguna mencoba mengakses halaman /StaffAdministrasi
+        if ($request->is('/StaffAdministrasi') && $user['role'] !== 'StaffAdministrasi') {
+            return redirect()->back()->withErrors(['message' => 'Unauthorized, only StaffAdministrasis can access this page.']);
         }
 
         // Jika role tidak dikenal, redirect ke login

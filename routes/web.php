@@ -44,21 +44,24 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/kategori', function () { return view('admin.kategori.index'); });
     Route::get('/admin/kategori/create', function () { return view('admin.kategori.create'); });
     Route::get('/admin/kategori/edit', function () { return view('admin.kategori.edit'); });
-
+    
+    Route::get('/admin/barang_harian', function () { return view('admin.barang_harian.index'); });
+    Route::get('/admin/barang_harian/create', function () { return view('admin.barang_harian.create'); });
+    Route::get('/admin/barang_harian/edit', function () { return view('admin.barang_harian.edit'); });
 
 
 });
 
-Route::middleware(['karyawan'])->group(function () {
+Route::middleware(['StaffProduksi'])->group(function () {
     
-    Route::get('/karyawan', function () { return view('karyawan.dashboard'); });
-    Route::get('/karyawan/profile', function () { return view('karyawan.profile'); });
+    Route::get('/StaffProduksi', function () { return view('karyawan.dashboard'); });
+    Route::get('/StaffProduksi/profile', function () { return view('karyawan.profile'); });
     
 });
 
-Route::middleware(['staff'])->group(function () {
+Route::middleware(['StaffAdministrasi'])->group(function () {
     
-    Route::get('/staff', function () { return view('staff.dashboard'); });
-    Route::get('/staff/profile', function () { return view('staff.profile'); });
+    Route::get('/StaffAdministrasi', function () { return view('staff.dashboard'); });
+    Route::get('/StaffAdministrasi/profile', function () { return view('staff.profile'); });
     
 });

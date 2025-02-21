@@ -42,20 +42,13 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
-
-        /* Untuk Chrome, Safari, Edge, dan Opera */
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
     </style>
 
     <body>
-        <h1 class="text-2xl font-light mb-4 mt-10">UPAH KARYAWAN</h1>
+        <h1 class="text-2xl font-light mb-4 mt-10">DATA USERS</h1>
 
-        <a href="/admin/upah/create">
-            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT UPAH KARYAWAN</button>
+        <a href="/admin/dataKaryawan/create">
+            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT USER</button>
         </a>
 
         <div id="app" class="py-8"
@@ -69,33 +62,29 @@
                     </select>
                     <span class="ml-2">entries</span>
                 </div>
-                <div class="flex gap-4">
-                    <div class="flex sm:w-full">
-                        <label for="search" class="mr-2">Search:</label>
-                        <input type="text" id="search" onkeyup="fetchData()"
-                            class="border border-gray-300 px-1 rounded w-full">
-                    </div>.
 
-                    <div class="flex items-center gap-2">
-                        <label for="mingguKe">Minggu Ke</label>
-                        <button onclick="adjustMingguKe(-1)">-</button>
-                        <input type="number" id="mingguKe" class="border p-1 w-10 text-center" value="1" min="1" />
-                        <button onclick="adjustMingguKe(1)">+</button>
-                    </div>
-
-
+                <div class="flex sm:w-full">
+                    <label for="search" class="mr-2">Search:</label>
+                    <input type="text" id="search" onkeyup="fetchData()"
+                        class="border border-gray-300 px-1 rounded w-full">
                 </div>
             </div>
 
-
+            {{-- <div class="mb-4">
+                <label for="category" class="mr-2">Filter by Category:</label>
+                <select id="category" onchange="fetchData()" class="border border-gray-300 p-2 rounded">
+                    <option value="">All</option>
+                </select>
+            </div> --}}
             <div class="w-full h-80 overflow-y-auto overflow-x-hidden">
                 <table id="dataTable" class="min-w-full">
                     <thead class="bg-secondary-2 text-white">
                         <tr>
                             <th style="width: 5%;" class="text-center">ID</th>
-                            <th style="width: 35%;">Nama Karyawan</th>
-                            <th style="width: 10%;" class="text-center">Minggu Ke</th>
-                            <th style="width: 25%;" class="text-center sm:hidden">Total Upah</th>
+                            <th style="width: 20%;">Nama</th>
+                            <th style="width: 25%;">Barang</th>
+                            <th style="width: 10%;">Jumlah</th>
+                            <th style="width: 15%;">Tanggal</th>
                             <th style="width: 25%;" class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -141,37 +130,33 @@
                 </div>
             </div>
         </div>
-        <script>
-            function formatRupiah(angka) {
-                return new Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                    minimumFractionDigits: 0
-                }).format(angka);
-            }
 
+
+
+        <script>
             let currentPage = 1;
 
             async function fetchData() {
                 try {
                     const entries = parseInt(document.getElementById("entries").value);
                     const search = document.getElementById("search").value.toLowerCase();
-                    const mingguKeElement = document.getElementById("mingguKe");
-                    const mingguKe = mingguKeElement ? mingguKeElement.value : "";
+                    const barangElement = document.getElementById("barang");
+                    const barang = barangElement ? barangElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/admin/upah', {
+                    const response = await fetch('http://localhost:8080/api/admin/barang-harian', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
                         }
                     });
+                    console.log(response);
                     if (!response.ok) throw new Error("Failed to fetch data");
 
                     const data = await response.json();
 
                     const filteredData = data.data.filter(item =>
-                        (item.staff_produksi?.user?.nama_lengkap.toLowerCase().includes(search) || search === "") &&
-                        (mingguKe === '' || item.minggu_ke == mingguKe)
+                        item.barang.toLowerCase().includes(search) &&
+                        (barang === '' || item.barang === barang)
                     );
 
                     const totalEntries = filteredData.length;
@@ -186,7 +171,7 @@
                     renderPagination(totalPages);
                     renderEntriesInfo(start, end, totalEntries);
 
-                    if (mingguKeElement) rendermingguKes(data, mingguKe);
+                    if (barangElement) renderbarangs(data, barang);
                 } catch (error) {
                     console.error("Error fetching data:", error);
                 }
@@ -194,13 +179,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/admin/upah/${id}`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + '{{ session("api_token") }}'
-                        }
-                    });
-
+                    const response = await fetch(`/data/${id}`);
                     if (!response.ok) throw new Error("Failed to fetch details");
 
                     const detailData = await response.json();
@@ -212,11 +191,11 @@
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Nama Lengkap :</p>
-                <span class="flex-grow border-b border-black">${detailData.nama_lengkap}</span>
+                <span class="flex-grow border-b border-black">${detailData.name}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">mingguKe :</p>
-                <span class="flex-grow border-b border-black">${detailData.minggu_ke}</span>
+                <p class="w-auto">barang :</p>
+                <span class="flex-grow border-b border-black">${detailData.barang}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Detail :</p>
@@ -229,20 +208,18 @@
                 }
             }
 
-
             function closeModal() {
                 document.getElementById("detailModal").style.display = "none";
             }
 
             function renderTable(data) {
                 const tbody = document.querySelector("#dataTable tbody");
-                tbody.innerHTML = data.map(item =>
-                   
-                `<tr>
+                tbody.innerHTML = data.map(item => `
+        <tr>
             <td class="text-center">${item.id}</td>
-            <td>${console.log(item)}</td>
-            <td class="text-center">${item.minggu_ke}</td>
-            <td class="sm:hidden text-center">${formatRupiah(item.total_upah)}</td>
+            <td>${item.nama}</td>
+            <td>${item.barang}</td>
+            <td class="sm:hidden">${item.stock_id}</td>
             <td class="flex justify-center gap-2 items-center">
                 <button onclick="viewDetail(${item.id})" class="px-2 py-4">
                     <svg width="18" height="13" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -309,25 +286,15 @@
                 }));
             }
 
-            function rendermingguKes(data, selectedmingguKe) {
-                const mingguKeSelect = document.getElementById("mingguKe");
-                mingguKeSelect.innerHTML = '<option value="">All</option>' +
-                    Array.from(new Set(data.data.map(item => item.minggu_ke))) // <- pakai minggu_ke
-                    .map(minggu_ke => `<option value="${minggu_ke}" ${minggu_ke === selectedmingguKe ? "selected" : ""}>${minggu_ke}</option>`)
+            function renderbarangs(data, selectedbarang) {
+                const barangSelect = document.getElementById("barang");
+                barangSelect.innerHTML = '<option value="">All</option>' +
+                    Array.from(new Set(data.map(item => item.barang)))
+                    .map(barang => `<option value="${barang}" ${barang === selectedbarang ? "selected" : ""}>${barang}</option>`)
                     .join("");
             }
 
-
-            document.getElementById("mingguKe")?.addEventListener("change", fetchData);
-
-            function adjustMingguKe(amount) {
-                const mingguKeElement = document.getElementById("mingguKe");
-                let value = parseInt(mingguKeElement.value) || 0;
-                value = Math.max(1, value + amount);
-                mingguKeElement.value = value;
-                fetchData();
-            }
-
+            document.getElementById("barang")?.addEventListener("change", fetchData);
             document.getElementById("search")?.addEventListener("input", fetchData);
             fetchData();
         </script>
@@ -335,14 +302,13 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/upah/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
                         method: "GET",
                         headers: {
+                            "Content-Type": "application/json",
                             "Authorization": "Bearer " + '{{ session("api_token") }}'
                         }
                     });
-
-                    console.log(response);
 
                     if (!response.ok) {
                         throw new Error("Gagal mengambil data user.");
@@ -366,7 +332,7 @@
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/upah/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
