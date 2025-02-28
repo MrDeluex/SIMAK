@@ -7,15 +7,15 @@
                 <div class="w-full flex flex-col gap-3">
                     <div class="w-full flex justify-start items-center gap-4">
                         <Label class="font-light w-auto">NAMA :</Label>
-                        <input type="text" name="nama" class="flex-grow border-b border-black">
+                        <input type="text" name="nama" class="flex-grow border-b border-black" value="{{ session('user')['nama_lengkap'] }}" readonly>
                     </div>
                     <div class="w-full flex justify-start items-center gap-4">
                         <Label class="font-light w-auto">EMAIL :</Label>
-                        <input type="text" name="nama" class="flex-grow border-b border-black">
+                        <input type="text" name="nama" class="flex-grow border-b border-black" value="{{ session('user')['email'] }}" readonly>
                     </div>
                     <div class="w-full flex justify-start items-center gap-4">
                         <Label class="font-light w-auto">ROLE :</Label>
-                        <input type="text" name="nama" class="flex-grow border-b border-black">
+                        <input type="text" name="nama" class="flex-grow border-b border-black" value="{{ session('user')['role'] }}" readonly>
                     </div>
                 </div>
             </div>

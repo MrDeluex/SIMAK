@@ -1,5 +1,5 @@
 <x-layout.adminPage contentClass="flex flex-col justify-start items-center">
-    <h1 class="text-2xl font-reguler mb-10">TAMBAH KATEGORI BARANG</h1>
+    <h1 class="text-2xl font-reguler mb-10">Edit Kategori Barang</h1>
     <form action="" class="w-full" id="editForm">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">

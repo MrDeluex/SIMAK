@@ -310,13 +310,13 @@
                         throw new Error("Gagal mengambil data user.");
                     }
 
-                    let user = await response.json();
+                    let karyawan = await response.json();
 
-                    // Simpan data user ke sessionStorage agar bisa digunakan di halaman edit
-                    sessionStorage.setItem("editUser", JSON.stringify(user));
+                    // Simpan data karyawan ke sessionStorage agar bisa digunakan di halaman edit
+                    sessionStorage.setItem("editKaryawan", JSON.stringify(karyawan));
 
                     // Redirect ke halaman edit
-                    window.location.href = `/admin/users/edit`;
+                    window.location.href = `/admin/karyawan/edit`;
                 } catch (error) {
                     alert(error.message);
                 }
