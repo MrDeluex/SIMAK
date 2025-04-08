@@ -68,6 +68,8 @@
                     <input type="text" id="search" onkeyup="fetchData()"
                         class="border border-gray-300 px-1 rounded w-full">
                 </div>
+
+                
             </div>
 
             <div class="w-full h-80 overflow-y-auto overflow-x-hidden">
@@ -76,8 +78,8 @@
                         <tr>
                             <th style="width: 5%;" class="text-center">ID</th>
                             <th style="width: 25%;">Nama</th>
-                            <th style="width: 25%;">Email</th>
-                            <th style="width: 25%;">Pekerjaan</th>
+                            <th style="width: 25%;" class="sm:hidden">Email</th>
+                            <th style="width: 25%;" class="sm:hidden">Pekerjaan</th>
                             <th style="width: 20%;" class="text-center">Action</th>
                         </tr>
                     </thead>

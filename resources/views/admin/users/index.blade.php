@@ -47,7 +47,7 @@
     <body>
         <h1 class="text-2xl font-light mb-4 mt-10">DATA USERS</h1>
 
-        <a href="/admin/dataKaryawan/create">
+        <a href="/admin/users/create">
             <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT USER</button>
         </a>
 
@@ -152,6 +152,7 @@
 
                     const data = await response.json();
 
+
                     const filteredData = data.data.filter(item =>
                         item.role.toLowerCase().includes(search) &&
                         (role === '' || item.role === role)
@@ -190,10 +191,6 @@
                     const modalContent = document.getElementById("modalContent");
                     modalContent.innerHTML = `
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">Id Karyawan :</p>
-                <span class="flex-grow border-b border-black">${detailData.id}</span>
-            </div>
-            <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Nama Lengkap :</p>
                 <span class="flex-grow border-b border-black">${detailData.nama_lengkap}</span>
             </div>
@@ -202,8 +199,8 @@
                 <span class="flex-grow border-b border-black">${detailData.role}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">Detail :</p>
-                <span class="flex-grow border-b border-black">${detailData.description || "No description available."}</span>
+                <p class="w-auto">Email :</p>
+                <span class="flex-grow border-b border-black">${detailData.email || "No description available."}</span>
             </div>`;
 
                     document.getElementById("detailModal").style.display = "flex";

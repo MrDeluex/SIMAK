@@ -8,12 +8,23 @@
                 <div class="relative w-full">
                     <select id="users_id" name="users_id"
                         class="form-select peer w-full bg-transparent focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250">
-                        <option value="id user">nama user</option>
+                        <option value="id user">Loading...</option>
                     </select>
                     <label for="users_id"
                         class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
                         style="top: 0; left: 0;">
                         Akun User
+                    </label>
+                </div>
+            </div>
+            <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
+                <div class="relative w-full">
+                    <input type="text" placeholder="Username" id="nama" name="nama"
+                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
+                    <label for=""
+                        class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
+                        style="top: 0; left: 0;">
+                        Username
                     </label>
                 </div>
             </div>
@@ -116,73 +127,28 @@
                 return;
             }
 
-            // Ambil token dengan pengecekan null
-            const tokenMeta = document.querySelector('meta[name="api-token"]');
-            const csrfMeta = document.querySelector('meta[name="csrf-token"]');
-
-            const token = tokenMeta ? tokenMeta.content : null;
-            const csrfToken = csrfMeta ? csrfMeta.content : null;
-
-            if (!token || !csrfToken) {
-                console.error("Token tidak lengkap:", {
-                    token: !!token,
-                    csrf: !!csrfToken
-                });
-                alert("Token tidak lengkap, silakan refresh halaman dan login ulang!");
-                return;
-            }
 
             // Validasi input dengan pengecekan elemen
             const usersIdElement = document.getElementById("users_id");
+            const namaElement = document.getElementById("nama");
             const pekerjaanElement = document.getElementById("pekerjaan");
             const tanggalLahirElement = document.getElementById("tanggal_lahir");
             const alamatElement = document.getElementById("alamat");
             const teleponElement = document.getElementById("telepon");
 
-            // Pastikan semua elemen ada
-            if (!usersIdElement || !pekerjaanElement || !tanggalLahirElement ||
-                !alamatElement || !teleponElement) {
-                console.error("Beberapa elemen form tidak ditemukan!");
-                alert("Terjadi kesalahan pada form, silakan refresh halaman!");
-                return;
-            }
-
-            // Ambil nilai dengan safety check
             const users_id = parseInt(usersIdElement.value);
+            const nama = namaElement.value.trim();
             const pekerjaan = pekerjaanElement.value.trim();
             const tanggal_lahir = tanggalLahirElement.value.trim();
             const alamat = alamatElement.value.trim();
             const telepon = teleponElement.value.trim();
 
-            // Validasi data lebih detail
-            if (!users_id || isNaN(users_id) || users_id <= 0) {
-                alert("Pilih pengguna yang valid!");
-                return;
-            }
-
-            if (!pekerjaan || pekerjaan.length < 2) {
-                alert("Masukkan pekerjaan yang valid!");
-                return;
-            }
-
-            if (!tanggal_lahir || !isValidDate(tanggal_lahir)) {
-                alert("Masukkan tanggal lahir yang valid!");
-                return;
-            }
-
-            if (!alamat || alamat.length < 5) {
-                alert("Masukkan alamat yang valid!");
-                return;
-            }
-
-            if (!telepon || !isValidPhone(telepon)) {
-                alert("Masukkan nomor telepon yang valid!");
-                return;
-            }
+    
 
             // Data yang akan dikirim
             const data = {
                 users_id,
+                nama,
                 tanggal_lahir,
                 pekerjaan,
                 alamat,
@@ -193,21 +159,12 @@
             console.log("Mengirim data:", data);
 
             try {
-                // Cek URL API
-                const apiUrl = "http://localhost:8080/api/admin/karyawan";
-                if (!apiUrl) {
-                    throw new Error("URL API tidak valid!");
-                }
-
-                const response = await fetch("http://localhost:8080/api/admin/karyawan", {
+                const response = await fetch("http://localhost:8080/api/admin/staff-produksi", {
                     method: "POST",
                     headers: {
-                        "Accept": "application/json",
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                        "X-CSRF-TOKEN": csrfToken
+                        "Authorization": "Bearer {{ session('api_token') }}"
                     },
-                    credentials: 'include',
                     body: JSON.stringify(data)
                 });
 

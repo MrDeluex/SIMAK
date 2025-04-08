@@ -1,6 +1,6 @@
 <x-layout.adminPage bodyClass="max-w-screen">
     <h1 class="w-full text-2xl font-light ml-2 sm:ml-0 mb-3 sm:text-center">DASHBOARD</h1>
-    <p class="sm:block hidden w-full font-light text-xs text-center bg-secondary-2 text-white py-1 rounded mb-6">SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
+    <p class="sm:block hidden w-full font-light text-xs text-center bg-secondary-2 text-white py-1 rounded mb-6">SELAMAT DATANG <span id="namaUserDisplay1"></span>, ANDA LOGIN SEBAGAI <span id="roleUserDisplay1"></span></p>
     <div class="w-full flex sm:flex-wrap gap-y-5 justify-between items-center mb-5 gap-3">
         <div class="w-96 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
             <div class="w-55 h-full flex flex-col justify-center items-center gap-3 -translate-y-3">
@@ -12,7 +12,7 @@
                         style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">Staff Produksi</div>
                 </div>
                 <div class="w-full h-0.5 bg-black"></div>
-                <div class="text-5xl font-light">10000</div>
+                <div id="jumlahStaffProduksi" class="text-5xl font-light">0</div>
             </div>
             <svg width="122" height="114" viewBox="0 0 122 114" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -30,7 +30,7 @@
                         style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">Staff Administrasi</div>
                 </div>
                 <div class="w-full h-0.5 bg-black"></div>
-                <div class="text-5xl font-light">1000</div>
+                <div id="jumlahStaffAdministrasi" class="text-5xl font-light">0</div>
             </div>
             <svg width="122" height="114" viewBox="0 0 122 114" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -48,7 +48,7 @@
                         style="box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.25);">Stock Barang</div>
                 </div>
                 <div class="w-full h-0.5 bg-black"></div>
-                <div class="text-5xl font-light">100</div>
+                <div id="jumlahStock" class="text-5xl font-light">0</div>
             </div>
             <svg width="122" height="114" viewBox="0 0 122 114" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -57,42 +57,147 @@
             </svg>
         </div>
     </div>
-
     <div class="flex flex-wrap justify-between items-center gap-5">
         <div class="flex-grow sm:w-screen h-86 sm:h-auto flex flex-col justify-between pt-2 sm:pt-0">
             <p class="sm:hidden">
-                SELAMAT DATANG {{ session('user')['nama_lengkap'] }}, ANDA LOGIN SEBAGAI {{ session('user')['role'] }}
+                SELAMAT DATANG <span id="namaUserDisplay2"></span>, ANDA LOGIN SEBAGAI <span id="roleUserDisplay2"></span>
             </p>
 
-            <div class="w-full h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
-                <div class="w-57 h-57 bg-primary-3 rounded-full border-2 border-black"></div>
+            <div
+                class="w-full h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
+                <img class="w-57 h-57 rounded-full border-2 border-black object-cover"
+                    src="{{ session('user')['foto_profile'] ?? asset('assets/img/profile/ExProfile.jpg') }}">
                 <div class="flex-grow sm:w-full h-full flex flex-col justify-center items-center gap-6">
                     <h1 class="text-2xl">YOUR PROFILE</h1>
                     <div class="w-full flex flex-col gap-3">
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">NAMA :</Label>
-                            <input type="text" name="nama" class="flex-grow border-b border-black" disabled>
+                            <input type="text" name="namaUser" id="namaUser" class="flex-grow border-b border-black" readonly
+                                value="">
                         </div>
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">EMAIL :</Label>
-                            <input type="text" name="nama" class="flex-grow border-b border-black" disabled>
+                            <input type="text" name="emailUser" id="emailUser" class="flex-grow border-b border-black" readonly
+                                value="">
                         </div>
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">ROLE :</Label>
-                            <input type="text" name="nama" class="flex-grow border-b border-black" disabled>
+                            <input type="text" name="nama" id="roleUser" class="flex-grow border-b border-black" readonly
+                                value="">
                         </div>
                     </div>
 
-                    <a href=""><button class="w-53 h-8 rounded-full text-center font-light bg-secondary-2 text-white">Edit Your Password</button></a>
+                    <a href="/admin/profile"><button
+                            class="w-53 h-8 rounded-full text-center font-light bg-secondary-2 text-white">Edit Your
+                            Password</button></a>
                 </div>
             </div>
         </div>
 
-        <div class="w-96 h-86 sm:h-auto flex flex-col justify-center items-center gap-4 sm:gap-8 sm:py-8 border border-black rounded-xl" style="box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.25);">
+        <div class="w-96 h-86 sm:h-auto flex flex-col justify-center items-center gap-4 sm:gap-8 sm:py-8 border border-black rounded-xl"
+            style="box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.25);">
             <img class="w-42 h-42" src="{{ asset('assets/img/logo/logoBgWhite.png') }}" alt="">
             <p class="w-56 font-light text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut</p>
         </div>
     </div>
 
+    <script>
+        async function getProfile() {
+            try {
+                const response = await fetch("http://localhost:8080/api/admin/staff-produksi", {
+                    method: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + '{{ session('api_token') }}'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                document.getElementById("jumlahStaffProduksi").innerText = data.data.length;
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        async function getJumlahStaffProduksi() {
+            try {
+                const response = await fetch("http://localhost:8080/api/admin/staff-produksi", {
+                    method: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + '{{ session('api_token') }}'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                document.getElementById("jumlahStaffProduksi").innerText = data.data.length;
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        async function getJumlahStaffAdministrasi() {
+            try {
+                const response = await fetch("http://localhost:8080/api/admin/users", {
+                    method: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + '{{ session('api_token') }}'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.status && Array.isArray(data.data)) {
+                    // Filter hanya data dengan role "staff administrasi"
+                    const staffAdministrasi = data.data.filter(user => user.role === "StaffAdministrasi");
+
+                    document.getElementById("jumlahStaffAdministrasi").innerText = staffAdministrasi.length;
+                } else {
+                    document.getElementById("jumlahStaffAdministrasi").innerText = "Error";
+                    console.error("Data format tidak sesuai");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById("jumlahStaffAdministrasi").innerText = "Error";
+            }
+        }
+        async function getJumlahStock() {
+            try {
+                const response = await fetch("http://localhost:8080/api/admin/barang", {
+                    method: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + '{{ session('api_token') }}'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.status && Array.isArray(data.data)) {
+                    // Menjumlahkan total stok
+                    const totalStok = data.data.reduce((sum, item) => sum + item.stok, 0);
+                    document.getElementById("jumlahStock").innerText = totalStok;
+                } else {
+                    document.getElementById("totalStok").innerText = "Error";
+                    console.error("Data format tidak sesuai");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        getJumlahStaffProduksi();
+        getJumlahStaffAdministrasi();
+        getJumlahStock();
+    </script>
 </x-layout.adminPage>

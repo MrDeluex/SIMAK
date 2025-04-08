@@ -18,7 +18,8 @@
 <body class="{{ $bodyClass ?? '' }}flex max-w-screen overflow-x-hidden pl-63 sm:pl-0">
 
     {{-- SIDEBAR --}}
-    <section id="menu" class="z-50 bg-secondary-1 text-white w-63 h-screen fixed top-0 left-0 flex flex-col justify-start gap-12 sm:-translate-x-full transition-transfom duration-300">
+    <section id="menu"
+        class="z-50 bg-secondary-1 text-white w-63 h-screen fixed top-0 left-0 flex flex-col justify-start gap-12 sm:-translate-x-full transition-transfom duration-300">
         <div class="bg-secondary-2 font-light flex flex-col justify-center items-center w-full h-53"
             style="box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);">
             <img class="w-24 mb-4" src="{{ asset('assets/img/logo/logoBgWhite.png') }}" alt="">
@@ -149,19 +150,24 @@
     </section>
 
     <section class="w-full">
-        <nav id="navbar" class="z-40 w-full bg-white sm:fixed sm:top-0 h-15 px-10 sm:px-6 flex sm:justify-between justify-end items-center "
+        <nav id="navbar"
+            class="z-40 w-full bg-white sm:fixed sm:top-0 h-15 px-10 sm:px-6 flex sm:justify-between justify-end items-center "
             style="box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);">
             <button id="menu-toggle" class="sm:block hidden focus:outline-none">
                 <svg class="w-8 h-8" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.33334 6.5H21.6667M4.33334 10.8333H21.6667M4.33334 15.1667H21.6667M4.33334 19.5H21.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.33334 6.5H21.6667M4.33334 10.8333H21.6667M4.33334 15.1667H21.6667M4.33334 19.5H21.6667"
+                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button>
             <div class="flex justify-end items-center gap-3 h-full">
                 <div class="flex flex-col justify-center items-center sm:items-end">
-                    <h1>Nama Lengkap</h1>
-                    <p>Role</p>
+                    <h1 id="namaUserDisplay"></h1>
+                    <p class="text-sm text-opacity-70" id="roleUserDisplay"></p>
                 </div>
-                <div class="aspect-1/1 w-11 bg-primary-1 rounded-full"></div>
+                <a href="/admin/profile">
+                    <img class="aspect-1/1 w-11 bg-primary-1 rounded-full object-cover"
+                        src="{{ session('user')['foto_profile'] ?? asset('assets/img/profile/ExProfile.jpg') }}">
+                </a>
             </div>
         </nav>
 
@@ -170,6 +176,61 @@
         </div>
 
     </section>
+
+    <script>
+        async function fetchUser() {
+            let idUser = {{ session('user')['id'] }};
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/admin/users/${idUser}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + '{{ session('api_token') }}'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Data:', data);
+
+                const namaUserDisplay = document.getElementById('namaUserDisplay');
+                if (namaUserDisplay) namaUserDisplay.textContent = data.nama_lengkap;
+
+                const namaUserDisplay1 = document.getElementById('namaUserDisplay1');
+                if (namaUserDisplay1) namaUserDisplay1.textContent = data.nama_lengkap;
+
+                const namaUserDisplay2 = document.getElementById('namaUserDisplay2');
+                if (namaUserDisplay2) namaUserDisplay2.textContent = data.nama_lengkap;
+
+                const roleUserDisplay = document.getElementById('roleUserDisplay');
+                if (roleUserDisplay) roleUserDisplay.textContent = data.role;
+                
+                const roleUserDisplay1 = document.getElementById('roleUserDisplay1');
+                if (roleUserDisplay) roleUserDisplay.textContent = data.role;
+                
+                const roleUserDisplay2 = document.getElementById('roleUserDisplay2');
+                if (roleUserDisplay) roleUserDisplay.textContent = data.role;
+
+                const namaUser = document.getElementById('namaUser');
+                if (namaUser) namaUser.value = data.nama_lengkap;
+
+                const emailUser = document.getElementById('emailUser');
+                if (emailUser) emailUser.value = data.email;
+
+                const roleUser = document.getElementById('roleUser');
+                if (roleUser) roleUser.value = data.role;
+
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetchUser();
+    </script>
 
     <script>
         const menuToggle = document.getElementById('menu-toggle');

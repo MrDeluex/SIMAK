@@ -168,6 +168,7 @@
                     if (!response.ok) throw new Error("Failed to fetch data");
 
                     const data = await response.json();
+                    console.log(data);
 
                     const filteredData = data.data.filter(item =>
                         (item.staff_produksi?.user?.nama_lengkap.toLowerCase().includes(search) || search === "") &&
@@ -212,15 +213,23 @@
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Nama Lengkap :</p>
-                <span class="flex-grow border-b border-black">${detailData.nama_lengkap}</span>
+                <span class="flex-grow border-b border-black">${detailData.nama}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">KategoriBarang :</p>
-                <span class="flex-grow border-b border-black">${detailData.kategori_barang}</span>
+                <span class="flex-grow border-b border-black">${detailData.kategori}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Stock Tersedia :</p>
+                <span class="flex-grow border-b border-black">${detailData.stok}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Upah Per Kodi :</p>
+                <span class="flex-grow border-b border-black">${detailData.upah}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Detail :</p>
-                <span class="flex-grow border-b border-black">${detailData.description || "No description available."}</span>
+                <span class="flex-grow border-b border-black">${detailData.deskripsi || "No description available."}</span>
             </div>`;
 
                     document.getElementById("detailModal").style.display = "flex";
@@ -242,8 +251,8 @@
                     <tr>
                         <td class="text-center">${item.id}</td>
                         <td>${item.nama}</td>
-                        <td class="text-center">${item.kategori_barang}</td>
-                        <td class="sm:hidden text-center">${item.stock_id}</td>
+                        <td class="text-center">${item.kategori}</td>
+                        <td class="sm:hidden text-center">${item.stok}</td>
                         <td class="flex justify-center gap-2 items-center">
                             <button onclick="viewDetail(${item.id})" class="px-2 py-4">
                                 <svg width="18" height="13" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">

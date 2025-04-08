@@ -21,23 +21,10 @@
 
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
-                    <input type="text" id="email" name="email"
-                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent"
-                        value=""/>
-                    <label for="email"
-                        class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
-                        style="top: 0; left: 0;">
-                        Email
-                    </label>
-                </div>
-            </div>
-
-            <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
-                <div class="relative w-full">
                     <select id="role" name="role"
                         class="form-select peer w-full bg-transparent focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250">
-                        <option value="Karyawan">Karyawan</option>
-                        <option value="Staff">Staff</option>
+                        <option value="StaffProduksi">Staff Produksi</option>
+                        <option value="StaffAdministrasi">Staff Administrasi</option>
                     </select>
                     <label for="role"
                         class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
@@ -61,7 +48,6 @@
             if (user) {
                 document.getElementById("user_id").value = user.id;
                 document.getElementById("nama_lengkap").value = user.nama_lengkap;
-                document.getElementById("email").value = user.email;
                 document.getElementById("role").value = user.role;
             } else {
                 alert("Data user tidak ditemukan!");
@@ -73,10 +59,9 @@
 
                 let userId = document.getElementById("user_id").value;
                 let nama = document.getElementById("nama_lengkap").value;
-                let email = document.getElementById("email").value;
                 let role = document.getElementById("role").value;
 
-                let data = { nama_lengkap: nama, email: email, role: role };
+                let data = { nama_lengkap: nama, role: role };
 
                 try {
                     let response = await fetch(`http://localhost:8080/api/admin/users/${userId}`, {

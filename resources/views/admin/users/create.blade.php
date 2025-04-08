@@ -27,10 +27,21 @@
             </div>
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
+                    <input type="text" placeholder="Nomor Handphone" id="nomor_hp" name="nomor_hp"
+                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
+                    <label for=""
+                        class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
+                        style="top: 0; left: 0;">
+                        Nomor Handphone
+                    </label>
+                </div>
+            </div>
+            <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
+                <div class="relative w-full">
                     <select id="role" name="role"
                         class="form-select peer w-full bg-transparent focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250">
-                        <option value="Karyawan">Karyawan</option>
-                        <option value="Staff">Staff</option>
+                        <option value="StaffProduksi">Staff Produksi</option>
+                        <option value="StaffAdministrasi">Staff Administrasi</option>
                     </select>
                     <label for="role"
                         class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
@@ -53,12 +64,14 @@
             // Ambil data dari form
             let nama = document.getElementById("nama_lengkap").value;
             let email = document.getElementById("email").value;
+            let nomor_hp = document.getElementById("nomor_hp").value;
             let role = document.getElementById("role").value;
 
             // Data yang akan dikirim ke API
             let data = {
                 nama_lengkap: nama,
                 email: email,
+                nomor_hp: nomor_hp,
                 role: role
             };
 
@@ -73,6 +86,7 @@
                 });
 
                 let result = await response.json();
+                console.log(result);
 
                 if (response.ok) {
                     alert("User berhasil ditambahkan!");
