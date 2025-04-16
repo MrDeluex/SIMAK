@@ -180,23 +180,35 @@
                     if (!response.ok) throw new Error("Failed to fetch details");
 
                     const detailData = await response.json();
+                    console.log(detailData);
                     const modalContent = document.getElementById("modalContent");
                     modalContent.innerHTML = `
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">Id Karyawan :</p>
-                <span class="flex-grow border-b border-black">${detailData.id}</span>
+                <p class="w-auto">Nama Lengkap :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.nama}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">Nama Lengkap :</p>
-                <span class="flex-grow border-b border-black">${detailData.nama_lengkap}</span>
+                <p class="w-auto">Tanggal Lahir :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.tanggal_lahir}</span>
+            </div>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Alamat :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.alamat}</span>
+            </div>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">No Telfon :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.telepon}</span>
+            </div>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Email :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.email}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">pekerjaan :</p>
-                <span class="flex-grow border-b border-black">${detailData.pekerjaan}</span>
-            </div>
-            <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">Detail :</p>
-                <span class="flex-grow border-b border-black">${detailData.description || "No description available."}</span>
+                <span class="flex-grow border-b border-black">${detailData.data.pekerjaan}</span>
             </div>`;
 
                     document.getElementById("detailModal").style.display = "flex";

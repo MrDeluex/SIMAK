@@ -170,7 +170,7 @@
         }
         async function getJumlahStock() {
             try {
-                const response = await fetch("http://localhost:8080/api/admin/barang", {
+                const response = await fetch("http://localhost:8080/api/admin/stocks", {
                     method: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + '{{ session('api_token') }}'
@@ -185,7 +185,8 @@
 
                 if (data.status && Array.isArray(data.data)) {
                     // Menjumlahkan total stok
-                    const totalStok = data.data.reduce((sum, item) => sum + item.stok, 0);
+                    const totalStok = data.data.reduce((sum, item) => sum + item.stock, 0);
+                    console.log(data.data);
                     document.getElementById("jumlahStock").innerText = totalStok;
                 } else {
                     document.getElementById("totalStok").innerText = "Error";

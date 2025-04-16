@@ -346,16 +346,16 @@
                     console.log(response);
 
                     if (!response.ok) {
-                        throw new Error("Gagal mengambil data user.");
+                        throw new Error("Gagal mengambil data upah.");
                     }
 
                     let user = await response.json();
 
                     // Simpan data user ke sessionStorage agar bisa digunakan di halaman edit
-                    sessionStorage.setItem("editUser", JSON.stringify(user));
+                    sessionStorage.setItem("editUpah", JSON.stringify(user));
 
                     // Redirect ke halaman edit
-                    window.location.href = `/admin/users/edit`;
+                    window.location.href = `/admin/upah/edit`;
                 } catch (error) {
                     alert(error.message);
                 }

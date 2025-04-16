@@ -321,7 +321,7 @@
             }
 
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus user ini?")) {
+                if (!confirm("Apakah Anda yakin ingin menghapus kategori ini?")) {
                     return;
                 }
 
@@ -335,8 +335,11 @@
                     });
 
                     if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error("Error response:", errorData);
                         throw new Error("Gagal menghapus Kategori.");
                     }
+
 
                     alert("Kategori berhasil dihapus!");
                     window.location.reload(); // Refresh halaman setelah menghapus
@@ -349,4 +352,4 @@
 
     </html>
 
-    </x-adminPage>
+    </x-adminPage>~

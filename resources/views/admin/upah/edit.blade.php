@@ -7,8 +7,8 @@
         }
     </style>
 
-    <h1 class="text-2xl font-reguler mb-10">Edit Data Harian</h1>
-    <form action="" class="w-full" id="editForm">
+    <h1 class="text-2xl font-reguler mb-10">Edit Data upah</h1>
+    <form action="" class="w-full" id="inputForm">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
 
@@ -76,21 +76,17 @@
         document.addEventListener("DOMContentLoaded", async function() {
             const form = document.getElementById("editForm");
             const staffSelect = document.getElementById("staff_produksi_id");
-            const barangSelect = document.getElementById("barang_id");
 
-            let harian = JSON.parse(sessionStorage.getItem("editHarian"));
-            console.log(harian);
+            let upah = JSON.parse(sessionStorage.getItem("editUpah"));
 
-            let id = harian?.data?.id; // ambil ID dari data harian 
-
-            if (harian) {
-                document.getElementById("tanggal").value = harian.data.tanggal;
-                document.getElementById("jumlah_dikerjakan").value = harian.data.jumlah_dikerjakan;
-                loadStaffProduksi(harian.data.staff_produksi_id);
-                loadBarangProduksi(harian.data.barang.id);
+            if (upah) {
+                document.getElementById("tanggal").value = upah.data.tanggal;
+                document.getElementById("jumlah_dikerjakan").value = upah.data.jumlah_dikerjakan;
+                document.getElementById("staff_produksi_id").innerHTML = '<option value="" disabled>Pilih Karyawan</option>' +
+                    data.map(staff => `<option value="${upah.data.staff_produksi.id}" ${upah.data.staff_produksi.id == upah.data.staff_produksi.id ? "selected" : ""}>${upah.data.staff_produksi.nama}</option>`).join("");
             } else {
-                alert("Data harian tidak ditemukan!");
-                window.location.href = "/admin/harian"; // Redirect jika tidak ada data
+                alert("Data upah tidak ditemukan!");
+                window.location.href = "/admin/upah"; // Redirect jika tidak ada data
             }
 
             async function loadStaffProduksi(selectedId) {
@@ -100,14 +96,9 @@
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
                     });
-
-                    const result = await res.json();
-                    const staffSelect = document.getElementById("staff_produksi_id");
-
+                    const data = await res.json();
                     staffSelect.innerHTML = '<option value="" disabled>Pilih Karyawan</option>' +
-                        result.data.map(staff =>
-                            `<option value="${staff.id}" ${staff.id == selectedId ? "selected" : ""}>${staff.nama}</option>`
-                        ).join("");
+                        data.data.map(staff => `<option value="${staff.id}" ${staff.id == selectedId ? "selected" : ""}>${staff.nama}</option>`).join("");
                 } catch (error) {
                     console.error("Error fetching staff produksi:", error);
                 }
@@ -128,6 +119,8 @@
                 }
             }
 
+            loadData();
+
             form.addEventListener("submit", async function(event) {
                 event.preventDefault();
                 const formData = {
@@ -136,11 +129,9 @@
                     tanggal: document.getElementById("tanggal").value,
                     jumlah_dikerjakan: document.getElementById("jumlah_dikerjakan").value
                 };
-                console.log(formData);
-
 
                 try {
-                    const res = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
+                    const res = await fetch(`http://localhost:8080/api/admin/barang-upah/${id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -151,7 +142,7 @@
                     const result = await res.json();
                     if (res.ok) {
                         alert(result.message);
-                        window.location.href = "/admin/harian";
+                        window.location.href = "/admin/upah";
                     } else {
                         alert(result.message || "Terjadi kesalahan");
                     }
