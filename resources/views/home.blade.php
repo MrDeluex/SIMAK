@@ -76,27 +76,27 @@
         <h1 class="text-white text-center text-6.5xl sm:text-2xl tracking-widest sm:tracking-normal">ADVANTAGES</h1>
         <div class="flex justify-center items-end flex-wrap my-6 gap-12">
             <div
-                class="aspect-108/79 sm:h-38 h-79 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
                 <div
-                    class="aspect-1/1 sm:h-38 h-79 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
                     EFISIEN</h1>
             </div>
             <div
-                class="aspect-108/79 sm:h-38 h-79 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
                 <div
-                    class="aspect-1/1 sm:h-38 h-79 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
                     TERINTEGRASI</h1>
             </div>
             <div
-                class="aspect-108/79 sm:h-38 h-79 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
                 <div
-                    class="aspect-1/1 sm:h-38 h-79 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">

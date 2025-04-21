@@ -363,12 +363,12 @@
             }
 
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus user ini?")) {
+                if (!confirm("Apakah Anda yakin ingin menghapus data ini?")) {
                     return;
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/upah/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
@@ -377,10 +377,10 @@
                     });
 
                     if (!response.ok) {
-                        throw new Error("Gagal menghapus user.");
+                        throw new Error("Gagal menghapus data.");
                     }
 
-                    alert("User berhasil dihapus!");
+                    alert("Data berhasil dihapus!");
                     window.location.reload(); // Refresh halaman setelah menghapus
                 } catch (error) {
                     alert("Terjadi kesalahan: " + error.message);

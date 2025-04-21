@@ -19,17 +19,6 @@
             </div>
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
-                    <input type="text" placeholder="Username" id="nama" name="nama"
-                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
-                    <label for=""
-                        class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
-                        style="top: 0; left: 0;">
-                        Username
-                    </label>
-                </div>
-            </div>
-            <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
-                <div class="relative w-full">
                     <input type="text" placeholder="Pekerjaan" id="pekerjaan" name="pekerjaan"
                         class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
                     <label for=""
@@ -61,20 +50,9 @@
                     </label>
                 </div>
             </div>
-            <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
-                <div class="relative w-full">
-                    <input type="text" placeholder="Telepon" id="telepon" name="telepon"
-                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
-                    <label for="Telepon"
-                        class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
-                        style="top: 0; left: 0;">
-                        Telepon
-                    </label>
-                </div>
-            </div>
 
             <div class="w-full flex justify-between items-center">
-                <button class="px-10 py-1 rounded bg-secondary-2 text-white">Kembali</button>
+                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
             </div>
         </div>
@@ -130,29 +108,23 @@
 
             // Validasi input dengan pengecekan elemen
             const usersIdElement = document.getElementById("users_id");
-            const namaElement = document.getElementById("nama");
             const pekerjaanElement = document.getElementById("pekerjaan");
             const tanggalLahirElement = document.getElementById("tanggal_lahir");
             const alamatElement = document.getElementById("alamat");
-            const teleponElement = document.getElementById("telepon");
 
             const users_id = parseInt(usersIdElement.value);
-            const nama = namaElement.value.trim();
             const pekerjaan = pekerjaanElement.value.trim();
             const tanggal_lahir = tanggalLahirElement.value.trim();
             const alamat = alamatElement.value.trim();
-            const telepon = teleponElement.value.trim();
 
     
 
             // Data yang akan dikirim
             const data = {
                 users_id,
-                nama,
                 tanggal_lahir,
                 pekerjaan,
                 alamat,
-                telepon
             };
 
             // Log data sebelum dikirim

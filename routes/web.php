@@ -39,6 +39,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/barang', function () { return view('admin.barang.index'); });
     Route::get('/admin/barang/create', function () { return view('admin.barang.create'); });
     Route::get('/admin/barang/edit', function () { return view('admin.barang.edit'); });
+
+    Route::get('/admin/stock', function () { return view('admin.stock.index'); });
     
     Route::get('/admin/kategori', function () { return view('admin.kategori.index'); });
     Route::get('/admin/kategori/create', function () { return view('admin.kategori.create'); });

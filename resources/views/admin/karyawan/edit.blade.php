@@ -42,7 +42,7 @@
             
 
             <div class="w-full flex justify-between items-center">
-                <button class="px-10 py-1 rounded bg-secondary-2 text-white">Kembali</button>
+                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Update</button>
             </div>
         </div>

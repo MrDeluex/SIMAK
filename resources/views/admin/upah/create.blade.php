@@ -31,7 +31,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white">Kembali</button>
+                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/upah'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
             </div>
         </div>
@@ -83,8 +83,9 @@
                     const result = await res.json();
                     if (res.ok) {
                         alert(result.message);
+                        window.location.href='/admin/upah'
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        alert(result.message || "Terjadi Kesalahan di otak lu");
                     }
                 } catch (error) {
                     console.error("Error submitting data:", error);

@@ -12,7 +12,8 @@
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">NAMA :</Label>
                             <input type="text" name="nama" id="namaUser"
-                                class="flex-grow border-b border-black px-1">
+                                class="flex-grow border-b border-black px-1"
+                                disabled>
                         </div>
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">EMAIL :</Label>
@@ -59,77 +60,63 @@
             </div>
             <p id="errorMessage" class="text-red-500 text-center w-full hidden">Passwords do not match!</p>
             <div class="w-full justify-center items-center flex gap-10">
-                <a href="">
-                    <button
-                        class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-custom-1">BACK</button>
+                <a href="/admin" class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-custom-1 flex items-center justify-center">
+                    <p>Back</p>
                 </a>
-                <a href="">
-                    <button type="submit"
-                        class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-secondary-2">Confirm</button>
-                </a>
+                <button type="submit"
+                    class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-secondary-2">Confirm</button>
+
             </div>
         </form>
     </div>
 
     <script>
-        document.getElementById("passwordForm").addEventListener("submit", function(event) {
+        document.getElementById("passwordForm").addEventListener("submit", async function(event) {
             event.preventDefault(); // Mencegah form terkirim langsung
 
+            let oldPassword = document.getElementById("oldPassword").value;
             let newPassword = document.getElementById("newPassword").value;
             let confirmPassword = document.getElementById("confirmPassword").value;
             let errorMessage = document.getElementById("errorMessage");
 
+            // Validasi new password dan confirm password
             if (newPassword !== confirmPassword) {
-                errorMessage.classList.remove("hidden"); // Tampilkan pesan error
+                errorMessage.classList.remove("hidden");
+                errorMessage.innerText = "Password baru dan konfirmasi harus sama!";
+                return;
             } else {
-                errorMessage.classList.add("hidden"); // Sembunyikan pesan error
-                alert("Password updated successfully!");
-                this.submit(); // Kirim form jika validasi sukses
+                errorMessage.classList.add("hidden");
+            }
+
+            // Data yang dikirim ke API
+            const data = {
+                old_password: oldPassword,
+                new_password: newPassword,
+                new_password_confirmation: confirmPassword,
+            };
+
+            try {
+                const response = await fetch("http://localhost:8080/api/users/change-password", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer {{ session('api_token') }}"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                console.log(result);
+
+                if (response.ok) {
+                    alert("Password berhasil diubah!");
+                } else {
+                    alert("Gagal ganti password: " + result.message);
+                }
+            } catch (error) {
+                alert("Terjadi kesalahan: " + error.message);
             }
         });
     </script>
 
-   
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let karyawan = JSON.parse(sessionStorage.getItem("editKaryawan"));
-
-            document.getElementById("profileForm").addEventListener("submit", async function(e) {
-                e.preventDefault();
-
-                let id = document.getElementById("idUsers").value;
-                let nama = document.getElementById("namaUser").value;
-                let role = document.getElementById("roleUser").value;
-
-                let data = {
-                    nama_lengkap: nama,
-                    role: role,
-                };
-
-                try {
-                    let response = await fetch(
-                        `http://localhost:8080/api/admin/users/${id}`, {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": "Bearer " + '{{ session('api_token') }}'
-                            },
-                            body: JSON.stringify(data)
-                        });
-
-                    let result = await response.json();
-                    console.log(result);
-
-                    if (response.ok) {
-                        alert("Username berhasil diperbarui!");
-                        window.location.href = "/admin/profile";
-                    } else {
-                        alert("Gagal memperbarui Username: " + result.message);
-                    }
-                } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
-                }
-            });
-        });
-    </script>
 </x-layout.adminPage>

@@ -205,23 +205,25 @@
                     if (!response.ok) throw new Error("Failed to fetch details");
 
                     const detailData = await response.json();
+                    console.log(detailData);
+
                     const modalContent = document.getElementById("modalContent");
                     modalContent.innerHTML = `
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">Id Karyawan :</p>
-                <span class="flex-grow border-b border-black">${detailData.id}</span>
-            </div>
-            <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Nama Lengkap :</p>
-                <span class="flex-grow border-b border-black">${detailData.nama_lengkap}</span>
+                <span class="flex-grow border-b border-black">${detailData.data.upah.staff_produksi.nama}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">mingguKe :</p>
-                <span class="flex-grow border-b border-black">${detailData.minggu_ke}</span>
+                <p class="w-auto">Periode Dimulai :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.periode.tanggal_mulai}</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
-                <p class="w-auto">Detail :</p>
-                <span class="flex-grow border-b border-black">${detailData.description || "No description available."}</span>
+                <p class="w-auto">Total Dikerjakan :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.upah.total_dikerjakan}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Total Upah :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.upah.total_upah}</span>
             </div>`;
 
                     document.getElementById("detailModal").style.display = "flex";

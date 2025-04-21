@@ -1,6 +1,5 @@
 <x-layout.adminPage bodyClass="max-w-screen">
     <h1 class="w-full text-2xl font-light ml-2 sm:ml-0 mb-3 sm:text-center">DASHBOARD</h1>
-    <p class="sm:block hidden w-full font-light text-xs text-center bg-secondary-2 text-white py-1 rounded mb-6">SELAMAT DATANG <span id="namaUserDisplay1"></span>, ANDA LOGIN SEBAGAI <span id="roleUserDisplay1"></span></p>
     <div class="w-full flex sm:flex-wrap gap-y-5 justify-between items-center mb-5 gap-3">
         <div class="w-96 h-50 border-2 border-black rounded-lg flex justify-start items-center gap-3">
             <div class="w-55 h-full flex flex-col justify-center items-center gap-3 -translate-y-3">
@@ -58,13 +57,8 @@
         </div>
     </div>
     <div class="flex flex-wrap justify-between items-center gap-5">
-        <div class="flex-grow sm:w-screen h-86 sm:h-auto flex flex-col justify-between pt-2 sm:pt-0">
-            <p class="sm:hidden">
-                SELAMAT DATANG <span id="namaUserDisplay2"></span>, ANDA LOGIN SEBAGAI <span id="roleUserDisplay2"></span>
-            </p>
-
-            <div
-                class="w-full h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
+        <div class="flex-grow sm:w-screen h-full sm:h-auto flex flex-col justify-between pt-2 sm:pt-0">
+            <div class="w-full h-86 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
                 <img class="w-57 h-57 rounded-full border-2 border-black object-cover"
                     src="{{ session('user')['foto_profile'] ?? asset('assets/img/profile/ExProfile.jpg') }}">
                 <div class="flex-grow sm:w-full h-full flex flex-col justify-center items-center gap-6">
@@ -103,24 +97,6 @@
     </div>
 
     <script>
-        async function getProfile() {
-            try {
-                const response = await fetch("http://localhost:8080/api/admin/staff-produksi", {
-                    method: "GET",
-                    headers: {
-                        'Authorization': 'Bearer ' + '{{ session('api_token') }}'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const data = await response.json();
-                document.getElementById("jumlahStaffProduksi").innerText = data.data.length;
-            } catch (error) {
-                console.error("Error:", error);
-            }
-        }
         async function getJumlahStaffProduksi() {
             try {
                 const response = await fetch("http://localhost:8080/api/admin/staff-produksi", {
@@ -170,7 +146,7 @@
         }
         async function getJumlahStock() {
             try {
-                const response = await fetch("http://localhost:8080/api/admin/stocks", {
+                const response = await fetch("http://localhost:8080/api/admin/stock/total-stock", {
                     method: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + '{{ session('api_token') }}'
@@ -182,16 +158,10 @@
                 }
 
                 const data = await response.json();
-
-                if (data.status && Array.isArray(data.data)) {
-                    // Menjumlahkan total stok
-                    const totalStok = data.data.reduce((sum, item) => sum + item.stock, 0);
-                    console.log(data.data);
-                    document.getElementById("jumlahStock").innerText = totalStok;
-                } else {
-                    document.getElementById("totalStok").innerText = "Error";
-                    console.error("Data format tidak sesuai");
-                }
+                const totalStok = data.total_stok
+                
+                document.getElementById("jumlahStock").innerText = totalStok;
+           
             } catch (error) {
                 console.error("Error:", error);
             }
