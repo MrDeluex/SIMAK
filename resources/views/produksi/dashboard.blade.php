@@ -18,24 +18,22 @@
                 </div>
                 <div class="w-full flex justify-start items-center gap-4">
                     <Label class="font-light w-auto">ROLE :</Label>
-                    <input type="text" name="nama" class="flex-grow border-b border-black" value="{{ session('user')['role'] }}" disabled>
+                    <input type="text" name="nama" class="flex-grow border-b border-black" value="{{ session('user')['role'] == 'StaffProduksi' ? 'Staff Produksi' : session('user')['role'] }}" disabled>
+
                 </div>
             </div>
-            <a href="" class="w-full flex justify-start sm:justify-center"><button
+            <a href="staffProduksi/profile" class="w-full flex justify-start sm:justify-center"><button
                     class="w-53 h-8 rounded-full text-center font-light bg-secondary-2 text-white">Edit Your
                     Password</button></a>
         </div>
     </div>
     <div class="w-full flex items-center justify-between gap-6">
-        <div class="py-14 pl-14 sm:py-12 sm:px-22 gap-14 sm:gap-8 flex-grow sm:w-full flex sm:flex-wrap justify-start sm:justify-center items-center border border-black rounded-xl"
+        <div class="py-14 px-8 pl-14 sm:py-12 sm:px-22 gap-14 sm:gap-8 flex sm:w-full sm:flex-wrap justify-between sm:justify-center items-center border border-black rounded-xl"
             style="box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.25);">
             <img class="w-42 h-42" src="{{ asset('assets/img/logo/logoBgWhite.png') }}" alt="">
             <p class="w-86 font-light text-justify sm:text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut</p>
         </div>
-        <p class="sm:hidden w-126 text-white text-center bg-secondary-2 border border-black rounded-lg px-8 py-1">
-            SELAMAT DATANG {{ session('user')['nama_lengkap'] }}, ANDA LOGIN SEBAGAI {{ session('user')['role'] }}
-        </p>
     </div>
 
 </x-layout.userPage>

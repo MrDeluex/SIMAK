@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="w-full flex justify-between items-center">
+            <div class="w-full flex justify-between items-center">`
                 <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
             </div>

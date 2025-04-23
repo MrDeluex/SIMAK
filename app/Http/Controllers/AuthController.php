@@ -19,10 +19,10 @@ class AuthController extends Controller
         // Periksa dan arahkan berdasarkan role pengguna
         elseif ($user['role'] === 'Admin') {
             return redirect('/admin');
-        } elseif ($user['role'] === 'Karyawan') {
-            return redirect('/karyawan');
-        } elseif ($user['role'] === 'Staff') {
-            return redirect('/staff');
+        } elseif ($user['role'] === 'StaffProduksi') {
+            return redirect('/staffProduksi');
+        } elseif ($user['role'] === 'StaffAdministrasi') {
+            return redirect('/staffAdministrasi');
         } else {
             return redirect('/login')->with('error', 'Role tidak dikenali. Silakan login kembali.');
         }

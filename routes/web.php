@@ -12,6 +12,11 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/forgot-password/no_handphone', function () {return view('auth.noTelfon');});
+Route::get('/forgot-password/email', function () {return view('auth.email');});
+
+Route::get('/change_password', function () {return view('auth.change_password');});
+
 Route::get('/percobaan', function () {
     return view('percobaan'); // Mengarahkan ke file percobaan.blade.php
 });
@@ -56,16 +61,21 @@ Route::middleware(['admin'])->group(function () {
 
 });
 
-Route::middleware(['StaffProduksi'])->group(function () {
+Route::middleware(['staffProduksi'])->group(function () {
     
-    Route::get('/StaffProduksi', function () { return view('karyawan.dashboard'); });
-    Route::get('/StaffProduksi/profile', function () { return view('karyawan.profile'); });
+    Route::get('/staffProduksi', function () { return view('produksi.dashboard'); });
+    Route::get('/staffProduksi/profile', function () { return view('produksi.profile'); });
     
+    Route::get('/staffProduksi/upah', function () { return view('produksi.upah.index'); });
+
+    Route::get('/staffProduksi/barang', function () { return view('produksi.barang.index'); });
+   
+    Route::get('/staffProduksi/barangHarian', function () { return view('produksi.barangHarian.index'); });
 });
 
-Route::middleware(['StaffAdministrasi'])->group(function () {
+Route::middleware(['staffAdministrasi'])->group(function () {
     
-    Route::get('/StaffAdministrasi', function () { return view('staff.dashboard'); });
-    Route::get('/StaffAdministrasi/profile', function () { return view('staff.profile'); });
+    Route::get('/taffAdministrasi', function () { return view('staffAdministrasi.dashboard'); });
+    Route::get('/taffAdministrasi/profile', function () { return view('staffAdministrasi.profile'); });
     
 });

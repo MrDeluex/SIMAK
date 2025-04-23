@@ -21,10 +21,9 @@ class StaffProduksiMiddleware
         if ($user['role'] === 'StaffProduksi' || $user['role'] === 'Admin') {
             return $next($request);
         }
-
-        // Cek apakah pengguna mencoba mengakses halaman /StaffProduksi
-        if ($request->is('/StaffProduksi') && $user['role'] !== 'StaffProduksi') {
-            return redirect()->back()->withErrors(['message' => 'Unauthorized, only Admins can access this page.']);
+        
+        if ($request->is('/staffProduksi') && $user['role'] !== 'StaffProduksi') {
+            return redirect()->withErrors(['message' => 'Unauthorized, only Admins can access this page.']);
         }
 
         // Jika role tidak dikenal, redirect ke login

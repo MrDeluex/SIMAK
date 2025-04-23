@@ -60,12 +60,43 @@
                         </label>
                     </div>
                 </div>
-                <p id="error-message" style="color: red;"></p>
-                {{-- <a href="">FORGOT YOUR PASSWORD?</a> --}}
-                <button type="submit" class="text-2xl sm:text-base sm:font-extralight w-79 h-14 border-2 sm:border border-black rounded-full">SIGN IN</button>
+                <div class="w-full flex flex-col items-center justify-center gap-4">
+                    <p id="error-message" style="color: red;"></p>
+                    <button type="submit" class="text-2xl sm:text-base sm:font-extralight w-79 h-14 border-2 sm:border border-black rounded-full">SIGN IN</button>
+                    <p id="forgotPassword" class="cursor-pointer">FORGOT YOUR PASSWORD?</a>
+                </div>
             </div>
         </form>
+
+        <div id="forgotModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="bg-white rounded-2xl p-6 w-212 shadow-lg relative">
+
+                <svg id="cancelModal" class="absolute top-2 right-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="black" />
+                </svg>
+
+                <h2 class="text-2xl text-center mb-4">FORGOT PASSWORD</h2>
+                <div class="flex justify-between px-8 py-4">
+                    <button class="w-72 h-16 flex items-center justify-center  bg-secondary-2 text-white rounded hover:bg-secondary-1 border-2 border-black" onclick="window.location.href='/forgot-password/email'">With E-mail</button>
+                    <button class="w-72 h-16 flex items-center justify-center  bg-secondary-2 text-white rounded hover:bg-secondary-1 border-2 border-black" onclick="window.location.href='/forgot-password/no_handphone'">With No-hp</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
+<script>
+    const forgotLink = document.getElementById("forgotPassword");
+    const modal = document.getElementById("forgotModal");
+    const cancelBtn = document.getElementById("cancelModal");
+
+    forgotLink.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
+</script>
 
 </html>

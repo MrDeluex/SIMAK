@@ -29,8 +29,8 @@
         <div class="bg-secondary-2 w-full h-103 py-5"
             style="box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);">
             <div class="w-full flex flex-col justify-start items-center gap-2">
-                <a href="/" class="w-full">
-                    <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
+                <a href="/staffProduksi/dashboard" class="w-full">
+                    <div class=" w-full h-10 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -43,8 +43,8 @@
                         <p>DASHBOARD</p>
                     </div>
                 </a>
-                <a href="/" class="w-full">
-                    <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
+                <a href="/staffProduksi/profile" class="w-full">
+                    <div class=" w-full h-10 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -54,11 +54,11 @@
                                 d="M20.125 1.4375H2.875C2.49375 1.4375 2.12812 1.58895 1.85853 1.85853C1.58895 2.12812 1.4375 2.49375 1.4375 2.875V20.125C1.4375 20.5062 1.58895 20.8719 1.85853 21.1415C2.12812 21.411 2.49375 21.5625 2.875 21.5625H20.125C20.5061 21.5619 20.8714 21.4103 21.1408 21.1408C21.4103 20.8714 21.5619 20.5061 21.5625 20.125V2.875C21.5625 2.49375 21.411 2.12812 21.1415 1.85853C20.8719 1.58895 20.5062 1.4375 20.125 1.4375ZM20.125 7.90625H10.0625V2.875H20.125V7.90625ZM8.625 2.875V7.90625H2.875V2.875H8.625ZM2.875 20.125V9.34375H20.125L20.1264 20.125H2.875Z"
                                 fill="white" />
                         </svg>
-                        <p>DATA KARYAWAN</p>
+                        <p>PROFILE</p>
                     </div>
                 </a>
-                <a href="/" class="w-full">
-                    <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
+                <a href="/staffProduksi/upah" class="w-full">
+                    <div class=" w-full h-10 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -68,11 +68,11 @@
                                 d="M20.125 1.4375H2.875C2.49375 1.4375 2.12812 1.58895 1.85853 1.85853C1.58895 2.12812 1.4375 2.49375 1.4375 2.875V20.125C1.4375 20.5062 1.58895 20.8719 1.85853 21.1415C2.12812 21.411 2.49375 21.5625 2.875 21.5625H20.125C20.5061 21.5619 20.8714 21.4103 21.1408 21.1408C21.4103 20.8714 21.5619 20.5061 21.5625 20.125V2.875C21.5625 2.49375 21.411 2.12812 21.1415 1.85853C20.8719 1.58895 20.5062 1.4375 20.125 1.4375ZM20.125 7.90625H10.0625V2.875H20.125V7.90625ZM8.625 2.875V7.90625H2.875V2.875H8.625ZM2.875 20.125V9.34375H20.125L20.1264 20.125H2.875Z"
                                 fill="white" />
                         </svg>
-                        <p>UPAH KARYAWAN</p>
+                        <p>UPAH</p>
                     </div>
                 </a>
-                <a href="/" class="w-full">
-                    <div class="border-y border-white w-full h-12 px-3 flex justify-start items-center gap-6">
+                <a href="/staffProduksi/barang" class="w-full">
+                    <div class=" w-full h-10 px-3 flex justify-start items-center gap-6">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -83,6 +83,20 @@
                                 fill="white" />
                         </svg>
                         <p>DATA BARANG</p>
+                    </div>
+                </a>
+                <a href="/staffProduksi/barangHarian" class="w-full">
+                    <div class=" w-full h-10 px-3 flex justify-start items-center gap-6">
+                        <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M17.25 15.0938H18.6875V18.6875H17.25V15.0938ZM14.375 11.5H15.8125V18.6875H14.375V11.5ZM7.90625 18.6875C6.95348 18.6864 6.04006 18.3074 5.36635 17.6337C4.69263 16.9599 4.31364 16.0465 4.3125 15.0938H5.75C5.75 15.5202 5.87646 15.9371 6.11339 16.2917C6.35033 16.6463 6.68709 16.9227 7.08109 17.0859C7.47509 17.2491 7.90864 17.2918 8.32691 17.2086C8.74518 17.1254 9.12939 16.92 9.43095 16.6184C9.73251 16.3169 9.93787 15.9327 10.0211 15.5144C10.1043 15.0961 10.0616 14.6626 9.89837 14.2686C9.73516 13.8746 9.45879 13.5378 9.1042 13.3009C8.7496 13.064 8.33272 12.9375 7.90625 12.9375V11.5C8.85937 11.5 9.77346 11.8786 10.4474 12.5526C11.1214 13.2265 11.5 14.1406 11.5 15.0938C11.5 16.0469 11.1214 16.961 10.4474 17.6349C9.77346 18.3089 8.85937 18.6875 7.90625 18.6875Z"
+                                fill="white" />
+                            <path
+                                d="M20.125 1.4375H2.875C2.49375 1.4375 2.12812 1.58895 1.85853 1.85853C1.58895 2.12812 1.4375 2.49375 1.4375 2.875V20.125C1.4375 20.5062 1.58895 20.8719 1.85853 21.1415C2.12812 21.411 2.49375 21.5625 2.875 21.5625H20.125C20.5061 21.5619 20.8714 21.4103 21.1408 21.1408C21.4103 20.8714 21.5619 20.5061 21.5625 20.125V2.875C21.5625 2.49375 21.411 2.12812 21.1415 1.85853C20.8719 1.58895 20.5062 1.4375 20.125 1.4375ZM20.125 7.90625H10.0625V2.875H20.125V7.90625ZM8.625 2.875V7.90625H2.875V2.875H8.625ZM2.875 20.125V9.34375H20.125L20.1264 20.125H2.875Z"
+                                fill="white" />
+                        </svg>
+                        <p>DATA BARANG HARIAN</p>
                     </div>
                 </a>
             </div>
@@ -111,8 +125,8 @@
             </button>
             <div class="flex justify-end items-center gap-3 h-full">
                 <div class="flex flex-col justify-center items-center sm:items-end">
-                    <h1>Nama Lengkap</h1>
-                    <p>Role</p>
+                    <h1>{{ session('user')['nama_lengkap'] }}</h1>
+                    <p>{{ session('user')['role'] == 'StaffProduksi' ? 'Staff Produksi' : session('user')['role'] }}</p>
                 </div>
                 <div class="aspect-1/1 w-11 bg-primary-1 rounded-full"></div>
             </div>

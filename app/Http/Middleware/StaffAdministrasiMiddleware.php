@@ -18,13 +18,10 @@ class StaffAdministrasiMiddleware
             return redirect('/login')->withErrors(['message' => 'Unauthorized, please log in.']);
         }
         
-        
         if ($user['role'] === 'StaffAdministrasi' || $user['role'] === 'Admin') {
             return $next($request);
         }
         
-
-        // Cek apakah pengguna mencoba mengakses halaman /StaffAdministrasi
         if ($request->is('/StaffAdministrasi') && $user['role'] !== 'StaffAdministrasi') {
             return redirect()->back()->withErrors(['message' => 'Unauthorized, only StaffAdministrasis can access this page.']);
         }
