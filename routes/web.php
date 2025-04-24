@@ -58,6 +58,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/kategori', function () { return view('admin.kategori.index'); });
     Route::get('/admin/kategori/create', function () { return view('admin.kategori.create'); });
     Route::get('/admin/kategori/edit', function () { return view('admin.kategori.edit'); });
+    
+    Route::get('/admin/activity', function () { return view('admin.log.index'); });
 
 });
 
@@ -75,7 +77,37 @@ Route::middleware(['staffProduksi'])->group(function () {
 
 Route::middleware(['staffAdministrasi'])->group(function () {
     
-    Route::get('/taffAdministrasi', function () { return view('staffAdministrasi.dashboard'); });
-    Route::get('/taffAdministrasi/profile', function () { return view('staffAdministrasi.profile'); });
+    Route::get('/staffAdministrasi', function () { return view('administrasi.dashboard'); })->name('staffAdministrasi');
+    Route::get('/staffAdministrasi/profile', function () { return view('administrasi.profile'); });
+
+    Route::get('/staffAdministrasi/upah', function () { return view('administrasi.upah.index'); });
+    Route::get('/staffAdministrasi/upah/create', function () { return view('administrasi.upah.create'); });
+    Route::get('/staffAdministrasi/upah/edit', function () { return view('administrasi.upah.edit'); });
+    
+    Route::get('/staffAdministrasi/users', function () { return view('administrasi.users.index'); });
+    Route::get('/staffAdministrasi/users/create', function () { return view('administrasi.users.create'); });
+    Route::get('/staffAdministrasi/users/edit', function () { return view('administrasi.users.edit'); });
+    
+    Route::get('/staffAdministrasi/karyawan', function () { return view('administrasi.karyawan.index'); });
+    Route::get('/staffAdministrasi/karyawan/create', function () { return view('administrasi.karyawan.create'); });
+    Route::get('/staffAdministrasi/karyawan/edit', function () { return view('administrasi.karyawan.edit'); });
+    
+    Route::get('/staffAdministrasi/barang', function () { return view('administrasi.barang.index'); });
+    Route::get('/staffAdministrasi/barang/create', function () { return view('administrasi.barang.create'); });
+    Route::get('/staffAdministrasi/barang/edit', function () { return view('administrasi.barang.edit'); });
+
+    Route::get('/staffAdministrasi/stock', function () { return view('administrasi.stock.index'); });
+    
+    Route::get('/staffAdministrasi/kategori', function () { return view('administrasi.kategori.index'); });
+    Route::get('/staffAdministrasi/kategori/create', function () { return view('administrasi.kategori.create'); });
+    Route::get('/staffAdministrasi/kategori/edit', function () { return view('administrasi.kategori.edit'); });
+    
+    Route::get('/staffAdministrasi/harian', function () { return view('administrasi.barang_harian.index'); });
+    Route::get('/staffAdministrasi/harian/create', function () { return view('administrasi.barang_harian.create'); });
+    Route::get('/staffAdministrasi/harian/edit', function () { return view('administrasi.barang_harian.edit'); });
+    
+    Route::get('/staffAdministrasi/kategori', function () { return view('administrasi.kategori.index'); });
+    Route::get('/staffAdministrasi/kategori/create', function () { return view('administrasi.kategori.create'); });
+    Route::get('/staffAdministrasi/kategori/edit', function () { return view('administrasi.kategori.edit'); });
     
 });
