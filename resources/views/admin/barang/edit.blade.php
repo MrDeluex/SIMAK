@@ -57,7 +57,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
                     <input type="number" id="upah" name="upah"
@@ -120,8 +120,8 @@
                     kategori_barang: kategoriSelect.value,
                     stock_awal: document.getElementById("stock_awal").value,
                     upah: document.getElementById("upah").value
-                };  
-                
+                };
+
                 console.log(formData);
 
 
@@ -136,13 +136,34 @@
                     });
                     const result = await res.json();
                     if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/barang";
+                        // Menampilkan SweetAlert jika data berhasil diproses
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect ke halaman admin barang setelah pop-up ditutup
+                            window.location.href = "/admin/barang";
+                        });
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        // Menampilkan SweetAlert jika terjadi error
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: result.message || "Terjadi kesalahan",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
                     console.error("Error updating data:", error);
+                    // Menampilkan SweetAlert jika terjadi kesalahan saat mengirim data
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan saat memperbarui data.",
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

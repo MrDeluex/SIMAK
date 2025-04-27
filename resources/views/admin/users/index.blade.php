@@ -303,34 +303,46 @@
 
         <script>
             async function editItem(id) {
-                try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                    try {
+                        let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + '{{ session("api_token") }}'
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error("Gagal mengambil data user.");
                         }
-                    });
 
-                    if (!response.ok) {
-                        throw new Error("Gagal mengambil data user.");
+                        let user = await response.json();
+
+                        // Simpan data user ke sessionStorage agar bisa digunakan di halaman edit
+                        sessionStorage.setItem("editUser", JSON.stringify(user));
+
+                        // Redirect ke halaman edit
+                        window.location.href = `/admin/users/edit`;
+                    } catch (error) {
+                        alert(error.message);
                     }
-
-                    let user = await response.json();
-
-                    // Simpan data user ke sessionStorage agar bisa digunakan di halaman edit
-                    sessionStorage.setItem("editUser", JSON.stringify(user));
-
-                    // Redirect ke halaman edit
-                    window.location.href = `/admin/users/edit`;
-                } catch (error) {
-                    alert(error.message);
                 }
-            }
+        </script>
 
+        <script>
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus user ini?")) {
-                    return;
+                // Konfirmasi dengan SweetAlert
+                const result = await Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data ini akan dihapus, proses ini tidak bisa dibatalkan.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Batal'
+                });
+
+                if (!result.isConfirmed) {
+                    return; // Jika tidak dikonfirmasi, proses di-stop
                 }
 
                 try {
@@ -346,10 +358,23 @@
                         throw new Error("Gagal menghapus user.");
                     }
 
-                    alert("User berhasil dihapus!");
-                    window.location.reload(); // Refresh halaman setelah menghapus
+                    // Menampilkan SweetAlert untuk keberhasilan
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: "User berhasil dihapus!",
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    }).then(() => {
+                        window.location.reload(); // Refresh halaman setelah menghapus
+                    });
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi kesalahan
+                    Swal.fire({
+                        title: 'Terjadi Kesalahan!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             }
         </script>

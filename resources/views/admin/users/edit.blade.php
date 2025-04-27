@@ -3,7 +3,7 @@
     <form id="userForm" class="w-full">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
-            
+
             <input type="hidden" id="user_id" value="">
 
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
@@ -35,14 +35,14 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>               
+                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Update</button>
             </div>
         </div>
     </form>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             let user = JSON.parse(sessionStorage.getItem("editUser"));
 
             if (user) {
@@ -54,14 +54,17 @@
                 window.location.href = "/admin/users"; // Redirect jika tidak ada data
             }
 
-            document.getElementById("userForm").addEventListener("submit", async function (e) {
+            document.getElementById("userForm").addEventListener("submit", async function(e) {
                 e.preventDefault();
 
                 let userId = document.getElementById("user_id").value;
                 let nama = document.getElementById("nama_lengkap").value;
                 let role = document.getElementById("role").value;
 
-                let data = { nama_lengkap: nama, role: role };
+                let data = {
+                    nama_lengkap: nama,
+                    role: role
+                };
 
                 try {
                     let response = await fetch(`http://localhost:8080/api/admin/users/${userId}`, {
@@ -76,13 +79,32 @@
                     let result = await response.json();
 
                     if (response.ok) {
-                        alert("User berhasil diperbarui!");
-                        window.location.href = "/admin/users";
+                        // Menampilkan SweetAlert untuk keberhasilan update
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "User berhasil diperbarui!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.href = "/admin/users"; // Redirect setelah berhasil
+                        });
                     } else {
-                        alert("Gagal memperbarui user: " + result.message);
+                        // Menampilkan SweetAlert jika gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: "Gagal memperbarui user: " + result.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi error pada request
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

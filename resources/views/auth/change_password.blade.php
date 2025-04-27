@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}">
     <title>SIMAK</title>
@@ -21,7 +22,7 @@
         <img class="aspect-1/1 w-38 rounded-full" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}"
             alt="Logo">
         <h1 class="text-3.5xl sm:text-2xl text-white sm:w-46 text-center">LOGIN TO YOUR ACCOUNT</h1>
-        <form id="login-form" action="{{ route('login') }}" method="post" class="sm:w-screen flex justify-center px-3">
+        <form id="reset-form" action="{{ route('login') }}" method="post" class="sm:w-screen flex justify-center px-3">
             @csrf
             <div class="w-194 sm:w-full filter bg-white flex flex-col justify-center items-center gap-8 py-10 sm:px-8 px-36"
                 style="box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);">
@@ -48,12 +49,12 @@
                     </svg>
 
                     <div class="relative w-full">
-                        <input type="text" placeholder="Old Password" id="old_password" name="old_password"
+                        <input type="tect" placeholder="New Password" id="password" name="password"
                             class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
-                        <label for="old_password"
+                        <label for="password"
                             class="form-label absolute text-gray-400 transform -translate-y-10 -translate-x-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:-translate-x-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
                             style="top: 0; left: 0;">
-                            Old Password
+                            New Password
                         </label>
                     </div>
                 </div>
@@ -64,12 +65,12 @@
                     </svg>
 
                     <div class="relative w-full">
-                        <input type="tect" placeholder="New Password" id="new_password" name="new_password"
+                        <input type="text" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation"
                             class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
-                        <label for="new_password"
+                        <label for="password_confirmation"
                             class="form-label absolute text-gray-400 transform -translate-y-10 -translate-x-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:-translate-x-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
                             style="top: 0; left: 0;">
-                            New Password
+                            Confirm Password
                         </label>
                     </div>
                 </div>
@@ -80,6 +81,62 @@
             </div>
         </form>
     </div>
+
+    <script>
+        const form = document.getElementById('reset-form');
+        const nomorHp = sessionStorage.getItem('nomor_hp');
+        console.log(nomorHp);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                nomor_hp: nomorHp,
+                code: form.code.value,
+                password: form.password.value,
+                password_confirmation: form.password_confirmation.value,
+            };
+            console.log(data);
+
+
+            try {
+                const response = await fetch('http://localhost:8080/api/users/forgot-password/reset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Password berhasil direset!',
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    }).then(() => {
+                        window.location.href = '/login';
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: result.message || 'Ada kesalahan saat reset password.',
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message || 'Terjadi kesalahan saat menghubungi server.',
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

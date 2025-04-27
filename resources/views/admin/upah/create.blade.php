@@ -82,13 +82,33 @@
 
                     const result = await res.json();
                     if (res.ok) {
-                        alert(result.message);
-                        window.location.href='/admin/upah'
+                        // Menampilkan SweetAlert jika berhasil
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.href = '/admin/upah'; // Redirect setelah SweetAlert ditutup
+                        });
                     } else {
-                        alert(result.message || "Terjadi Kesalahan di otak lu");
+                        // Menampilkan SweetAlert jika gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: result.message || "Terjadi kesalahan di otak lu",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
                     console.error("Error submitting data:", error);
+                    // Menampilkan SweetAlert jika terjadi error saat request
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <style>
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
@@ -57,7 +57,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
                     <input type="number" id="upah" name="upah"
@@ -70,7 +70,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/barang'">Kembali</button>
+                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/staffAdministrasi/barang'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
             </div>
         </div>
@@ -92,14 +92,14 @@
                 loadKategoriBarang(barang.data.id);
             } else {
                 alert("Data barang tidak ditemukan!");
-                window.location.href = "/admin/barang"; // Redirect jika tidak ada data
+                window.location.href = "/staffAdministrasi/barang"; // Redirect jika tidak ada data
             }
 
             async function loadKategoriBarang(selectedId) {
                 const kategoriSelect = document.getElementById("kategoriSelect");
 
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/kategori/", {
+                    const res = await fetch("http://localhost:8080/api/staff-administrasi/kategori/", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -120,13 +120,13 @@
                     kategori_barang: kategoriSelect.value,
                     stock_awal: document.getElementById("stock_awal").value,
                     upah: document.getElementById("upah").value
-                };  
-                
+                };
+
                 console.log(formData);
 
 
                 try {
-                    const res = await fetch(`http://localhost:8080/api/admin/barang/${id}`, {
+                    const res = await fetch(`http://localhost:8080/api/staff-administrasi/barang/${id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -136,16 +136,37 @@
                     });
                     const result = await res.json();
                     if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/barang";
+                        // Menampilkan SweetAlert untuk sukses
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect setelah SweetAlert ditutup
+                            window.location.href = "/staffAdministrasi/barang";
+                        });
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        // Menampilkan SweetAlert jika gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: result.message || "Terjadi kesalahan",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
                     console.error("Error updating data:", error);
+                    // Menampilkan SweetAlert jika terjadi error
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });
     </script>
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

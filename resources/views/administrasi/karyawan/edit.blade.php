@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <h1 class="text-2xl font-reguler mb-10">INPUT DATA KARYAWAN</h1>
     <form id="editForm" class="w-full">
         @csrf
@@ -26,7 +26,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
                     <input type="text" placeholder="Alamat" id="alamat" name="alamat"
@@ -38,11 +38,11 @@
                     </label>
                 </div>
             </div>
-            
-            
+
+
 
             <div class="w-full flex justify-between items-center">
-                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
+                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/staffAdministrasi/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Update</button>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 document.getElementById("alamat").value = karyawan.data.alamat;
             } else {
                 alert("Data Karyawan tidak ditemukan!");
-                window.location.href = "/admin/staff-produksi"; // Redirect jika tidak ada data
+                window.location.href = "/staffAdministrasi/staff-produksi"; // Redirect jika tidak ada data
             }
 
             document.getElementById("editForm").addEventListener("submit", async function(e) {
@@ -77,11 +77,12 @@
 
                 try {
                     let response = await fetch(
-                        `http://localhost:8080/api/admin/staff-produksi/${karyawanId}`, {
+                        `http://localhost:8080/api/staff-administrasi/staff-produksi/${karyawanId}`, {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json",
-                                "Authorization": "Bearer " + '{{ session('api_token') }}'
+                                "Authorization": "Bearer " + '{{ session('
+                                api_token ') }}'
                             },
                             body: JSON.stringify(data)
                         });
@@ -89,17 +90,37 @@
                     let result = await response.json();
 
                     if (response.ok) {
-                        alert("Karyawan berhasil diperbarui!");
-                        window.location.href = "/admin/karyawan";
+                        // Menampilkan SweetAlert jika berhasil memperbarui
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Karyawan berhasil diperbarui!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect ke halaman /staffAdministrasi/karyawan setelah klik 'Oke'
+                            window.location.href = "/staffAdministrasi/karyawan";
+                        });
                     } else {
-                        alert("Gagal memperbarui Karyawan: " + result.message);
+                        // Menampilkan SweetAlert jika gagal memperbarui
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: "Gagal memperbarui Karyawan: " + result.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi error saat eksekusi
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });
     </script>
 
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

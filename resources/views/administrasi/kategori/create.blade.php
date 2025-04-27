@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <h1 class="text-2xl font-reguler mb-10">TAMBAH KATEGORI BARANG</h1>
     <form action="" class="w-full" id="createForm">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
@@ -53,7 +53,7 @@
             console.log(data);
 
             try {
-                let response = await fetch("http://localhost:8080/api/admin/kategori", { // Ganti dengan URL API-mu
+                let response = await fetch("http://localhost:8080/api/staff-administrasi/kategori", { // Ganti dengan URL API-mu
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,15 +65,34 @@
                 let result = await response.json();
 
                 if (response.ok) {
-                    alert("Kategori berhasil ditambahkan!");
-                    window.location.href = "/admin/kategori"; // Redirect setelah berhasil
+                    // Menampilkan SweetAlert saat berhasil menambahkan kategori
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: "Kategori berhasil ditambahkan!",
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    }).then(() => {
+                        window.location.href = "/staffAdministrasi/kategori"; // Redirect setelah pop-up ditutup
+                    });
                 } else {
-                    alert("Gagal menambahkan kategori: " + result.message);
+                    // Menampilkan SweetAlert jika gagal menambahkan kategori
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: "Gagal menambahkan kategori: " + result.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             } catch (error) {
-                alert("Terjadi kesalahan: " + error.message);
+                // Menampilkan SweetAlert jika terjadi kesalahan
+                Swal.fire({
+                    title: 'Error!',
+                    text: "Terjadi kesalahan: " + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
         });
     </script>
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

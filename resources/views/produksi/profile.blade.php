@@ -161,6 +161,7 @@
             const response = await fetch('http://localhost:8080/api/users/upload-photo', {
                 method: 'POST',
                 body: formData,
+                credentials: 'include', 
                 headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer {{ session('api_token') }}"

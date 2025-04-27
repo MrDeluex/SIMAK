@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}">
     <title>SIMAK</title>
@@ -71,6 +72,7 @@
             const data = await response.json();
 
             sessionStorage.setItem("data", JSON.stringify(data));
+            sessionStorage.setItem("nomor_hp", nomorHp);
 
             window.location.href = `/change_password`;
         } catch (error) {

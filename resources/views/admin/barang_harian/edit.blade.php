@@ -150,13 +150,34 @@
                     });
                     const result = await res.json();
                     if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/harian";
+                        // Menampilkan SweetAlert jika berhasil
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect ke halaman admin harian setelah pop-up ditutup
+                            window.location.href = "/admin/harian";
+                        });
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        // Menampilkan SweetAlert jika gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: result.message || "Terjadi kesalahan",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
                     console.error("Error updating data:", error);
+                    // Menampilkan SweetAlert jika terjadi error saat mengirim data
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan saat memperbarui data.",
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

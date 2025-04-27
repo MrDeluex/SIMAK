@@ -51,13 +51,16 @@ class AuthController extends Controller
         
         if ($response->successful()) {
             $responseData = $response->json();
-    
+            
             // Simpan token dan data user ke sesi
             session(['api_token' => $responseData['data']['token']]);
             session(['user' => $responseData['data']['user']]);
     
             // Ambil role pengguna dari response API
             $role = $responseData['data']['user']['role'];
+            
+            session()->flash('login_success', 'Selamat datang, ' . $responseData['data']['user']['nama_lengkap'] . '!');
+
             // Redirect berdasarkan role
             if ($role === 'Admin') {
                 return redirect('/admin')->with('success', 'Login berhasil sebagai Admin!');

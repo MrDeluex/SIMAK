@@ -114,14 +114,24 @@
 
             const users_id = parseInt(usersIdElement.value);
             const pekerjaan = pekerjaanElement.value.trim();
-            const tanggal_lahir = tanggalLahirElement.value.trim();
+
+            const rawTanggalLahir = tanggalLahirElement.value.trim();
+            const tanggalObj = new Date(rawTanggalLahir);
+
+            // Format ke dd/mm/yyyy
+            const tanggal_lahir = tanggalObj.getDate().toString().padStart(2, '0') + '-' +
+                (tanggalObj.getMonth() + 1).toString().padStart(2, '0') + '-' +
+                tanggalObj.getFullYear();
+
             const alamat = alamatElement.value.trim();
 
-    
+            const user = window.usersData.find(user => user.id === users_id);
+            const nama = user ? user.nama_lengkap : '';
 
             // Data yang akan dikirim
             const data = {
                 users_id,
+                nama, // Tambahkan nama_lengkap di sini
                 tanggal_lahir,
                 pekerjaan,
                 alamat,
@@ -148,16 +158,37 @@
                     throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
                 }
 
-
                 const result = await response.json();
-                console.log("Success response:", result);
 
-                alert("Data karyawan berhasil ditambahkan!");
-                window.location.href = "/admin/karyawan";
-
+                if (response.ok) {
+                    // Menampilkan SweetAlert jika berhasil
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: "Data karyawan berhasil ditambahkan!",
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    }).then(() => {
+                        // Redirect ke halaman admin karyawan setelah pop-up ditutup
+                        window.location.href = "/admin/karyawan";
+                    });
+                } else {
+                    // Menampilkan SweetAlert jika gagal
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: result.message || "Terjadi kesalahan",
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
+                }
             } catch (error) {
                 console.error("Error detail:", error);
-                alert("Terjadi kesalahan: " + (error.message || "Unknown error"));
+                // Menampilkan SweetAlert jika terjadi error saat mengirim data
+                Swal.fire({
+                    title: 'Error!',
+                    text: "Terjadi kesalahan: " + (error.message || "Unknown error"),
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
         });
 

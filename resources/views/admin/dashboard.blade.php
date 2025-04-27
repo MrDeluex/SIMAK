@@ -67,17 +67,17 @@
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">NAMA :</Label>
                             <input type="text" name="namaUser" id="namaUser" class="flex-grow border-b border-black" readonly
-                                value="">
+                                value="{{ session('user')['nama_lengkap'] }}">
                         </div>
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">EMAIL :</Label>
                             <input type="text" name="emailUser" id="emailUser" class="flex-grow border-b border-black" readonly
-                                value="">
+                                value="{{ session('user')['email'] }}">
                         </div>
                         <div class="w-full flex justify-start items-center gap-4">
                             <Label class="font-light w-auto">ROLE :</Label>
                             <input type="text" name="nama" id="roleUser" class="flex-grow border-b border-black" readonly
-                                value="">
+                                value="{{ session('user')['role'] }}">
                         </div>
                     </div>
 
@@ -95,6 +95,7 @@
                 eiusmod tempor incididunt ut</p>
         </div>
     </div>
+
 
     <script>
         async function getJumlahStaffProduksi() {
@@ -159,9 +160,9 @@
 
                 const data = await response.json();
                 const totalStok = data.total_stok
-                
+
                 document.getElementById("jumlahStock").innerText = totalStok;
-           
+
             } catch (error) {
                 console.error("Error:", error);
             }

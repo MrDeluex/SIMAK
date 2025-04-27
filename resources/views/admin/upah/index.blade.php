@@ -240,8 +240,8 @@
             function renderTable(data) {
                 const tbody = document.querySelector("#dataTable tbody");
                 tbody.innerHTML = data.map(item =>
-                   
-                `<tr>
+
+                    `<tr>
             <td class="text-center">${item.id}</td>
             <td>${item.staff_produksi.nama}</td>
             <td class="text-center">${item.minggu_ke}</td>
@@ -250,12 +250,6 @@
                 <button onclick="viewDetail(${item.id})" class="px-2 py-4">
                     <svg width="18" height="13" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.77 6C17.77 5.641 17.576 5.406 17.188 4.934C15.768 3.21 12.636 0 8.99998 0C5.36398 0 2.23198 3.21 0.81198 4.934C0.42398 5.406 0.22998 5.641 0.22998 6C0.22998 6.359 0.42398 6.594 0.81198 7.066C2.23198 8.79 5.36398 12 8.99998 12C12.636 12 15.768 8.79 17.188 7.066C17.576 6.594 17.77 6.359 17.77 6ZM8.99998 9C9.79563 9 10.5587 8.68393 11.1213 8.12132C11.6839 7.55871 12 6.79565 12 6C12 5.20435 11.6839 4.44129 11.1213 3.87868C10.5587 3.31607 9.79563 3 8.99998 3C8.20433 3 7.44127 3.31607 6.87866 3.87868C6.31605 4.44129 5.99998 5.20435 5.99998 6C5.99998 6.79565 6.31605 7.55871 6.87866 8.12132C7.44127 8.68393 8.20433 9 8.99998 9Z" fill="black"/>
-                    </svg>
-                </button>
-                <button onclick="editItem(${item.id})" class="px-2 py-4">
-                    <svg width="14" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.625 1.62268H2.25C1.91848 1.62268 1.60054 1.75438 1.36612 1.9888C1.1317 2.22322 1 2.54116 1 2.87268V11.6227C1 11.9542 1.1317 12.2721 1.36612 12.5066C1.60054 12.741 1.91848 12.8727 2.25 12.8727H11C11.3315 12.8727 11.6495 12.741 11.8839 12.5066C12.1183 12.2721 12.25 11.9542 12.25 11.6227V7.24768" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.60895 1.38833C9.85759 1.13968 10.1948 1 10.5464 1C10.8981 1 11.2353 1.13968 11.4839 1.38833C11.7326 1.63697 11.8723 1.97419 11.8723 2.32583C11.8723 2.67746 11.7326 3.01468 11.4839 3.26333L5.85082 8.89708C5.70241 9.04535 5.51907 9.1539 5.3177 9.2127L3.52207 9.7377C3.46829 9.75339 3.41128 9.75433 3.35701 9.74042C3.30275 9.72652 3.25321 9.69828 3.2136 9.65867C3.17399 9.61906 3.14575 9.56952 3.13185 9.51526C3.11794 9.46099 3.11888 9.40398 3.13457 9.3502L3.65957 7.55457C3.71865 7.35336 3.8274 7.17024 3.97582 7.02208L9.60895 1.38833Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
                 <button onclick="deleteItem(${item.id})" class="px-2 py-4">
@@ -364,27 +358,52 @@
             }
 
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus user ini?")) {
-                    return;
-                }
+                // Menampilkan konfirmasi dengan SweetAlert
+                const result = await Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data ini akan dihapus secara permanen.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true // Menukar posisi tombol OK dan Cancel
+                });
 
-                try {
-                    let response = await fetch(`http://localhost:8080/api/admin/upah/${id}`, {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                // Jika pengguna memilih "Hapus"
+                if (result.isConfirmed) {
+                    try {
+                        let response = await fetch(`http://localhost:8080/api/admin/upah/${id}`, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + '{{ session("api_token") }}'
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error("Gagal menghapus user.");
                         }
-                    });
 
-                    if (!response.ok) {
-                        throw new Error("Gagal menghapus user.");
+                        // Menampilkan SweetAlert jika berhasil dihapus
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "User berhasil dihapus!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.reload(); // Refresh halaman setelah SweetAlert ditutup
+                        });
+
+                    } catch (error) {
+                        console.error("Error deleting item:", error);
+                        // Menampilkan SweetAlert jika terjadi error saat request
+                        Swal.fire({
+                            title: 'Error!',
+                            text: "Terjadi kesalahan: " + error.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
-
-                    alert("User berhasil dihapus!");
-                    window.location.reload(); // Refresh halaman setelah menghapus
-                } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
                 }
             }
         </script>

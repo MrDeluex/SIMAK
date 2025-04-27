@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-between items-center gap-7">
+<x-layout.administrasiPage contentClass="flex flex-col justify-between items-center gap-7">
     <div class="w-full flex sm:flex-wrap-reverse justify-between items-center">
         <div
             class="w-189 h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
@@ -60,7 +60,7 @@
             </div>
             <p id="errorMessage" class="text-red-500 text-center w-full hidden">Passwords do not match!</p>
             <div class="w-full justify-center items-center flex gap-10">
-                <a href="/admin" class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-custom-1 flex items-center justify-center">
+                <a href="/staffAdministrasi" class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-custom-1 flex items-center justify-center">
                     <p>Back</p>
                 </a>
                 <button type="submit"
@@ -108,15 +108,35 @@
                 const result = await response.json();
                 console.log(result);
 
+                response.json();
+
                 if (response.ok) {
-                    alert("Password berhasil diubah!");
+                    // Menampilkan SweetAlert untuk berhasil
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'Password berhasil diubah!',
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    });
                 } else {
-                    alert("Gagal ganti password: " + result.message);
+                    // Menampilkan SweetAlert jika gagal
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: 'Gagal ganti password: ' + result.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             } catch (error) {
-                alert("Terjadi kesalahan: " + error.message);
+                // Menampilkan SweetAlert jika terjadi error
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Terjadi kesalahan: ' + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
         });
     </script>
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

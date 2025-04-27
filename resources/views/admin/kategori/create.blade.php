@@ -65,13 +65,33 @@
                 let result = await response.json();
 
                 if (response.ok) {
-                    alert("Kategori berhasil ditambahkan!");
-                    window.location.href = "/admin/kategori"; // Redirect setelah berhasil
+                    // Menampilkan SweetAlert jika berhasil menambahkan kategori
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: "Kategori berhasil ditambahkan!",
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    }).then(() => {
+                        // Redirect setelah pop-up ditutup
+                        window.location.href = "/admin/kategori";
+                    });
                 } else {
-                    alert("Gagal menambahkan kategori: " + result.message);
+                    // Menampilkan SweetAlert jika gagal menambahkan kategori
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: "Gagal menambahkan kategori: " + (result.message || "Terjadi kesalahan"),
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             } catch (error) {
-                alert("Terjadi kesalahan: " + error.message);
+                // Menampilkan SweetAlert jika terjadi kesalahan dalam proses request
+                Swal.fire({
+                    title: 'Error!',
+                    text: "Terjadi kesalahan: " + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
         });
     </script>

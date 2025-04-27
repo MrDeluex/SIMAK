@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <h1 class="text-2xl font-reguler mb-10">INPUT DATA KARYAWAN</h1>
     <form id="userForm" class="w-full">
         @csrf
@@ -52,7 +52,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center">`
-                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
+                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/staffAdministrasi/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
             </div>
         </div>
@@ -61,7 +61,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", async function() {
             try {
-                let response = await fetch("http://localhost:8080/api/admin/users", {
+                let response = await fetch("http://localhost:8080/api/staff-administrasi/users", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -117,7 +117,7 @@
             const tanggal_lahir = tanggalLahirElement.value.trim();
             const alamat = alamatElement.value.trim();
 
-    
+
 
             // Data yang akan dikirim
             const data = {
@@ -131,7 +131,7 @@
             console.log("Mengirim data:", data);
 
             try {
-                const response = await fetch("http://localhost:8080/api/admin/staff-produksi", {
+                const response = await fetch("http://localhost:8080/api/staff-administrasi/staff-produksi", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -152,12 +152,23 @@
                 const result = await response.json();
                 console.log("Success response:", result);
 
-                alert("Data karyawan berhasil ditambahkan!");
-                window.location.href = "/admin/karyawan";
-
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: "Data karyawan berhasil ditambahkan!",
+                    icon: 'success',
+                    confirmButtonText: 'Oke'
+                }).then(() => {
+                    // Redirect ke halaman /staffAdministrasi/karyawan setelah klik 'Oke'
+                    window.location.href = "/staffAdministrasi/karyawan";
+                });
             } catch (error) {
                 console.error("Error detail:", error);
-                alert("Terjadi kesalahan: " + (error.message || "Unknown error"));
+                Swal.fire({
+                    title: 'Terjadi kesalahan!',
+                    text: "Terjadi kesalahan: " + (error.message || "Unknown error"),
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
         });
 
@@ -174,4 +185,4 @@
     </script>
 
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

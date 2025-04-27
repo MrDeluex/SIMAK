@@ -28,8 +28,6 @@
                                 disabled>
                         </div>
                     </div>
-                    <button type="submit"
-                        class="font-light text-white text-base sm:text-sm w-43 sm:w-36 py-1 rounded-full bg-secondary-2">Update</button>
                 </form>
             </div>
         </div>
@@ -108,13 +106,33 @@
                 const result = await response.json();
                 console.log(result);
 
+                json();
+
                 if (response.ok) {
-                    alert("Password berhasil diubah!");
+                    // Menampilkan SweetAlert untuk keberhasilan
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: "Password berhasil diubah!",
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    });
                 } else {
-                    alert("Gagal ganti password: " + result.message);
+                    // Menampilkan SweetAlert jika gagal
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: "Gagal ganti password: " + (result.message || "Terjadi kesalahan"),
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             } catch (error) {
-                alert("Terjadi kesalahan: " + error.message);
+                // Menampilkan SweetAlert jika terjadi kesalahan pada request
+                Swal.fire({
+                    title: 'Terjadi Kesalahan!',
+                    text: "Terjadi kesalahan: " + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
         });
     </script>

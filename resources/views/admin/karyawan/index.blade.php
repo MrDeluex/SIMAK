@@ -69,7 +69,7 @@
                         class="border border-gray-300 px-1 rounded w-full">
                 </div>
 
-                
+
             </div>
 
             <div class="w-full h-80 overflow-y-auto overflow-x-hidden">
@@ -337,32 +337,63 @@
             }
 
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus user ini?")) {
-                    return;
-                }
+                // Menampilkan konfirmasi menggunakan SweetAlert
+                const result = await Swal.fire({
+                    title: 'Apakah Anda Yakin?',
+                    text: "Data ini akan dihapus dan tidak bisa dipulihkan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal'
+                });
 
-                try {
-                    let response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                if (result.isConfirmed) {
+                    try {
+                        let response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + '{{ session("api_token") }}'
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error("Gagal menghapus user.");
                         }
-                    });
 
-                    if (!response.ok) {
-                        throw new Error("Gagal menghapus user.");
+                        // Menampilkan SweetAlert jika berhasil menghapus user
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "User berhasil dihapus!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Me-refresh halaman setelah pop-up ditutup
+                            window.location.reload();
+                        });
+
+                    } catch (error) {
+                        // Menampilkan SweetAlert jika terjadi kesalahan
+                        Swal.fire({
+                            title: 'Error!',
+                            text: "Terjadi kesalahan: " + error.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
-
-                    alert("User berhasil dihapus!");
-                    window.location.reload(); // Refresh halaman setelah menghapus
-                } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                } else {
+                    // Menampilkan pesan jika pengguna membatalkan penghapusan
+                    Swal.fire({
+                        title: 'Dibatalkan',
+                        text: "Penghapusan user dibatalkan.",
+                        icon: 'info',
+                        confirmButtonText: 'Oke'
+                    });
                 }
             }
         </script>
 
-        
+
     </body>
 
     </html>

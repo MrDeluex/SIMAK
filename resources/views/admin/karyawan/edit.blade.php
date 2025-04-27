@@ -26,7 +26,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
                     <input type="text" placeholder="Alamat" id="alamat" name="alamat"
@@ -38,8 +38,8 @@
                     </label>
                 </div>
             </div>
-            
-            
+
+
 
             <div class="w-full flex justify-between items-center">
                 <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
@@ -89,13 +89,33 @@
                     let result = await response.json();
 
                     if (response.ok) {
-                        alert("Karyawan berhasil diperbarui!");
-                        window.location.href = "/admin/karyawan";
+                        // Menampilkan SweetAlert jika berhasil
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Karyawan berhasil diperbarui!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect ke halaman admin karyawan setelah pop-up ditutup
+                            window.location.href = "/admin/karyawan";
+                        });
                     } else {
-                        alert("Gagal memperbarui Karyawan: " + result.message);
+                        // Menampilkan SweetAlert jika gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: "Gagal memperbarui Karyawan: " + result.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi error saat mengirim data
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

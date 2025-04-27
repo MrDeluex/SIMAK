@@ -17,6 +17,7 @@ Route::get('/forgot-password/email', function () {return view('auth.email');});
 
 Route::get('/change_password', function () {return view('auth.change_password');});
 
+
 Route::get('/percobaan', function () {
     return view('percobaan'); // Mengarahkan ke file percobaan.blade.php
 });

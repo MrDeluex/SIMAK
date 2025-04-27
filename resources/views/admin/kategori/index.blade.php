@@ -321,30 +321,61 @@
             }
 
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus kategori ini?")) {
-                    return;
-                }
+                // Menampilkan konfirmasi sebelum menghapus
+                const result = await Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data kategori ini akan dihapus!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                });
 
-                try {
-                    let response = await fetch(`http://localhost:8080/api/admin/kategori/${id}`, {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                // Jika pengguna memilih "Ya, Hapus!"
+                if (result.isConfirmed) {
+                    try {
+                        let response = await fetch(`http://localhost:8080/api/admin/kategori/${id}`, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + '{{ session("api_token") }}'
+                            }
+                        });
+
+                        // Jika response tidak ok, lempar error
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            console.error("Error response:", errorData);
+                            throw new Error("Gagal menghapus kategori.");
                         }
-                    });
 
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error("Error response:", errorData);
-                        throw new Error("Gagal menghapus Kategori.");
+                        // Menampilkan SweetAlert jika berhasil menghapus
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Kategori berhasil dihapus!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.reload(); // Refresh halaman setelah berhasil menghapus
+                        });
+                    } catch (error) {
+                        // Menampilkan SweetAlert jika terjadi kesalahan
+                        Swal.fire({
+                            title: 'Error!',
+                            text: "Terjadi kesalahan: " + error.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
-
-
-                    alert("Kategori berhasil dihapus!");
-                    window.location.reload(); // Refresh halaman setelah menghapus
-                } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                } else {
+                    // Jika pengguna memilih "Batal"
+                    Swal.fire({
+                        title: 'Dibatalkan',
+                        text: "Kategori tidak jadi dihapus.",
+                        icon: 'info',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             }
         </script>

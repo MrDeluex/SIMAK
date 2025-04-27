@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <h1 class="text-2xl font-reguler mb-10">Tambah Stock Barang</h1>
     <form action="" class="w-full" id="editForm">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
@@ -9,8 +9,8 @@
                 <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                     <div class="relative w-full">
                         <input type="text" placeholder="Nama Barang" id="nama" name="nama"
-                            class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" 
-                            disabled/>
+                            class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent"
+                            disabled />
                         <label for=""
                             class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
                             style="top: 0; left: 0;">
@@ -35,7 +35,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
+                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/staffAdministrasi/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Update</button>
             </div>
         </div>
@@ -51,21 +51,21 @@
                 document.getElementById("nama").value = stock.data.nama;
             } else {
                 alert("Data barang tidak ditemukan!");
-                window.location.href = "/admin/barang"; // Redirect jika tidak ada data
+                window.location.href = "/staffAdministrasi/barang"; // Redirect jika tidak ada data
             }
 
             document.getElementById("editForm").addEventListener("submit", async function(e) {
                 e.preventDefault();
                 let stok = document.getElementById("stock").value;
                 console.log(id);
-                
+
 
                 let data = {
                     stok: stok
                 };
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/stock/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/stock/${id}`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -77,17 +77,37 @@
                     let result = await response.json();
 
                     if (response.ok) {
-                        alert("Stock berhasil ditambah");
-                        window.location.href = "/admin/barang";
+                        // Menampilkan SweetAlert untuk sukses
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Stock berhasil ditambah!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.href = "/staffAdministrasi/barang"; // Redirect setelah sukses
+                        });
                     } else {
-                        alert("Gagal memperbarui kategori: " + result.message);
+                        const result = await response.json();
+                        // Menampilkan SweetAlert untuk gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: "Gagal memperbarui stock: " + result.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert untuk kesalahan
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });
     </script>
 
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

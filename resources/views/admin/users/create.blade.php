@@ -88,14 +88,31 @@
                 let result = await response.json();
                 console.log(result);
 
+
                 if (response.ok) {
-                    alert("User berhasil ditambahkan!");
-                    window.location.href = "/admin/users"; // Redirect setelah berhasil
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: 'User berhasil ditambahkan!',
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    }).then(() => {
+                        window.location.href = "/admin/users"; // Redirect setelah klik "Oke"
+                    });
                 } else {
-                    alert("Gagal menambahkan user: " + result.message);
+                    Swal.fire({
+                        title: 'Gagal!',
+                        text: result.message || 'Gagal menambahkan user.',
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             } catch (error) {
-                alert("Terjadi kesalahan: " + error.message);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message || 'Terjadi kesalahan.',
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
         });
     </script>

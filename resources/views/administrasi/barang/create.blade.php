@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <style>
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
@@ -57,7 +57,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
                     <input type="number" id="upah" name="upah"
@@ -83,7 +83,7 @@
 
             async function loadKategori() {
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/kategori", {
+                    const res = await fetch("http://localhost:8080/api/staff-administrasi/kategori", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -116,7 +116,7 @@
                 console.log(formData);
 
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/barang", {
+                    const res = await fetch("http://localhost:8080/api/staff-administrasi/barang", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -126,17 +126,40 @@
                     });
 
                     const result = await res.json();
+                    json();
+
                     if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/harian"
+                        // Menampilkan SweetAlert untuk sukses
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect setelah SweetAlert ditutup
+                            window.location.href = "/staffAdministrasi/harian";
+                        });
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        // Menampilkan SweetAlert jika gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: result.message || "Terjadi kesalahan",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
                     console.error("Error submitting data:", error);
+                    // Menampilkan SweetAlert jika terjadi error
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });
     </script>
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <style>
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
@@ -90,12 +90,12 @@
                 loadBarangProduksi(harian.data.barang.id);
             } else {
                 alert("Data harian tidak ditemukan!");
-                window.location.href = "/admin/harian"; // Redirect jika tidak ada data
+                window.location.href = "/staffAdministrasi/harian"; // Redirect jika tidak ada data
             }
 
             async function loadStaffProduksi(selectedId) {
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/staff-produksi", {
+                    const res = await fetch("http://localhost:8080/api/staff-administrasi/staff-produksi", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -115,7 +115,7 @@
 
             async function loadBarangProduksi(selectedId) {
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/barang", {
+                    const res = await fetch("http://localhost:8080/api/staff-administrasi/barang", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -140,7 +140,7 @@
 
 
                 try {
-                    const res = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
+                    const res = await fetch(`http://localhost:8080/api/staff-administrasi/barang-harian/${id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -150,15 +150,34 @@
                     });
                     const result = await res.json();
                     if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/harian";
+                        // Menampilkan SweetAlert untuk sukses
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: result.message,
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.href = "/staffAdministrasi/harian"; // Redirect setelah sukses
+                        });
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        // Menampilkan SweetAlert untuk kegagalan
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: result.message || "Terjadi kesalahan",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    console.error("Error updating data:", error);
+                    // Menampilkan SweetAlert untuk kesalahan pada request
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan saat mengirim data.",
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });
     </script>
-</x-layout.adminPage>
+</x-layout.administrasiPage>

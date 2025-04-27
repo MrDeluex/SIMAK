@@ -1,4 +1,4 @@
-<x-layout.adminPage>
+<x-layout.administrasiPage>
 
     <style>
         table {
@@ -47,7 +47,7 @@
     <body>
         <h1 class="text-2xl font-light mb-4 mt-10">DATA KARYAWAN</h1>
 
-        <a href="/admin/karyawan/create">
+        <a href="/staffAdministrasi/karyawan/create">
             <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">TAMBAH KARYAWAN</button>
         </a>
 
@@ -69,7 +69,7 @@
                         class="border border-gray-300 px-1 rounded w-full">
                 </div>
 
-                
+
             </div>
 
             <div class="w-full h-80 overflow-y-auto overflow-x-hidden">
@@ -135,7 +135,7 @@
                     const pekerjaanElement = document.getElementById("pekerjaan");
                     const pekerjaan = pekerjaanElement ? pekerjaanElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/admin/staff-produksi', {
+                    const response = await fetch('http://localhost:8080/api/staff-administrasi/staff-produksi', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -170,7 +170,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
+                    const response = await fetch(`http://localhost:8080/api/staff-administrasi/staff-produksi/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -312,7 +312,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/staff-produksi/${id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -330,19 +330,30 @@
                     sessionStorage.setItem("editKaryawan", JSON.stringify(karyawan));
 
                     // Redirect ke halaman edit
-                    window.location.href = `/admin/karyawan/edit`;
+                    window.location.href = `/staffAdministrasi/karyawan/edit`;
                 } catch (error) {
                     alert(error.message);
                 }
             }
 
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus user ini?")) {
-                    return;
+                // Menggunakan SweetAlert untuk konfirmasi sebelum menghapus
+                const result = await Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data ini akan dihapus secara permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal'
+                });
+
+                // Jika pengguna memilih 'Ya, Hapus'
+                if (!result.isConfirmed) {
+                    return; // Menghentikan fungsi jika pengguna membatalkan
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/staff-produksi/${id}`, {
+                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/staff-produksi/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
@@ -350,19 +361,34 @@
                         }
                     });
 
+                    // Mengecek apakah response berhasil
                     if (!response.ok) {
                         throw new Error("Gagal menghapus user.");
                     }
 
-                    alert("User berhasil dihapus!");
-                    window.location.reload(); // Refresh halaman setelah menghapus
+                    // Menampilkan SweetAlert jika berhasil
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: "User berhasil dihapus!",
+                        icon: 'success',
+                        confirmButtonText: 'Oke'
+                    }).then(() => {
+                        // Me-refresh halaman setelah pop-up ditutup
+                        window.location.reload();
+                    });
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi error
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             }
         </script>
 
-        
+
     </body>
 
     </html>

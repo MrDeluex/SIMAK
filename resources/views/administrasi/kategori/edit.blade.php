@@ -1,9 +1,9 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <h1 class="text-2xl font-reguler mb-10">Edit Kategori Barang</h1>
     <form action="" class="w-full" id="editForm">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
-<input type="text" class="hidden" id="kategori_id">
+            <input type="text" class="hidden" id="kategori_id">
             <!-- Nama Kategori -->
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
@@ -30,7 +30,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <a href="/admin/kategori"><button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white">Kembali</button></a>
+                <a href="/staffAdministrasi/kategori"><button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white">Kembali</button></a>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Update</button>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 document.getElementById("deskripsi").value = kategori.data.deskripsi;
             } else {
                 alert("Data kategori tidak ditemukan!");
-                window.location.href = "/admin/kategori"; // Redirect jika tidak ada data
+                window.location.href = "/staffAdministrasi/kategori"; // Redirect jika tidak ada data
             }
 
             document.getElementById("editForm").addEventListener("submit", async function(e) {
@@ -63,7 +63,7 @@
                 };
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/kategori/${kategoriId}`, {
+                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/kategori/${kategoriId}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -75,17 +75,36 @@
                     let result = await response.json();
 
                     if (response.ok) {
-                        alert("Kategori berhasil diperbarui!");
-                        window.location.href = "/admin/kategori";
+                        // Menampilkan SweetAlert saat berhasil memperbarui kategori
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Kategori berhasil diperbarui!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.href = "/staffAdministrasi/kategori"; // Redirect setelah pop-up ditutup
+                        });
                     } else {
-                        alert("Gagal memperbarui kategori: " + result.message);
+                        // Menampilkan SweetAlert jika gagal memperbarui kategori
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: "Gagal memperbarui kategori: " + result.message,
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi kesalahan
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });
     </script>
 
 
-</x-layout.adminPage>
+</x-layout.administrasiPage>

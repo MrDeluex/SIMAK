@@ -9,8 +9,8 @@
                 <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                     <div class="relative w-full">
                         <input type="text" placeholder="Nama Barang" id="nama" name="nama"
-                            class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" 
-                            disabled/>
+                            class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent"
+                            disabled />
                         <label for=""
                             class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
                             style="top: 0; left: 0;">
@@ -58,7 +58,7 @@
                 e.preventDefault();
                 let stok = document.getElementById("stock").value;
                 console.log(id);
-                
+
 
                 let data = {
                     stok: stok
@@ -76,14 +76,35 @@
 
                     let result = await response.json();
 
+
                     if (response.ok) {
-                        alert("Stock berhasil ditambah");
-                        window.location.href = "/admin/barang";
+                        // Menampilkan SweetAlert untuk berhasil menambah stok
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Stock berhasil ditambah",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect setelah SweetAlert ditutup
+                            window.location.href = "/admin/barang";
+                        });
                     } else {
-                        alert("Gagal memperbarui kategori: " + result.message);
+                        // Menampilkan SweetAlert jika gagal menambah stok
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: "Gagal memperbarui kategori: " + (result.message || "Terjadi kesalahan"),
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi kesalahan
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

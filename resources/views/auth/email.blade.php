@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}">
     <title>SIMAK</title>
@@ -67,10 +68,30 @@
                     email: email
                 })
             });
-
-            const data = await response.json();
+            if (response.ok) {
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Password berhasil direset!',
+                    icon: 'success',
+                    confirmButtonText: 'Oke'
+                }).then(() => {
+                    window.location.href = '/login';
+                });
+            } else {
+                Swal.fire({
+                    title: 'Gagal!',
+                    text: result.message || 'Ada kesalahan saat reset password.',
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
+            }
         } catch (error) {
-            document.getElementById('error-message').textContent = 'Terjadi error pada jaringan.';
+            Swal.fire({
+                title: 'Error!',
+                text: error.message || 'Terjadi kesalahan saat menghubungi server.',
+                icon: 'error',
+                confirmButtonText: 'Tutup'
+            });
         }
     });
 </script>

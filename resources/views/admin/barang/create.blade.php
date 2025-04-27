@@ -57,7 +57,7 @@
                     </label>
                 </div>
             </div>
-            
+
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
                     <input type="number" id="upah" name="upah"
@@ -125,15 +125,34 @@
                         body: JSON.stringify(formData)
                     });
 
-                    const result = await res.json();
                     if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/harian"
+                        // Menampilkan SweetAlert jika data berhasil ditambahkan
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: res.message,
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect setelah pop-up ditutup
+                            window.location.href = "/admin/barang";
+                        });
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        // Menampilkan SweetAlert jika ada error
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: res.message || "Terjadi kesalahan",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
                     console.error("Error submitting data:", error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan saat mengirim data.",
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

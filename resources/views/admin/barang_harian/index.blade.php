@@ -363,27 +363,60 @@
             }
 
             async function deleteItem(id) {
-                if (!confirm("Apakah Anda yakin ingin menghapus data ini?")) {
-                    return;
-                }
+                // Menampilkan konfirmasi menggunakan SweetAlert sebelum menghapus
+                const result = await Swal.fire({
+                    title: 'Apakah Anda Yakin?',
+                    text: "Data ini akan dihapus dan tidak bisa dipulihkan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal'
+                });
 
-                try {
-                    let response = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                if (result.isConfirmed) {
+                    try {
+                        let response = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": "Bearer " + '{{ session("api_token") }}'
+                            }
+                        });
+
+                        // Jika response tidak ok, tampilkan pesan error
+                        if (!response.ok) {
+                            throw new Error("Gagal menghapus data.");
                         }
-                    });
 
-                    if (!response.ok) {
-                        throw new Error("Gagal menghapus data.");
+                        // Menampilkan SweetAlert jika berhasil menghapus
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Data berhasil dihapus!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Me-refresh halaman setelah pop-up ditutup
+                            window.location.reload();
+                        });
+
+                    } catch (error) {
+                        console.error("Error deleting item:", error);
+                        // Menampilkan SweetAlert jika terjadi error saat request
+                        Swal.fire({
+                            title: 'Error!',
+                            text: "Terjadi kesalahan saat menghapus data.",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
-
-                    alert("Data berhasil dihapus!");
-                    window.location.reload(); // Refresh halaman setelah menghapus
-                } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                } else {
+                    // Menampilkan pesan jika pengguna membatalkan penghapusan
+                    Swal.fire({
+                        title: 'Dibatalkan',
+                        text: "Penghapusan data dibatalkan.",
+                        icon: 'info',
+                        confirmButtonText: 'Oke'
+                    });
                 }
             }
         </script>

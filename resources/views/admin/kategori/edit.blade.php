@@ -3,7 +3,7 @@
     <form action="" class="w-full" id="editForm">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
-<input type="text" class="hidden" id="kategori_id">
+            <input type="text" class="hidden" id="kategori_id">
             <!-- Nama Kategori -->
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
@@ -74,14 +74,35 @@
 
                     let result = await response.json();
 
+
                     if (response.ok) {
-                        alert("Kategori berhasil diperbarui!");
-                        window.location.href = "/admin/kategori";
+                        // Menampilkan SweetAlert untuk keberhasilan pembaruan kategori
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: "Kategori berhasil diperbarui!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            // Redirect ke halaman kategori setelah pop-up ditutup
+                            window.location.href = "/admin/kategori";
+                        });
                     } else {
-                        alert("Gagal memperbarui kategori: " + result.message);
+                        // Menampilkan SweetAlert jika gagal memperbarui kategori
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: "Gagal memperbarui kategori: " + (result.message || "Terjadi kesalahan"),
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
-                    alert("Terjadi kesalahan: " + error.message);
+                    // Menampilkan SweetAlert jika terjadi kesalahan dalam request
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });

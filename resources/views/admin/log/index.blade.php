@@ -92,11 +92,8 @@
                 <table id="dataTable" class="min-w-full">
                     <thead class="bg-secondary-2 text-white">
                         <tr>
-                            <th style="width: 5%;" class="text-center">ID</th>
-                            <th style="width: 35%;">Nama Barang</th>
-                            <th style="width: 10%;" class="text-center">Kategori</th>
-                            <th style="width: 25%;" class="text-center sm:hidden">Stock</th>
-                            <th style="width: 25%;" class="text-center">Action</th>
+                            <th style="width: 5%;" class="text-center">No</th>
+                            <th style="width: 95%;">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,33 +113,282 @@
 
         </div>
 
+        <div id="detailModal" class="z-50 hidden fixed inset-0 bg-gray-900 bg-opacity-50 justify-center items-center">
+            <div class="bg-white rounded-lg shadow-lg w-170 max-h-152"
+                style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
+
+                <div class="w-full h-14 px-6 flex justify-between items-center"
+                    style="box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);">
+                    <h2 class="text-xl font-light ">INFORMASI DATA PENGGUNA</h2>
+                    <button onclick="closeModal()" id="menu-close" class=" focus:outline-none">
+                        <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="p-6 flex flex-col justify-start items-center">
+                    <div class="w-42 h-42 bg-cover bg-center my-6"
+                        style="background-image: url('{{ asset('assets/img/logo/logoBgWhite.png'); }}')"></div>
+
+                    <div id="modalContent" class="w-full flex flex-col gap-3 mb-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
-            async function fetchLogs() {
+            function formatRupiah(angka) {
+                return new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0
+                }).format(angka);
+            }
+
+            let currentPage = 1; // Global variable for current page
+
+            async function fetchData() {
                 try {
+                    const entries = parseInt(document.getElementById("entries").value) || 5; // Default to 5 if empty or invalid
+                    const searchTerm = document.getElementById("search").value.toLowerCase(); // Get the search term
+
+                    // Fetch data from API
                     const response = await fetch('http://localhost:8080/api/admin/logs', {
                         method: 'GET',
                         headers: {
-                            'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
-                        },
+                        }
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error("Failed to fetch data");
 
                     const data = await response.json();
-                    console.log(data); // atau render ke DOM
+
+                    // Filter the data based on searchTerm (case insensitive) in 'description'
+                    const filteredData = data.data.data.filter(item => {
+                        return item.description && item.description.toLowerCase().includes(searchTerm);
+                    });
+
+                    const totalEntries = filteredData.length;
+                    const totalPages = Math.ceil(totalEntries / entries);
+
+                    // Adjust currentPage if it's out of bounds after filtering
+                    currentPage = Math.min(currentPage, totalPages) || 1;
+
+                    const start = (currentPage - 1) * entries;
+                    const end = Math.min(start + entries, totalEntries);
+
+                    const paginatedData = filteredData.slice(start, end);
+
+                    // Render the filtered and paginated data
+                    renderTable(paginatedData);
+                    renderPagination(totalPages);
+                    renderEntriesInfo(start, end, totalEntries);
+
+                    // Handle case when no results are found
+                    if (filteredData.length === 0) {
+                        renderTable([]); // Clear the table or show a 'No results found' message
+                        renderPagination(0); // No pagination if no results
+                        renderEntriesInfo(0, 0, 0); // Empty info
+                    }
+
                 } catch (error) {
-                    console.error('Gagal fetch logs:', error);
+                    console.error("Error fetching data:", error);
                 }
             }
 
-            // Jalankan saat halaman siap
-            document.addEventListener('DOMContentLoaded', fetchLogs);
+
+
+
+
+
+            async function viewDetail(id) {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/admin/barang/${id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + '{{ session("api_token") }}'
+                        }
+                    });
+
+                    if (!response.ok) throw new Error("Failed to fetch details");
+
+                    const detailData = await response.json();
+
+                    const modalContent = document.getElementById("modalContent");
+                    modalContent.innerHTML = `
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Nama Barang :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.nama}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Deskripsi Barang :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.deskripsi}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Stock Tersedia :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.stok}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Upah Per Kodi :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.upah}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Kategori Barang :</p>
+                <span class="flex-grow border-b border-black">${detailData.data.kategori}</span>
+            </div>`;
+
+                    document.getElementById("detailModal").style.display = "flex";
+                } catch (error) {
+                    console.error("Error fetching details:", error);
+                }
+            }
+
+
+            function closeModal() {
+                document.getElementById("detailModal").style.display = "none";
+            }
+
+
+
+
+            function renderTable(data) {
+                console.log(data);
+                const tbody = document.querySelector("#dataTable tbody");
+                tbody.innerHTML = data.map(item => `
+                    <tr>
+                        <td class="text-center">${item.id}</td>
+                        <td>${item.description}</td>
+                        
+                    </tr>`).join("");
+            }
+
+            function renderEntriesInfo(startIndex, endIndex, totalEntries) {
+                document.getElementById("entriesInfo").textContent = totalEntries === 0 ?
+                    "No entries to show." : `Showing ${startIndex + 1} to ${endIndex} of ${totalEntries} entries`;
+            }
+
+            function renderPagination(totalPages) {
+                const paginationDiv = document.getElementById("pagination");
+                paginationDiv.innerHTML = "";
+
+                const createButton = (text, disabled, onClick) => {
+                    const button = document.createElement("button");
+                    button.textContent = text;
+                    button.className = "pagination-button border border-gray-300 font-light hover:bg-gray-200 cursor-pointer";
+                    button.disabled = disabled;
+                    button.onclick = onClick;
+                    return button;
+                };
+
+                paginationDiv.appendChild(createButton("Previous", currentPage === 1, () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        fetchData();
+                    }
+                }));
+
+                const maxVisibleButtons = 5;
+                let startPage = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+                startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+
+                for (let i = startPage; i <= endPage; i++) {
+                    paginationDiv.appendChild(createButton(i, i === currentPage, () => {
+                        currentPage = i;
+                        fetchData();
+                    }));
+                }
+
+                paginationDiv.appendChild(createButton("Next", currentPage === totalPages, () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        fetchData();
+                    }
+                }));
+            }
+            document.getElementById("search")?.addEventListener("input", fetchData);
+            fetchData();
         </script>
 
+        <script>
+            async function editItem(id) {
+                try {
+                    let response = await fetch(`http://localhost:8080/api/admin/barang/${id}`, {
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                        }
+                    });
 
+                    if (!response.ok) {
+                        throw new Error("Gagal mengambil data Barang.");
+                    }
+
+                    let user = await response.json();
+
+                    // Simpan data user ke sessionStorage agar bisa digunakan di halaman edit
+                    sessionStorage.setItem("editBarang", JSON.stringify(user));
+
+                    // Redirect ke halaman edit
+                    window.location.href = `/admin/barang/edit`;
+                } catch (error) {
+                    alert(error.message);
+                }
+            }
+
+            async function deleteItem(id) {
+                if (!confirm("Apakah Anda yakin ingin menghapus Barang ini?")) {
+                    return;
+                }
+
+                try {
+                    let response = await fetch(`http://localhost:8080/api/admin/barang/${id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Gagal menghapus barang.");
+                    }
+
+                    alert("Barang berhasil dihapus!");
+                    window.location.reload(); // Refresh halaman setelah menghapus
+                } catch (error) {
+                    alert("Terjadi kesalahan: " + error.message);
+                }
+            }
+
+            async function tambahStock(id) {
+                try {
+                    let response = await fetch(`http://localhost:8080/api/admin/barang/${id}`, {
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + '{{ session("api_token") }}'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Gagal mengambil data Barang.");
+                    }
+
+                    let barang = await response.json();
+
+                    // Simpan data user ke sessionStorage agar bisa digunakan di halaman edit
+                    sessionStorage.setItem("tambahStock", JSON.stringify(barang));
+
+                    // Redirect ke halaman edit
+                    window.location.href = `/admin/stock`;
+                } catch (error) {
+                    alert(error.message);
+                }
+            }
+        </script>
     </body>
 
     </html>

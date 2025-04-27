@@ -7,16 +7,18 @@
         }
     </style>
 
-    <h1 class="text-2xl font-reguler mb-10">Edit Data upah</h1>
-    <form action="" class="w-full" id="inputForm">
+    <h1 class="text-2xl font-reguler mb-10">Input Data Upah Mingguan</h1>
+    <form class="w-full" id="inputForm">
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
 
+            <!-- ID Karyawan -->
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
-                    <select id="staff_produksi_id" name="staff_produksi_id"
+                    <select id="id_karyawan" name="id_karyawan"
                         class="form-select peer w-full bg-transparent focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250">
                         <option value="">Pilih Karyawan</option>
+                        <!-- Tambahkan opsi sesuai data karyawan -->
                     </select>
                     <label class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500"
                         style="top: 0; left: 0;">
@@ -25,69 +27,87 @@
                 </div>
             </div>
 
+            <!-- Minggu ke -->
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
-                    <select id="barang_id" name="barang_id"
-                        class="form-select peer w-full bg-transparent focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250">
-                        <option value="">Pilih Barang</option>
-                    </select>
+                    <input type="number" id="minggu_ke" name="minggu_ke"
+                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
                     <label class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500"
                         style="top: 0; left: 0;">
-                        Pilih Barang
+                        Minggu Ke-
                     </label>
                 </div>
             </div>
 
+            <!-- Total Dikerjakan -->
+            <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
+                <div class="relative w-full">
+                    <input type="number" id="total_dikerjakan" name="total_dikerjakan"
+                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
+                    <label class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500"
+                        style="top: 0; left: 0;">
+                        Total Dikerjakan
+                    </label>
+                </div>
+                <p class="tracking-wider">KODI</p>
+            </div>
+
+            <!-- Total Upah -->
+            <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
+                <div class="relative w-full">
+                    <input type="number" id="total_upah" name="total_upah"
+                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
+                    <label class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500"
+                        style="top: 0; left: 0;">
+                        Total Upah (Rp)
+                    </label>
+                </div>
+            </div>
+
+            <!-- Periode Mulai dan Selesai -->
             <div class="flex justify-between w-full gap-10">
+                <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
+                    <div class="relative w-full">
+                        <input type="date" id="periode_mulai" name="periode_mulai"
+                            class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
+                        <label class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500"
+                            style="top: 0; left: 0;">
+                            Periode Mulai
+                        </label>
+                    </div>
+                </div>
 
                 <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                     <div class="relative w-full">
-                        <input type="date" id="tanggal" name="tanggal"
+                        <input type="date" id="periode_selesai" name="periode_selesai"
                             class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
                         <label class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500"
                             style="top: 0; left: 0;">
-                            Tanggal
+                            Periode Selesai
                         </label>
                     </div>
                 </div>
-
-                <div class="w-80 h-15 border-2 border-black rounded-xl flex items-center px-4">
-                    <div class="relative w-full">
-                        <input type="number" id="jumlah_dikerjakan" name="jumlah_dikerjakan"
-                            class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
-                        <label class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500"
-                            style="top: 0; left: 0;">
-                            Jumlah Dikerjakan
-                        </label>
-                    </div>
-                    <p class="tracking-wider">KODI</p>
-                </div>
-
             </div>
 
+            <!-- Tombol -->
             <div class="w-full flex justify-between items-center">
                 <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/upah'">Kembali</button>
-                <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
+                <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Simpan</button>
             </div>
         </div>
     </form>
-
     <script>
-        document.addEventListener("DOMContentLoaded", async function() {
-            const form = document.getElementById("editForm");
-            const staffSelect = document.getElementById("staff_produksi_id");
+        document.addEventListener("DOMContentLoaded", function() {
+            const data = sessionStorage.getItem("editUpah");
 
-            let upah = JSON.parse(sessionStorage.getItem("editUpah"));
-
-            if (upah) {
-                document.getElementById("tanggal").value = upah.data.tanggal;
-                document.getElementById("jumlah_dikerjakan").value = upah.data.jumlah_dikerjakan;
-                document.getElementById("staff_produksi_id").innerHTML = '<option value="" disabled>Pilih Karyawan</option>' +
-                    data.map(staff => `<option value="${upah.data.staff_produksi.id}" ${upah.data.staff_produksi.id == upah.data.staff_produksi.id ? "selected" : ""}>${upah.data.staff_produksi.nama}</option>`).join("");
-            } else {
-                alert("Data upah tidak ditemukan!");
-                window.location.href = "/admin/upah"; // Redirect jika tidak ada data
+            if (!data) {
+                alert("Data upah tidak ditemukan.");
+                return;
             }
+
+            const result = JSON.parse(data);
+            const upah = result.data.upah;
+            const selectedId = upah.staff_produksi_id;
 
             async function loadStaffProduksi(selectedId) {
                 try {
@@ -96,60 +116,79 @@
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
                     });
-                    const data = await res.json();
+
+                    const result = await res.json();
+                    const staffSelect = document.getElementById("id_karyawan");
+
                     staffSelect.innerHTML = '<option value="" disabled>Pilih Karyawan</option>' +
-                        data.data.map(staff => `<option value="${staff.id}" ${staff.id == selectedId ? "selected" : ""}>${staff.nama}</option>`).join("");
+                        result.data.map(staff =>
+                            `<option value="${staff.id}" ${staff.id == selectedId ? "selected" : ""}>${staff.nama}</option>`
+                        ).join("");
                 } catch (error) {
                     console.error("Error fetching staff produksi:", error);
                 }
             }
 
-            async function loadBarangProduksi(selectedId) {
-                try {
-                    const res = await fetch("http://localhost:8080/api/admin/barang", {
-                        headers: {
-                            "Authorization": "Bearer {{ session('api_token') }}"
-                        }
-                    });
-                    const data = await res.json();
-                    barangSelect.innerHTML = '<option value="" disabled>Pilih Barang</option>' +
-                        data.data.map(barang => `<option value="${barang.id}" ${barang.id == selectedId ? "selected" : ""}>${barang.nama}</option>`).join("");
-                } catch (error) {
-                    console.error("Error fetching barang produksi:", error);
-                }
+            loadStaffProduksi(selectedId);
+
+            document.getElementById("minggu_ke").value = upah.minggu_ke;
+            document.getElementById("total_dikerjakan").value = upah.total_dikerjakan;
+            document.getElementById("total_upah").value = upah.total_upah;
+            document.getElementById("periode_mulai").value = upah.periode_mulai.split('T')[0];
+            document.getElementById("periode_selesai").value = upah.periode_selesai.split('T')[0];
+
+            // Simpan ID upah ke variabel global
+            window.upahId = upah.id;
+        });
+
+        // Submit form
+        document.getElementById("inputForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const id = window.upahId;
+            console.log(id);
+
+
+            const payload = {
+                id_karyawan: document.getElementById("id_karyawan").value,
+                minggu_ke: document.getElementById("minggu_ke").value,
+                total_dikerjakan: document.getElementById("total_dikerjakan").value,
+                total_upah: document.getElementById("total_upah").value,
+                periode_mulai: document.getElementById("periode_mulai").value,
+                periode_selesai: document.getElementById("periode_selesai").value
+            };
+
+            console.log(payload);
+
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/admin/upah/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + '{{ session("api_token") }}'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: "Data berhasil diupdate!",
+                    icon: 'success',
+                    confirmButtonText: 'Oke'
+                }).then(() => {
+                    window.location.href = "/admin/upah"; // Redirect setelah SweetAlert ditutup
+                });
+            } catch (error) {
+                console.error("Error updating data:", error);
+                // Menampilkan SweetAlert jika terjadi error
+                Swal.fire({
+                    title: 'Error!',
+                    text: "Terjadi kesalahan: " + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Tutup'
+                });
             }
-
-            loadData();
-
-            form.addEventListener("submit", async function(event) {
-                event.preventDefault();
-                const formData = {
-                    staff_produksi_id: staffSelect.value,
-                    barang_id: barangSelect.value,
-                    tanggal: document.getElementById("tanggal").value,
-                    jumlah_dikerjakan: document.getElementById("jumlah_dikerjakan").value
-                };
-
-                try {
-                    const res = await fetch(`http://localhost:8080/api/admin/barang-upah/${id}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer {{ session('api_token') }}"
-                        },
-                        body: JSON.stringify(formData)
-                    });
-                    const result = await res.json();
-                    if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/upah";
-                    } else {
-                        alert(result.message || "Terjadi kesalahan");
-                    }
-                } catch (error) {
-                    console.error("Error updating data:", error);
-                }
-            });
         });
     </script>
 </x-layout.adminPage>

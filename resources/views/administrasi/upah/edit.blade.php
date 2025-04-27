@@ -1,4 +1,4 @@
-<x-layout.adminPage contentClass="flex flex-col justify-start items-center">
+<x-layout.administrasiPage contentClass="flex flex-col justify-start items-center">
     <style>
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
@@ -66,7 +66,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/upah'">Kembali</button>
+                <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/staffAdministrasi/upah'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
             </div>
         </div>
@@ -86,12 +86,12 @@
                     data.map(staff => `<option value="${upah.data.staff_produksi.id}" ${upah.data.staff_produksi.id == upah.data.staff_produksi.id ? "selected" : ""}>${upah.data.staff_produksi.nama}</option>`).join("");
             } else {
                 alert("Data upah tidak ditemukan!");
-                window.location.href = "/admin/upah"; // Redirect jika tidak ada data
+                window.location.href = "/staffAdministrasi/upah"; // Redirect jika tidak ada data
             }
 
             async function loadStaffProduksi(selectedId) {
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/staff-produksi", {
+                    const res = await fetch("http://localhost:8080/api/staff-administrasi/staff-produksi", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -106,7 +106,7 @@
 
             async function loadBarangProduksi(selectedId) {
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/barang", {
+                    const res = await fetch("http://localhost:8080/api/staff-administrasi/barang", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -131,7 +131,7 @@
                 };
 
                 try {
-                    const res = await fetch(`http://localhost:8080/api/admin/barang-upah/${id}`, {
+                    const res = await fetch(`http://localhost:8080/api/staff-administrasi/barang-upah/${id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -140,16 +140,36 @@
                         body: JSON.stringify(formData)
                     });
                     const result = await res.json();
-                    if (res.ok) {
-                        alert(result.message);
-                        window.location.href = "/admin/upah";
+                    if (response.ok) {
+                        // Menampilkan SweetAlert untuk sukses
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: result.message || "Operasi berhasil!",
+                            icon: 'success',
+                            confirmButtonText: 'Oke'
+                        }).then(() => {
+                            window.location.href = "/staffAdministrasi/upah"; // Redirect ke halaman setelah berhasil
+                        });
                     } else {
-                        alert(result.message || "Terjadi kesalahan");
+                        // Menampilkan SweetAlert jika gagal
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: result.message || "Terjadi kesalahan",
+                            icon: 'error',
+                            confirmButtonText: 'Tutup'
+                        });
                     }
                 } catch (error) {
+                    // Menampilkan SweetAlert jika terjadi kesalahan saat request
                     console.error("Error updating data:", error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: "Terjadi kesalahan: " + error.message,
+                        icon: 'error',
+                        confirmButtonText: 'Tutup'
+                    });
                 }
             });
         });
     </script>
-</x-layout.adminPage>
+</x-layout.administrasiPage>
