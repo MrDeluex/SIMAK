@@ -1,9 +1,8 @@
 <x-layout.administrasiPage contentClass="flex flex-col justify-between items-center gap-7">
     <div class="w-full flex sm:flex-wrap-reverse justify-between items-center">
-        <div
-            class="w-189 h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
+        <div class="w-189 h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
             <img class="w-57 h-57 rounded-full border-2 border-black object-cover"
-                src="{{ session('user')['foto_profile'] ?? asset('assets/img/profile/ExProfile.jpg') }}">
+                src="{{ session('user')['foto_profile'] ?? asset('assets/img/profile/default.png') }}">
             <div class="flex-grow sm:w-full h-full flex flex-col justify-center items-center gap-6">
                 <h1 class="text-2xl">YOUR PROFILE</h1>
                 <form id="profileForm" class="w-full flex flex-col justify-center items-center gap-2">

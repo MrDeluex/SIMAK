@@ -69,6 +69,36 @@
     </div>
 
     <script>
+        async function getProfile() {
+            try {
+                const response = await fetch("http://localhost:8080/api/profile", {
+                    method: "GET",
+                    headers: {
+                        'Authorization': 'Bearer ' + '{{ session('api_token') }}'
+                    }
+                });
+
+                const result = await response.json();
+                console.log(result);
+                const data = result;
+                
+                document.getElementById("namaUser").value = data.data.nama_lengkap;
+                document.getElementById("emailUser").value = data.data.email;
+                document.getElementById("roleUser").value = data.data.role;
+
+                // Cek dan set foto profile
+                if (data.foto_profile) {
+                    document.querySelector("img").src = data.foto_profile;
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        getProfile();
+    </script>
+
+    <script>
         document.getElementById("passwordForm").addEventListener("submit", async function(event) {
             event.preventDefault(); // Mencegah form terkirim langsung
 

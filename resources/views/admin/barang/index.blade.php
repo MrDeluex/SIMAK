@@ -54,9 +54,38 @@
     <body>
         <h1 class="text-2xl font-light mb-4 mt-10">DATA BARANG</h1>
 
-        <a href="/admin/barang/create">
-            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT BARANG</button>
-        </a>
+        <div class="w-full flex justify-between">
+            <a href="/admin/barang/create">
+                <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT BARANG</button>
+            </a>
+
+            <button id="downloadAllPdfBtn" class="font-light w-50 py-1 bg-secondary-2 text-white rounded-xl mb-6">Export Laporan</button>
+
+        </div>
+
+        <div id="exportModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+            <div class="bg-white p-6 rounded-lg w-96">
+                <h2 class="text-lg font-semibold mb-4">Export Laporan Barang</h2>
+
+                <form id="exportForm">
+                    <div class="mb-4">
+                        <label class="block mb-1">Tanggal Mulai</label>
+                        <input type="date" name="tanggal_mulai" class="border rounded w-full p-2" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-1">Tanggal Selesai</label>
+                        <input type="date" name="tanggal_selesai" class="border rounded w-full p-2" required>
+                    </div>
+
+                    <div class="flex justify-end gap-3">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-400 text-white rounded">Batal</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Kirim</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
         <div id="app" class="py-8"
             style="box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.25), -4px 0px 4px 0px rgba(0,0,0,0.25), 0px 4px 4px 0px rgba(0,0,0,0.25), 0px -4px 4px 0px rgba(0,0,0,0.25);">
@@ -421,6 +450,44 @@
                 }
             }
         </script>
+
+        <script>
+            const apiToken = "{{ session('api_token') }}";
+            document.getElementById('downloadAllPdfBtn').addEventListener('click', async function() {
+                try {
+                    const response = await fetch('http://localhost:8080/api/admin/laporan-barang/download-all-pdf', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${apiToken}` // kalau pakai token
+                        }
+                    });
+                    console.log(response);
+                    
+
+                    if (!response.ok) {
+                        alert('Gagal download PDF.');
+                        return;
+                    }
+
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'semua-laporan-barang.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+
+                    alert('Download berhasil!');
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat download.');
+                }
+            });
+        </script>
+
+
     </body>
 
     </html>

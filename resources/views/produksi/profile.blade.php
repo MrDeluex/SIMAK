@@ -1,9 +1,9 @@
 <x-layout.userPage contentClass="flex flex-col justify-between items-center gap-7">
-    <input type="file" id="uploadInput" accept="image/*" style="display: none" />
+    <input type="file" id="uploadInput" accept="image/*" style="display: none" />   
 
     <div class="w-full flex sm:flex-wrap-reverse justify-between items-center">
         <div class="w-full h-71 sm:h-auto border sm:py-10 px-10 sm:px-4 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center items-center gap-8">
-            <div id="foto_profile" class="w-52 h-52 bg-primary-3 rounded-full border-2 border-black"></div>
+            <div id="foto_profile" class="w-52 h-52 bg-cover bg-center rounded-full border-2 border-black" style="background-image: url({{ asset('assets/img/default.png') }});"></div>
             <div class="flex-grow sm:w-full h-full flex flex-col justify-center items-center gap-6">
                 <h1 class="text-2xl">YOUR PROFILE</h1>
                 <div class="w-full flex flex-col gap-3">
@@ -139,49 +139,5 @@
             }
         });
     </script>
-
-<script>
-    const fotoDiv = document.getElementById('foto_profile');
-    const fileInput = document.getElementById('uploadInput');
-
-    // Klik div buat trigger file input
-    fotoDiv.addEventListener('click', () => {
-        fileInput.click();
-    });
-
-    // Upload otomatis saat file dipilih
-    fileInput.addEventListener('change', async () => {
-        const file = fileInput.files[0];
-        if (!file) return;
-
-        const formData = new FormData();
-        formData.append('photo', file);
-
-        try {
-            const response = await fetch('http://localhost:8080/api/users/upload-photo', {
-                method: 'POST',
-                body: formData,
-                credentials: 'include', 
-                headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer {{ session('api_token') }}"
-                    },
-            });
-
-            const data = await response.json();
-            console.log(data);
-
-            // Ganti preview profil jadi gambar yang dipilih
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                fotoDiv.style.backgroundImage = `url('${e.target.result}')`;
-            };
-            reader.readAsDataURL(file);
-
-        } catch (err) {
-            console.error('Gagal upload foto:', err);
-        }
-    });
-</script>
 
 </x-layout.userPage>

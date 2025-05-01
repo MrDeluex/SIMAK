@@ -3,7 +3,7 @@
     <p class="hidden sm:block text-white text-center sm:text-xs bg-secondary-2 border border-black rounded-lg px-8 py-1 sm:px-0 sm:w-full sm:mb-8">SELAMAT DATANG "Username", ANDA LOGIN SEBAGAI "Role"</p>
     <div class="w-full h-71 sm:h-auto border-2 border-black rounded-xl flex sm:flex-wrap justify-between sm:justify-center mb-10 sm:py-8 sm:gap-8" style="box-shadow: 4px 4px 1px 0px rgba(0,0,0,0.25);">
         <div class="w-86 h-full flex justify-center items-center">
-            <img src="{{ session('user')['foto_profile'] ? session('user')['foto_profile'] : asset('storage/profile_photos/default.jpg') }}" alt="" class="size-57 bg-primary-3 rounded-full object-cover object-center border-2 border-black">
+            <img src="{{ session('user')['foto_profile'] ? session('user')['foto_profile'] : asset('storage/profile_pictures/default.jpg') }}" alt="" class="size-57 bg-primary-3 rounded-full object-cover object-center border-2 border-black">
         </div>
         <div class="h-full flex flex-grow flex-col justify-center items-center gap-8 sm:px-4">
             <h1 class="text-2xl">YOUR PROFILE</h1>

@@ -49,7 +49,7 @@
                     </svg>
 
                     <div class="relative w-full">
-                        <input type="tect" placeholder="New Password" id="password" name="password"
+                        <input type="password" placeholder="New Password" id="password" name="password"
                             class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
                         <label for="password"
                             class="form-label absolute text-gray-400 transform -translate-y-10 -translate-x-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:-translate-x-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
@@ -65,7 +65,7 @@
                     </svg>
 
                     <div class="relative w-full">
-                        <input type="text" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation"
+                        <input type="password" placeholder="Confirm Password" id="password_confirmation" name="password_confirmation"
                             class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
                         <label for="password_confirmation"
                             class="form-label absolute text-gray-400 transform -translate-y-10 -translate-x-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:-translate-x-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
@@ -109,6 +109,8 @@
                 });
 
                 const result = await response.json();
+                console.log(result);
+                
 
                 if (response.ok) {
                     Swal.fire({
@@ -116,8 +118,6 @@
                         text: 'Password berhasil direset!',
                         icon: 'success',
                         confirmButtonText: 'Oke'
-                    }).then(() => {
-                        window.location.href = '/login';
                     });
                 } else {
                     Swal.fire({
