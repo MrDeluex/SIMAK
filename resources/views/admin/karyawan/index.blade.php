@@ -48,7 +48,7 @@
         <h1 class="text-2xl font-light mb-4 mt-10">DATA KARYAWAN</h1>
 
         <a href="/admin/karyawan/create">
-            <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">TAMBAH KARYAWAN</button>
+            <button class="font-light w-68 py-1 bg-button-true text-white rounded-xl mb-6">TAMBAH KARYAWAN</button>
         </a>
 
         <div id="app" class="py-8"
@@ -74,7 +74,7 @@
 
             <div class="w-full h-80 overflow-y-auto overflow-x-hidden">
                 <table id="dataTable" class="min-w-full">
-                    <thead class="bg-secondary-2 text-white">
+                    <thead class="bg-custom-1 text-white">
                         <tr>
                             <th style="width: 5%;" class="text-center">ID</th>
                             <th style="width: 25%;">Nama</th>

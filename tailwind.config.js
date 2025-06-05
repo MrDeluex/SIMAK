@@ -33,6 +33,11 @@ export default {
                     2 : '#1E2697',
                 },
 
+                button: {
+                    true : '#1E974E',
+                    false : '#D40E0E',
+                },
+
                 custom: {
                     1 : '#2D2D2D',
                 }

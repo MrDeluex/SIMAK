@@ -71,7 +71,7 @@
 
             <div class="w-full flex justify-between items-center">
                 <button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/barang'">Kembali</button>
-                <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Tambah</button>
+                <button type="submit" class="px-10 py-1 rounded bg-button-true text-white">Tambah</button>
             </div>
         </div>
     </form>

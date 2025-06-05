@@ -83,7 +83,7 @@
 
             <div class="w-full h-80 overflow-y-auto overflow-x-hidden">
                 <table id="dataTable" class="min-w-full">
-                    <thead class="bg-secondary-2 text-white">
+                    <thead class="bg-custom-1 text-white">
                         <tr>
                             <th style="width: 5%;" class="text-center">ID</th>
                             <th style="width: 35%;">Nama Karyawan</th>

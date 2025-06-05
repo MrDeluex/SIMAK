@@ -56,10 +56,10 @@
 
         <div class="w-full flex justify-between">
             <a href="/admin/upah/create">
-                <button class="font-light w-68 py-1 bg-secondary-2 text-white rounded-xl mb-6">INPUT BARANG</button>
+                <button class="font-light w-68 py-1 bg-button-true text-white rounded-xl mb-6">INPUT BARANG</button>
             </a>
 
-            <button id="downloadAllPdfBtn" class="font-light w-50 py-1 bg-secondary-2 text-white rounded-xl mb-6">Export Laporan</button>
+            <button id="downloadAllPdfBtn" class="font-light w-50 py-1 bg-button-false text-white rounded-xl mb-6">Export Laporan</button>
 
         </div>
 
@@ -96,7 +96,7 @@
 
             <div class="w-full h-80 overflow-y-auto overflow-x-hidden">
                 <table id="dataTable" class="min-w-full">
-                    <thead class="bg-secondary-2 text-white">
+                    <thead class="bg-custom-1 text-white">
                         <tr>
                             <th style="width: 5%;" class="text-center">ID</th>
                             <th style="width: 35%;">Nama Karyawan</th>
