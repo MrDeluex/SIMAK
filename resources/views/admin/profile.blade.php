@@ -58,11 +58,11 @@
             </div>
             <p id="errorMessage" class="text-red-500 text-center w-full hidden">Passwords do not match!</p>
             <div class="w-full justify-center items-center flex gap-10">
-                <a href="/admin" class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-custom-1 flex items-center justify-center">
+                <a href="/admin" class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-button-false flex items-center justify-center">
                     <p>Back</p>
                 </a>
                 <button type="submit"
-                    class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-secondary-2">Confirm</button>
+                    class="font-light text-white text-2xl sm:text-base w-43 sm:w-36 h-10 sm:h-10 rounded-full bg-button-true">Confirm</button>
 
             </div>
         </form>

@@ -66,7 +66,7 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <button type="button" class="px-10 py-1 rounded bg-button-false text-white">Kembali</button>
+                <button type="button" class="px-10 py-1 rounded bg-button-false text-white"  onclick="window.location.href='/admin/upah'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-button-true text-white">Tambah</button>
             </div>
         </div>

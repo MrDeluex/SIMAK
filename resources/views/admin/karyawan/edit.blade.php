@@ -1,5 +1,5 @@
 <x-layout.adminPage contentClass="flex flex-col justify-start items-center">
-    <h1 class="text-2xl font-reguler mb-10">INPUT DATA KARYAWAN</h1>
+    <h1 class="text-2xl font-reguler mb-10">EDIT DATA KARYAWAN</h1>
     <form id="editForm" class="w-full">
         @csrf
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
@@ -42,8 +42,8 @@
 
 
             <div class="w-full flex justify-between items-center">
-                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
-                <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Update</button>
+                <button class="px-10 py-1 rounded bg-button-false text-white" onclick="window.location.href='/admin/karyawan'">Kembali</button>
+                <button type="submit" class="px-10 py-1 rounded bg-button-true text-white">Update</button>
             </div>
         </div>
     </form>

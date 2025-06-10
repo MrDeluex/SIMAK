@@ -30,8 +30,8 @@
             </div>
 
             <div class="w-full flex justify-between items-center">
-                <a href="/staffAdministrasi/kategori"><button type="button" class="px-10 py-1 rounded bg-secondary-2 text-white">Kembali</button></a>
-                <button type="submit" class="px-10 py-1 rounded bg-secondary-2 text-white">Update</button>
+                <a href="/staffAdministrasi/kategori"><button type="button" class="px-10 py-1 rounded bg-button-false text-white">Kembali</button></a>
+                <button type="submit" class="px-10 py-1 rounded bg-button-true text-white">Update</button>
             </div>
         </div>
     </form>

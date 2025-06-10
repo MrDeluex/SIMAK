@@ -56,7 +56,7 @@
 
         <div class="w-full flex justify-between">
             <a href="/admin/upah/create">
-                <button class="font-light w-68 py-1 bg-button-true text-white rounded-xl mb-6">INPUT BARANG</button>
+                <button class="font-light w-68 py-1 bg-button-true text-white rounded-xl mb-6">TAMBAH DATA UPAH</button>
             </a>
 
             <button id="downloadAllPdfBtn" class="font-light w-50 py-1 bg-button-false text-white rounded-xl mb-6">Export Laporan</button>

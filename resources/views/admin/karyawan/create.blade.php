@@ -1,5 +1,5 @@
 <x-layout.adminPage contentClass="flex flex-col justify-start items-center">
-    <h1 class="text-2xl font-reguler mb-10">INPUT DATA KARYAWAN</h1>
+    <h1 class="text-2xl font-reguler mb-10">TAMBAH DATA KARYAWAN</h1>
     <form id="userForm" class="w-full">
         @csrf
         <div class="w-full p-10 flex flex-col justify-start items-start gap-8"
@@ -19,12 +19,16 @@
             </div>
             <div class="w-full h-15 border-2 border-black rounded-xl flex items-center px-4">
                 <div class="relative w-full">
-                    <input type="text" placeholder="Pekerjaan" id="pekerjaan" name="pekerjaan"
-                        class="form-input peer w-full focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250 placeholder-transparent" />
-                    <label for=""
+                    <select id="pekerjaan" name="pekerjaan"
+                        class="form-select peer w-full bg-transparent focus:outline-none focus:ring-0 focus:border-b-2 focus:border-black transition-all duration-250">
+                        <option value="Tukang Bawah">Tukang Bawah</option>
+                        <option value="Tukang Jahit">Tukang Jahit</option>
+                        <option value="Tukang Bensol">Tukang Bensol</option>
+                    </select>
+                    <label for="pekerjaan"
                         class="form-label absolute text-gray-400 transform -translate-y-10 scale-100 transition-all duration-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-gray-400 peer-focus:-translate-y-10 peer-focus:scale-125 peer-focus:text-black pointer-events-none"
                         style="top: 0; left: 0;">
-                        Pekerjaan
+                        Pekerjaan 
                     </label>
                 </div>
             </div>
@@ -51,8 +55,8 @@
                 </div>
             </div>
 
-            <div class="w-full flex justify-between items-center">`
-                <button class="px-10 py-1 rounded bg-secondary-2 text-white" onclick="window.location.href='/admin/users'">Kembali</button>
+            <div class="w-full flex justify-between items-center">
+                <button class="px-10 py-1 rounded bg-button-false text-white" onclick="window.location.href='/admin/users'">Kembali</button>
                 <button type="submit" class="px-10 py-1 rounded bg-button-true text-white">Tambah</button>
             </div>
         </div>

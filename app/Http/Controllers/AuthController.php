@@ -37,15 +37,17 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
+
         // Data login
         $data = [
             'email' => $request->email,
             'password' => $request->password,
         ];
 
+        
         // URL API eksternal
         $url = 'http://localhost:8080/api/login';
-
+        
         // Kirim request ke API
         $response = Http::post($url, $data);
         
