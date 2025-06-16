@@ -20,7 +20,7 @@
 }
 </style>
 
-<body class="{{ $customClass }} max-w-screen min-h-screen font-sans overflow-x-hidden bg-cover bg-fixed">
+<body style="background-image: url('{{ asset('assets/img/mainBg.png' )}}');" class="{{ $customClass }} max-w-screen min-h-screen font-sans overflow-x-hidden bg-cover bg-fixed">
     {{ $slot }}
 </body>
 

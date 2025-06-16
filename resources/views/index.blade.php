@@ -1,10 +1,10 @@
-<x-layout.landingPage bg="bg-white" customClass="flex flex-col justify-between items-center">
+<x-layout.landingPage bg="bg-white" customClass="flex flex-col justify-between items-center text-white">
     <div class="sticky top-0 z-50 w-full">
         <nav id="navbar"
             class="w-full flex justify-between items-center px-12 sm:px-2 mt-8 sm:mt:0 transition-transform duration-300">
             <!-- Logo -->
             <a href="/">
-                <img class="w-19 sm:w-6 hidden sm:block" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}"
+                <img class="w-19 sm:w-6 hidden sm:block" src="{{ asset('assets/img/logo/SIMAK1.png?v=1') }}"
                     alt="Logo">
             </a>
 
@@ -19,7 +19,7 @@
             <!-- Desktop Navigation -->
             <div id="menu" class="w-full flex justify-between items-center sm:hidden">
                 <a href="/" class="cursor-default"><div class="h-28 sm:h-12 w-28 sm:w-12 bg-cover bg-center"
-                    style="background-image: url('{{ asset('assets/img/logo/logoTransparant.png?v=1') }}');"></div></a>
+                    style="background-image: url('{{ asset('assets/img/logo/SIMAK1.png?v=1') }}');"></div></a>
                 <div
                     class="flex justify-around items-center gap-14 sm:gap-3 text-2xl sm:text-base px-14 sm:px-0 font-light">
                     <a href="/home">Home</a>
@@ -53,7 +53,7 @@
         </div>
         <a href="/home">
         <button
-            class="w-124 sm:w-66 h-20 sm:h-11 border border-black rounded-full text-3.5xl sm:text-2xl mt-12 sm:mt-7 font-extralight">LEARN
+            class="w-124 sm:w-66 h-20 sm:h-11 border border-white rounded-full text-3.5xl sm:text-2xl mt-12 sm:mt-7 font-extralight">LEARN
             MORE</button>
             </a>
     </section>

@@ -212,7 +212,7 @@
                     const detailData = await response.json();
                     console.log(detailData);
 
-                    const modalContent = document.getElementById("modalContent");
+                    const modalContent = document.getElementById("modalContent");   
                     modalContent.innerHTML = `
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Nama Lengkap :</p>
@@ -221,6 +221,10 @@
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Periode Dimulai :</p>
                 <span class="flex-grow border-b border-black">${detailData.data.periode.tanggal_mulai}</span>
+            </div>
+            <div class="w-full flex justify-start items-center gap-3">
+                <p class="w-auto">Jenis Barang & Jumlah :</p>
+                <span class="flex-grow border-b border-black">Sepatu Rajut 038 : 150, Sepatu Bustong 001 : 150, Sepatu Bustong 002: 89</span>
             </div>
             <div class="w-full flex justify-start items-center gap-3">
                 <p class="w-auto">Total Dikerjakan :</p>

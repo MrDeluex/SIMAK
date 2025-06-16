@@ -43,6 +43,7 @@
                     <a href="/">
                         <img class="w-19 sm:w-6" src="{{ asset('assets/img/logo/logoBgWhite.png?v=1') }}" alt="Logo">
                     </a>
+
                     <div class="w-108 sm:w-32 flex justify-around items-center">
                         <a class="" href="#advantages">Advantages</a>
                         <a class="" href="#contact">Contact</a>
@@ -76,27 +77,33 @@
         <h1 class="text-white text-center text-6.5xl sm:text-2xl tracking-widest sm:tracking-normal">ADVANTAGES</h1>
         <div class="flex justify-center items-end flex-wrap my-6 gap-12">
             <div
-                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
-                <div
-                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-white filter drop-shadow-1 relative mt-40 sm:mt-24">
+                <div class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-white left-1/2 transform -translate-x-1/2">
+                    <img src="{{ asset('assets/img/efisien.png?v=1') }}" alt="">
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
                     EFISIEN</h1>
             </div>
             <div
-                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-white filter drop-shadow-1 relative mt-40 sm:mt-24">
+
                 <div
-                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-white left-1/2 transform -translate-x-1/2">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <img src="{{ asset('assets/img/terintegrasi.png?v=1') }}" alt="" style="width: 95%;">
+                    </div>
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
                     TERINTEGRASI</h1>
             </div>
             <div
-                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-primary-4 filter drop-shadow-1 relative mt-40 sm:mt-24">
+                class="aspect-108/79 sm:h-38 h-72 rounded-2xl bg-white filter drop-shadow-1 relative mt-40 sm:mt-24">
                 <div
-                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-primary-4 left-1/2 transform -translate-x-1/2">
+                    class="aspect-1/1 sm:h-38 h-72 rounded-full absolute top-min40 sm:top-min19 filter drop-shadow-2 bg-white left-1/2 transform -translate-x-1/2">
+                    <img src="{{ asset('assets/img/transparan.png?v=1') }}" alt="">
+
                 </div>
                 <h1
                     class="text-6xl sm:text-2xl font-extralight absolute bottom-8 sm:bottom-4 left-0 right-0 text-center">
@@ -107,12 +114,12 @@
 
     <div class="w-full h-12 bg-white"></div>
 
-    <section class="text-center flex flex-col justify-center items-center py-44 sm:py-14 gap-8 sm:gap-4">
+    <section class="text-center text-white flex flex-col justify-center items-center py-44 sm:py-14 gap-8 sm:gap-4">
         <h1 class="text-6.5xl sm:text-2xl mb-2">JOIN WITH US</h1>
         <h2 class="text-2xl sm:text-base w-212 sm:w-95 font-light">Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Sed do eiusmod
             tempor incididunt ut</h2>
-        <a href="/login"><button class="text-4xl sm:text-base w-86 sm:w-56 h-18 sm:h-9 border-black border rounded-full">SIGN IN</button></a>
+        <a href="/login"><button class="text-4xl sm:text-base w-86 sm:w-56 h-18 sm:h-9 border-white border rounded-full">SIGN IN</button></a>
     </section>
 
     <section id="contact"
