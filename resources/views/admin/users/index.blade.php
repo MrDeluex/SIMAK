@@ -147,7 +147,7 @@
                     const roleElement = document.getElementById("role");
                     const role = roleElement ? roleElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/admin/users', {
+                    const response = await fetch('http://backend-simak.trihech.my.id/api/admin/users', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -183,7 +183,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                    const response = await fetch(`http://backend-simak.trihech.my.id/api/admin/users/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -309,7 +309,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/users/${id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -351,7 +351,7 @@
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/users/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",

@@ -136,7 +136,7 @@
                     const KategoriBarangElement = document.getElementById("KategoriBarang");
                     const KategoriBarang = KategoriBarangElement ? KategoriBarangElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/staff-produksi/barang', {
+                    const response = await fetch('http://backend-simak.trihech.my.id/api/staff-produksi/barang', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -171,7 +171,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/staff-produksi/barang/${id}`, {
+                    const response = await fetch(`http://backend-simak.trihech.my.id/api/staff-produksi/barang/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'

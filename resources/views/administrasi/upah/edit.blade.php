@@ -91,7 +91,7 @@
 
             async function loadStaffProduksi(selectedId) {
                 try {
-                    const res = await fetch("http://localhost:8080/api/staff-administrasi/staff-produksi", {
+                    const res = await fetch("http://backend-simak.trihech.my.id/api/staff-administrasi/staff-produksi", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -106,7 +106,7 @@
 
             async function loadBarangProduksi(selectedId) {
                 try {
-                    const res = await fetch("http://localhost:8080/api/staff-administrasi/barang", {
+                    const res = await fetch("http://backend-simak.trihech.my.id/api/staff-administrasi/barang", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -131,7 +131,7 @@
                 };
 
                 try {
-                    const res = await fetch(`http://localhost:8080/api/staff-administrasi/barang-upah/${id}`, {
+                    const res = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/barang-upah/${id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",

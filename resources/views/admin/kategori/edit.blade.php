@@ -63,7 +63,7 @@
                 };
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/kategori/${kategoriId}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/kategori/${kategoriId}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",

@@ -76,7 +76,7 @@
             };
 
             try {
-                let response = await fetch("http://localhost:8080/api/admin/users", { // Ganti dengan URL API-mu
+                let response = await fetch("http://backend-simak.trihech.my.id/api/admin/users", { // Ganti dengan URL API-mu
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

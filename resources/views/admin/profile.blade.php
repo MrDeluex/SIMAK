@@ -71,7 +71,7 @@
     <script>
         async function getProfile() {
             try {
-                const response = await fetch("http://localhost:8080/api/profile", {
+                const response = await fetch("http://backend-simak.trihech.my.id/api/profile", {
                     method: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + '{{ session('api_token') }}'
@@ -124,7 +124,7 @@
             };
 
             try {
-                const response = await fetch("http://localhost:8080/api/users/change-password", {
+                const response = await fetch("http://backend-simak.trihech.my.id/api/users/change-password", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

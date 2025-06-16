@@ -45,7 +45,7 @@
             // Fetch daftar staff produksi
             async function loadStaffProduksi() {
                 try {
-                    const res = await fetch("http://localhost:8080/api/staff-administrasi/staff-produksi", {
+                    const res = await fetch("http://backend-simak.trihech.my.id/api/staff-administrasi/staff-produksi", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -71,7 +71,7 @@
                 };
 
                 try {
-                    const res = await fetch("http://localhost:8080/api/staff-administrasi/upah", {
+                    const res = await fetch("http://backend-simak.trihech.my.id/api/staff-administrasi/upah", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

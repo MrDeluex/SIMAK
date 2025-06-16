@@ -83,7 +83,7 @@
 
             async function loadKategori() {
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/kategori", {
+                    const res = await fetch("http://backend-simak.trihech.my.id/api/admin/kategori", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -116,7 +116,7 @@
                 console.log(formData);
 
                 try {
-                    const res = await fetch("http://localhost:8080/api/admin/barang", {
+                    const res = await fetch("http://backend-simak.trihech.my.id/api/admin/barang", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

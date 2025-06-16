@@ -139,7 +139,7 @@
                     const entries = parseInt(document.getElementById("entries").value) || 10;
                     const search = document.getElementById("search").value.toLowerCase();
 
-                    const response = await fetch('http://localhost:8080/api/staff-administrasi/kategori', {
+                    const response = await fetch('http://backend-simak.trihech.my.id/api/staff-administrasi/kategori', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -247,7 +247,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/staff-administrasi/kategori/${id}`, {
+                    const response = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/kategori/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -290,7 +290,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/kategori/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/kategori/${id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -331,7 +331,7 @@
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/kategori/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/kategori/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",

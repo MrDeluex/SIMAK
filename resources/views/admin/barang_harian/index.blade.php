@@ -160,7 +160,7 @@
                     const tanggalElement = document.getElementById("tanggal");
                     const tanggal = tanggalElement ? tanggalElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/admin/barang-harian', {
+                    const response = await fetch('http://backend-simak.trihech.my.id/api/admin/barang-harian', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -195,7 +195,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
+                    const response = await fetch(`http://backend-simak.trihech.my.id/api/admin/barang-harian/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -337,7 +337,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/barang-harian/${id}`, {
                         method: "GET",
                         headers: {
                             "Authorization": "Bearer " + '{{ session("api_token") }}'
@@ -375,7 +375,7 @@
 
                 if (result.isConfirmed) {
                     try {
-                        let response = await fetch(`http://localhost:8080/api/admin/barang-harian/${id}`, {
+                        let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/barang-harian/${id}`, {
                             method: "DELETE",
                             headers: {
                                 "Content-Type": "application/json",

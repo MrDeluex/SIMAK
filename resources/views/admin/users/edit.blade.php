@@ -67,7 +67,7 @@
                 };
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/users/${userId}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/users/${userId}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",

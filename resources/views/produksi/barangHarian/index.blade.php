@@ -152,7 +152,7 @@
                     const tanggalElement = document.getElementById("tanggal");
                     const tanggal = tanggalElement ? tanggalElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/staff-produksi/barang-harian', {
+                    const response = await fetch('http://backend-simak.trihech.my.id/api/staff-produksi/barang-harian', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -187,7 +187,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/staff-produksi/barang-harian/${id}`, {
+                    const response = await fetch(`http://backend-simak.trihech.my.id/api/staff-produksi/barang-harian/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'

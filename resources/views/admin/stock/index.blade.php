@@ -65,7 +65,7 @@
                 };
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/admin/stock/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/stock/${id}`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

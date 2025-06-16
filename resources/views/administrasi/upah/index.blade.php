@@ -160,7 +160,7 @@
                     const mingguKeElement = document.getElementById("mingguKe");
                     const mingguKe = mingguKeElement ? mingguKeElement.value : "";
 
-                    const response = await fetch('http://localhost:8080/api/staff-administrasi/upah', {
+                    const response = await fetch('http://backend-simak.trihech.my.id/api/staff-administrasi/upah', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -195,7 +195,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://localhost:8080/api/staff-administrasi/upah/${id}`, {
+                    const response = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/upah/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -328,7 +328,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/upah/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/upah/${id}`, {
                         method: "GET",
                         headers: {
                             "Authorization": "Bearer " + '{{ session("api_token") }}'
@@ -359,7 +359,7 @@
                 }
 
                 try {
-                    let response = await fetch(`http://localhost:8080/api/staff-administrasi/upah/${id}`, {
+                    let response = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/upah/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
