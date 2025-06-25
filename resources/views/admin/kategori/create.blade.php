@@ -53,7 +53,7 @@
             console.log(data);
 
             try {
-                let response = await fetch("http://backend-simak.trihech.my.id/api/admin/kategori", { // Ganti dengan URL API-mu
+                let response = await fetch("https://backend-simak.trihech.my.id/api/admin/kategori", { // Ganti dengan URL API-mu
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',

@@ -65,7 +65,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", async function() {
             try {
-                let response = await fetch("http://backend-simak.trihech.my.id/api/admin/users", {
+                let response = await fetch("https://backend-simak.trihech.my.id/api/admin/users", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -145,7 +145,7 @@
             console.log("Mengirim data:", data);
 
             try {
-                const response = await fetch("http://backend-simak.trihech.my.id/api/admin/staff-produksi", {
+                const response = await fetch("https://backend-simak.trihech.my.id/api/admin/staff-produksi", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

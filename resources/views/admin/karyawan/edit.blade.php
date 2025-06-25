@@ -77,7 +77,7 @@
 
                 try {
                     let response = await fetch(
-                        `http://backend-simak.trihech.my.id/api/admin/staff-produksi/${karyawanId}`, {
+                        `https://backend-simak.trihech.my.id/api/admin/staff-produksi/${karyawanId}`, {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json",

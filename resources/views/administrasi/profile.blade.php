@@ -95,7 +95,7 @@
             };
 
             try {
-                const response = await fetch("http://backend-simak.trihech.my.id/api/users/change-password", {
+                const response = await fetch("https://backend-simak.trihech.my.id/api/users/change-password", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

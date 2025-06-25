@@ -58,7 +58,7 @@
         const nomorHp = document.getElementById('nomor_hp').value;
 
         try {
-            const response = await fetch('http://backend-simak.trihech.my.id/api/users/forgot-password/send-code', {
+            const response = await fetch('https://backend-simak.trihech.my.id/api/users/forgot-password/send-code', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -135,7 +135,7 @@
                     const pekerjaanElement = document.getElementById("pekerjaan");
                     const pekerjaan = pekerjaanElement ? pekerjaanElement.value : "";
 
-                    const response = await fetch('http://backend-simak.trihech.my.id/api/admin/staff-produksi', {
+                    const response = await fetch('https://backend-simak.trihech.my.id/api/admin/staff-produksi', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -170,7 +170,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://backend-simak.trihech.my.id/api/admin/staff-produksi/${id}`, {
+                    const response = await fetch(`https://backend-simak.trihech.my.id/api/admin/staff-produksi/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -312,7 +312,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/staff-produksi/${id}`, {
+                    let response = await fetch(`https://backend-simak.trihech.my.id/api/admin/staff-produksi/${id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -349,7 +349,7 @@
 
                 if (result.isConfirmed) {
                     try {
-                        let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/staff-produksi/${id}`, {
+                        let response = await fetch(`https://backend-simak.trihech.my.id/api/admin/staff-produksi/${id}`, {
                             method: "DELETE",
                             headers: {
                                 "Content-Type": "application/json",

@@ -63,7 +63,7 @@
                 };
 
                 try {
-                    let response = await fetch(`http://backend-simak.trihech.my.id/api/staff-administrasi/kategori/${kategoriId}`, {
+                    let response = await fetch(`https://backend-simak.trihech.my.id/api/staff-administrasi/kategori/${kategoriId}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",

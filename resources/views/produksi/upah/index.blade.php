@@ -151,7 +151,7 @@
                     const mingguKeElement = document.getElementById("mingguKe");
                     const mingguKe = mingguKeElement ? mingguKeElement.value : "";
 
-                    const response = await fetch('http://backend-simak.trihech.my.id/api/staff-produksi/upah', {
+                    const response = await fetch('https://backend-simak.trihech.my.id/api/staff-produksi/upah', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -188,7 +188,7 @@
                 console.log(id);
 
                 try {
-                    const response = await fetch(`http://backend-simak.trihech.my.id/api/staff-produksi/upah/${id}`, {
+                    const response = await fetch(`https://backend-simak.trihech.my.id/api/staff-produksi/upah/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'

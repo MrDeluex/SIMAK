@@ -188,7 +188,7 @@
                     const KategoriBarangElement = document.getElementById("KategoriBarang");
                     const KategoriBarang = KategoriBarangElement ? KategoriBarangElement.value : "";
 
-                    const response = await fetch('http://backend-simak.trihech.my.id/api/admin/barang', {
+                    const response = await fetch('https://backend-simak.trihech.my.id/api/admin/barang', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -223,7 +223,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
+                    const response = await fetch(`https://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -377,7 +377,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
+                    let response = await fetch(`https://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
                         method: "GET",
                         headers: {
                             "Authorization": "Bearer " + '{{ session("api_token") }}'
@@ -406,7 +406,7 @@
                 }
 
                 try {
-                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
+                    let response = await fetch(`https://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json",
@@ -427,7 +427,7 @@
 
             async function tambahStock(id) {
                 try {
-                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
+                    let response = await fetch(`https://backend-simak.trihech.my.id/api/admin/barang/${id}`, {
                         method: "GET",
                         headers: {
                             "Authorization": "Bearer " + '{{ session("api_token") }}'
@@ -455,7 +455,7 @@
             const apiToken = "{{ session('api_token') }}";
             document.getElementById('downloadAllPdfBtn').addEventListener('click', async function() {
                 try {
-                    const response = await fetch('http://backend-simak.trihech.my.id/api/admin/laporan-barang/download-all-pdf', {
+                    const response = await fetch('https://backend-simak.trihech.my.id/api/admin/laporan-barang/download-all-pdf', {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${apiToken}` // kalau pakai token

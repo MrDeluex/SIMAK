@@ -58,7 +58,7 @@
         const email = document.getElementById('email').value;
 
         try {
-            const response = await fetch('http://backend-simak.trihech.my.id/api/users/forgot-password/email', {
+            const response = await fetch('https://backend-simak.trihech.my.id/api/users/forgot-password/email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

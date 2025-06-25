@@ -100,7 +100,7 @@
     <script>
         async function getJumlahStaffProduksi() {
             try {
-                const response = await fetch("http://backend-simak.trihech.my.id/api/admin/staff-produksi", {
+                const response = await fetch("https://backend-simak.trihech.my.id/api/admin/staff-produksi", {
                     method: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + '{{ session('api_token') }}'
@@ -118,7 +118,7 @@
         }
         async function getJumlahStaffAdministrasi() {
             try {
-                const response = await fetch("http://backend-simak.trihech.my.id/api/admin/users", {
+                const response = await fetch("https://backend-simak.trihech.my.id/api/admin/users", {
                     method: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + '{{ session('api_token') }}'
@@ -147,7 +147,7 @@
         }
         async function getJumlahStock() {
             try {
-                const response = await fetch("http://backend-simak.trihech.my.id/api/admin/stock/total-stock", {
+                const response = await fetch("https://backend-simak.trihech.my.id/api/admin/stock/total-stock", {
                     method: "GET",
                     headers: {
                         'Authorization': 'Bearer ' + '{{ session('api_token') }}'

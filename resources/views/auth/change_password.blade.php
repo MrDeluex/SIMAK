@@ -100,7 +100,7 @@
 
 
             try {
-                const response = await fetch('http://backend-simak.trihech.my.id/api/users/forgot-password/reset', {
+                const response = await fetch('https://backend-simak.trihech.my.id/api/users/forgot-password/reset', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

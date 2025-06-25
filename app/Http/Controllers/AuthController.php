@@ -46,7 +46,7 @@ class AuthController extends Controller
 
         
         // URL API eksternal
-        $url = 'http://backend-simak.trihech.my.id/api/login';
+        $url = 'https://backend-simak.trihech.my.id/api/login';
         
         // Kirim request ke API
         $response = Http::post($url, $data);

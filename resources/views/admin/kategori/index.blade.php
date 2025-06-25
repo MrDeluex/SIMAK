@@ -139,7 +139,7 @@
                     const entries = parseInt(document.getElementById("entries").value) || 10;
                     const search = document.getElementById("search").value.toLowerCase();
 
-                    const response = await fetch('http://backend-simak.trihech.my.id/api/admin/kategori', {
+                    const response = await fetch('https://backend-simak.trihech.my.id/api/admin/kategori', {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -252,7 +252,7 @@
 
             async function viewDetail(id) {
                 try {
-                    const response = await fetch(`http://backend-simak.trihech.my.id/api/admin/kategori/${id}`, {
+                    const response = await fetch(`https://backend-simak.trihech.my.id/api/admin/kategori/${id}`, {
                         method: 'GET',
                         headers: {
                             'Authorization': 'Bearer ' + '{{ session("api_token") }}'
@@ -295,7 +295,7 @@
         <script>
             async function editItem(id) {
                 try {
-                    let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/kategori/${id}`, {
+                    let response = await fetch(`https://backend-simak.trihech.my.id/api/admin/kategori/${id}`, {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -335,7 +335,7 @@
                 // Jika pengguna memilih "Ya, Hapus!"
                 if (result.isConfirmed) {
                     try {
-                        let response = await fetch(`http://backend-simak.trihech.my.id/api/admin/kategori/${id}`, {
+                        let response = await fetch(`https://backend-simak.trihech.my.id/api/admin/kategori/${id}`, {
                             method: "DELETE",
                             headers: {
                                 "Content-Type": "application/json",

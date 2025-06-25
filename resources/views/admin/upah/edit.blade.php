@@ -111,7 +111,7 @@
 
             async function loadStaffProduksi(selectedId) {
                 try {
-                    const res = await fetch("http://backend-simak.trihech.my.id/api/admin/staff-produksi", {
+                    const res = await fetch("https://backend-simak.trihech.my.id/api/admin/staff-produksi", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -162,7 +162,7 @@
 
 
             try {
-                const response = await fetch(`http://backend-simak.trihech.my.id/api/admin/upah/${id}`, {
+                const response = await fetch(`https://backend-simak.trihech.my.id/api/admin/upah/${id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",

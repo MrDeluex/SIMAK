@@ -81,7 +81,7 @@
             // Fetch daftar staff produksi
             async function loadStaffProduksi() {
                 try {
-                    const res = await fetch("http://backend-simak.trihech.my.id/api/staff-administrasi/staff-produksi", {
+                    const res = await fetch("https://backend-simak.trihech.my.id/api/staff-administrasi/staff-produksi", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -99,7 +99,7 @@
 
             async function loadBarangProduksi() {
                 try {
-                    const res = await fetch("http://backend-simak.trihech.my.id/api/staff-administrasi/barang", {
+                    const res = await fetch("https://backend-simak.trihech.my.id/api/staff-administrasi/barang", {
                         headers: {
                             "Authorization": "Bearer {{ session('api_token') }}"
                         }
@@ -132,7 +132,7 @@
                 console.log(formData);
 
                 try {
-                    const res = await fetch("http://backend-simak.trihech.my.id/api/staff-administrasi/barang-harian", {
+                    const res = await fetch("https://backend-simak.trihech.my.id/api/staff-administrasi/barang-harian", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
